@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "httprunner"
+name = "apimeter"
 version = "2.5.9"
 description = "One-stop solution for HTTP(S) testing."
 license = "Apache-2.0"
@@ -24,7 +24,10 @@ classifiers = [
     "Programming Language :: Python :: 3.5",
     "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8"
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11"    
 ]
 
 include = ["docs/CHANGELOG.md"]
@@ -50,10 +53,13 @@ flask = "<1.0.0"
 coverage = "^4.5.4"
 
 [tool.poetry.scripts]
-hrun = "httprunner.cli:main"
-ate = "httprunner.cli:main"
-httprunner = "httprunner.cli:main"
-locusts = "httprunner.ext.locusts.cli:main"
+apimeter = "apimeter.cli:main"
+meter = "apimeter.cli:main"
+hrun = "apimeter.cli:main"
+httprunner = "apimeter.cli:main"
+ate = "apimeter.cli:main"
+locusts = "apimeter.ext.locusts.cli:main"
+apilocust = "apimeter.ext.locusts.cli:main"
 
 [build-system]
 requires = ["poetry>=1.0.0"]

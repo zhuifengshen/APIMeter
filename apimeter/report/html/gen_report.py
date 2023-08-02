@@ -8,7 +8,7 @@ from apimeter import logger
 from apimeter.exceptions import SummaryEmpty
 
 
-def gen_html_report(summary, report_template=None, report_dir=None, report_file=None):
+def gen_html_report(summary, report_template=None, report_dir=None, report_file=None, skip_success=False):
     """render html report with specified report name and template
 
     Args:
@@ -35,6 +35,11 @@ def gen_html_report(summary, report_template=None, report_dir=None, report_file=
     start_at_timestamp = summary["time"]["start_at"]
     utc_time_iso_8601_str = datetime.utcfromtimestamp(start_at_timestamp).isoformat()
     summary["time"]["start_datetime"] = utc_time_iso_8601_str
+
+    # skip success testcases in report
+    if skip_success:
+        for suite in summary["details"]:
+            suite['records'] = list(filter(lambda record: record['status'] != 'success', suite['records']))
 
     if report_file:
         report_dir = os.path.dirname(report_file)

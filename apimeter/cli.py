@@ -49,6 +49,9 @@ def main():
         help="Specify report file path, this has higher priority than specifying report dir.",
     )
     parser.add_argument(
+        '--skip-success', action='store_true', default=False,
+        help="Specify skip success testcases in report.")    
+    parser.add_argument(
         "--save-tests",
         action="store_true",
         default=False,
@@ -119,6 +122,7 @@ def main():
                 report_template=args.report_template,
                 report_dir=report_dir,
                 report_file=args.report_file,
+                skip_success=args.skip_success,
             )
             err_code |= 0 if summary and summary["success"] else 1
     except Exception as ex:
