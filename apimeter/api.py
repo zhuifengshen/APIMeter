@@ -145,7 +145,7 @@ class HttpRunner(object):
             if result.wasSuccessful():
                 # 测试用例执行成功，剔除执行成功的用例步骤数据，减少报告体积大小
                 if self.skip_success:
-                    result.records = []
+                    result.records = list(filter(lambda record: record["status"] != "success", result.records))
                 tests_results.append((testcase, result))
             else:
                 tests_results.insert(0, (testcase, result))

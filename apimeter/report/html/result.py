@@ -20,6 +20,7 @@ class HtmlTestResult(unittest.TextTestResult):
             "attachment": attachment,
             "meta_datas": test.meta_datas,
         }
+        test.meta_datas = {}  # clear meta_datas
         self.records.append(data)
 
     def startTestRun(self):
