@@ -1,8 +1,8 @@
 import sys
 import unittest
 
-from httprunner.cli import main
-from httprunner.compat import io
+from apimeter.cli import main
+from apimeter.compat import io
 
 
 class TestCli(unittest.TestCase):
@@ -21,7 +21,7 @@ class TestCli(unittest.TestCase):
 
         self.assertEqual(cm.exception.code, 0)
 
-        from httprunner import __version__
+        from apimeter import __version__
 
         self.assertIn(__version__, self.captured_output.getvalue().strip())
 
@@ -33,6 +33,6 @@ class TestCli(unittest.TestCase):
 
         self.assertEqual(cm.exception.code, 0)
 
-        from httprunner import __description__
+        from apimeter import __description__
 
         self.assertIn(__description__, self.captured_output.getvalue().strip())

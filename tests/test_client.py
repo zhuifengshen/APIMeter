@@ -1,4 +1,4 @@
-from httprunner.client import HttpSession
+from apimeter.client import HttpSession
 from tests.api_server import HTTPBIN_SERVER
 from tests.base import ApiServerUnittest
 

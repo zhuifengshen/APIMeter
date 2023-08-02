@@ -1,8 +1,8 @@
 import os
 import unittest
 
-from httprunner import exceptions, loader
-from httprunner.loader import buildup
+from apimeter import exceptions, loader
+from apimeter.loader import buildup
 
 
 class TestModuleLoader(unittest.TestCase):

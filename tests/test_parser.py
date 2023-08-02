@@ -2,8 +2,8 @@ import os
 import time
 import unittest
 
-from httprunner import exceptions, loader, parser
-from httprunner.loader import load
+from apimeter import exceptions, loader, parser
+from apimeter.loader import load
 from tests.debugtalk import gen_random_string, sum_two
 
 

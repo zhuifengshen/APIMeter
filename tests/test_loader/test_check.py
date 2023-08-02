@@ -1,6 +1,6 @@
 import unittest
 
-from httprunner.loader import check
+from apimeter.loader import check
 
 
 class TestLoaderCheck(unittest.TestCase):

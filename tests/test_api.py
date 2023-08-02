@@ -4,8 +4,8 @@ import re
 import shutil
 import time
 
-from httprunner import exceptions, loader, parser, report
-from httprunner.api import HttpRunner
+from apimeter import exceptions, loader, parser, report
+from apimeter.api import HttpRunner
 from tests.api_server import HTTPBIN_SERVER
 from tests.base import ApiServerUnittest
 

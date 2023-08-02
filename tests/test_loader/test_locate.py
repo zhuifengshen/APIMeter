@@ -1,8 +1,8 @@
 import os
 import unittest
 
-from httprunner import exceptions
-from httprunner.loader import locate
+from apimeter import exceptions
+from apimeter.loader import locate
 
 
 class TestLoaderLocate(unittest.TestCase):

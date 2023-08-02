@@ -1,6 +1,6 @@
 import os
 
-from httprunner import context, exceptions, loader, parser, runner
+from apimeter import context, exceptions, loader, parser, runner
 from tests.api_server import gen_md5
 from tests.base import ApiServerUnittest, gen_random_string
 

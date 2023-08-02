@@ -1,9 +1,9 @@
 import os
 import unittest
 
-from httprunner import exceptions
-from httprunner.loader import load
-from httprunner.loader.buildup import load_test_file
+from apimeter import exceptions
+from apimeter.loader import load
+from apimeter.loader.buildup import load_test_file
 
 
 class TestFileLoader(unittest.TestCase):
