@@ -108,6 +108,7 @@ def main():
         save_tests=args.save_tests,
         log_level=args.log_level,
         log_file=args.log_file,
+        skip_success=args.skip_success
     )
 
     err_code = 0

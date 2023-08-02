@@ -30,7 +30,7 @@ class HttpRunner(object):
     """
 
     def __init__(
-        self, failfast=False, save_tests=False, log_level="WARNING", log_file=None
+        self, failfast=False, save_tests=False, log_level="WARNING", log_file=None, skip_success=False
     ):
         """initialize HttpRunner.
 
@@ -48,6 +48,7 @@ class HttpRunner(object):
         self.unittest_runner = unittest.TextTestRunner(**kwargs)
         self.test_loader = unittest.TestLoader()
         self.save_tests = save_tests
+        self.skip_success = skip_success
         self._summary = None
         self.project_working_directory = None
 
@@ -142,6 +143,9 @@ class HttpRunner(object):
 
             result = self.unittest_runner.run(testcase)
             if result.wasSuccessful():
+                # 测试用例执行成功，剔除执行成功的用例步骤数据，减少报告体积大小
+                if self.skip_success:
+                    result.records = []
                 tests_results.append((testcase, result))
             else:
                 tests_results.insert(0, (testcase, result))

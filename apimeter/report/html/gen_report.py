@@ -37,9 +37,9 @@ def gen_html_report(summary, report_template=None, report_dir=None, report_file=
     summary["time"]["start_datetime"] = utc_time_iso_8601_str
 
     # skip success testcases in report
-    if skip_success:
-        for suite in summary["details"]:
-            suite['records'] = list(filter(lambda record: record['status'] != 'success', suite['records']))
+    # if skip_success:
+    #     for suite in summary["details"]:
+    #         suite['records'] = list(filter(lambda record: record['status'] != 'success', suite['records']))
 
     if report_file:
         report_dir = os.path.dirname(report_file)
