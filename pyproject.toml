@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "apimeter"
-version = "2.6.0"
+version = "2.6.1"
 description = "One-stop solution for HTTP(S) testing."
 license = "Apache-2.0"
 readme = "README.md"
@@ -54,12 +54,8 @@ coverage = "^4.5.4"
 
 [tool.poetry.scripts]
 apimeter = "apimeter.cli:main"
-meter = "apimeter.cli:main"
-hrun = "apimeter.cli:main"
-httprunner = "apimeter.cli:main"
-ate = "apimeter.cli:main"
-locusts = "apimeter.ext.locusts.cli:main"
 apilocust = "apimeter.ext.locusts.cli:main"
+hrun = "apimeter.cli:main"
 
 [build-system]
 requires = ["poetry>=1.0.0"]
