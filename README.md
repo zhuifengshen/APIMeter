@@ -32,10 +32,12 @@ ApiMeter is rich documented.
 
 ## Usage
 ```python
-# 报告支持忽略成功用例数据
-apimeter xxx.yml --skip-success
-
-
+poetry install  # 安装依赖
+poetry run python -m apimeter /path/to/api  # 完整生成报告
+poetry run python -m apimeter /path/to/api --skip-success  # 报告忽略成功用例数据
+poetry build  # 打包
+poetry publish  # 发布，根据提示输入pypi账号密码
+pip install -i https://pypi.Python.org/simple/ apimeter  # 指定安装源，因为刚发布其他平台未及时同步
 ```
 
 
