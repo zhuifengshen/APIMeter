@@ -50,6 +50,24 @@ poetry run python -m apimeter /path/to/api --skip-success  # 报告忽略成功�
 poetry build  # 打包
 poetry publish  # 发布，根据提示输入pypi账号密码
 pip install -i https://pypi.Python.org/simple/ apimeter  # 指定安装源，因为刚发布其他平台未及时同步
+
+
+# 如何将git项目本地的report分支推送到远程的master分支
+git checkout report
+git push origin report:master
+
+
+# 逐行代码运行时内存分析
+poetry shell
+pip install memory-profiler
+# 1. 导入方式
+python -m apimeter /Users/zhangchuzhao/Project/ATDD/tmp/demo_api/ --skip-success
+# 2. 装饰器方式
+python -m memory_profiler apimeter /Users/zhangchuzhao/Project/ATDD/tmp/demo_api --skip-success --log-level error
+# 3. 命令方式
+mprof run apimeter /path/to/api
+mprof plot  # 生成内存趋势图，安装依赖pip install matplotlib
+# 参考链接：https://www.cnblogs.com/rgcLOVEyaya/p/RGC_LOVE_YAYA_603days_1.html
 ```
 
 

@@ -1,5 +1,6 @@
 import os
 import unittest
+# from memory_profiler import profile
 
 from apimeter import (
     __version__,
@@ -124,7 +125,8 @@ class HttpRunner(object):
             test_suite.addTest(loaded_testcase)
 
         return test_suite
-
+    
+    # @profile
     def _run_suite(self, test_suite):
         """run tests in test_suite
 
