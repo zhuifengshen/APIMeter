@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "apimeter"
-version = "2.6.2"
+version = "2.6.3"
 description = "One-stop solution for HTTP(S) testing."
 license = "Apache-2.0"
 readme = "README.md"
@@ -36,7 +36,7 @@ include = ["docs/CHANGELOG.md"]
 python = "~2.7 || ^3.5"
 requests = "^2.22.0"
 requests-toolbelt = "^0.9.1"
-pyyaml = "^5.1.2"
+pyyaml = "5.1.2"
 jinja2 = "^2.10.3"
 har2case = "^0.3.1"
 colorama = "^0.4.1"
