@@ -48,7 +48,7 @@ future = { version = "^0.18.1", python = "~2.7" }
 enum34 = { version = "^1.1.6", python = "~2.7" }
 jsonschema = "^3.2.0"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 flask = "<1.0.0"
 coverage = "^4.5.4"
 
