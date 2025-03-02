@@ -5,17 +5,17 @@
 # pip install mkdocs-material
 
 # Project information
-site_name: HttpRunner V2.x 中文使用文档
-site_description: HttpRunner V2.x User Documentation
+site_name: ApiMeter V2.x 中文使用文档
+site_description: ApiMeter V2.x User Documentation
 site_author: 'debugtalk'
 
 # Repository
-repo_name: HttpRunner
-repo_url: https://github.com/HttpRunner/HttpRunner
+repo_name: ApiMeter
+repo_url: https://git.umlife.net/utils/apimeter
 edit_uri: ""
 
 # Copyright
-copyright: 'Copyright &copy; 2017 - 2019 debugtalk'
+copyright: 'Copyright &copy; 2017 - 2025 debugtalk'
 
 # Configuration
 theme:
@@ -47,9 +47,9 @@ extra:
         language: 'jp'
     social:
         - type: globe
-          link: https://debugtalk.com
+          link: https://git.umlife.net/utils/apimeter
         - type: 'github'
-          link: 'https://github.com/httprunner'
+          link: 'https://git.umlife.net/utils/apimeter'
 
 # index pages
 nav:

@@ -53,7 +53,7 @@ mprof plot  # 生成内存趋势图，安装依赖pip install matplotlib
 
 
 ## FQA
-1、安装 apimeter 报错
+### 1、安装 apimeter 报错
 ```
 pip install apimeter
 Collecting apimeter
@@ -181,3 +181,35 @@ note: This error originates from a subprocess, and is likely not a problem with 
 原因：安装依赖 PyYAML==5.41 时编译出错。
 
 解决方法：直接安装之前兼容的版本 pip3 install PyYAML==5.31，然后再执行 pip3 install apimeter 即可。
+
+
+### 2、命令 apimeter -V 报错
+```
+Traceback (most recent call last):
+  File "/Users/devin/.pyenv/versions/gx_hrun_3.9.21/bin/hrun", line 5, in <module>
+    from apimeter.cli import main
+  File "/Users/devin/.pyenv/versions/gx_hrun_3.9.21/lib/python3.9/site-packages/apimeter/cli.py", line 8, in <module>
+    from apimeter.api import HttpRunner
+  File "/Users/devin/.pyenv/versions/gx_hrun_3.9.21/lib/python3.9/site-packages/apimeter/api.py", line 5, in <module>
+    from apimeter import (
+  File "/Users/devin/.pyenv/versions/gx_hrun_3.9.21/lib/python3.9/site-packages/apimeter/report/__init__.py", line 10, in <module>
+    from apimeter.report.stringify import stringify_summary
+  File "/Users/devin/.pyenv/versions/gx_hrun_3.9.21/lib/python3.9/site-packages/apimeter/report/stringify.py", line 4, in <module>
+    from jinja2 import escape
+  File "/Users/devin/.pyenv/versions/gx_hrun_3.9.21/lib/python3.9/site-packages/jinja2/__init__.py", line 12, in <module>
+    from .environment import Environment
+  File "/Users/devin/.pyenv/versions/gx_hrun_3.9.21/lib/python3.9/site-packages/jinja2/environment.py", line 25, in <module>
+    from .defaults import BLOCK_END_STRING
+  File "/Users/devin/.pyenv/versions/gx_hrun_3.9.21/lib/python3.9/site-packages/jinja2/defaults.py", line 3, in <module>
+    from .filters import FILTERS as DEFAULT_FILTERS  # noqa: F401
+  File "/Users/devin/.pyenv/versions/gx_hrun_3.9.21/lib/python3.9/site-packages/jinja2/filters.py", line 13, in <module>
+    from markupsafe import soft_unicode
+ImportError: cannot import name 'soft_unicode' from 'markupsafe' (/Users/devin/.pyenv/versions/gx_hrun_3.9.21/lib/python3.9/site-packages/markupsafe/__init__.py)
+```
+
+原因：jinja2 依赖库 markusafe 不兼容，需要降级版本
+
+解决方法：
+在 pyproject.toml 的 [tool.poetry.dependencies] 部分中添加：
+markupsafe = "2.0.1"
+jinja2 = "2.10.3"
