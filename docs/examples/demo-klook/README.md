@@ -27,4 +27,4 @@ klook地理位置搜索接口测试 | api/area_manage_testsuite.yml | 区域管�
  | | 
 baidu首页demo | testcases/just_request_testcase.yml | 提取百度首页title的demo | 演示了直接使用request而不是引用api的方式，使用了teardown_hooks的使用
 
-完整的案例访问[地址](https://github.com/httprunner/httprunner/tree/master/docs/examples/demo-klook)。
+完整的案例访问[地址](https://git.umlife.net/utils/apimeter/-/tree/master/docs/examples/demo-klook)。

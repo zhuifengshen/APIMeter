@@ -14,15 +14,28 @@ apimeter /path/to/api --skip-success  # 报告忽略成功用例数
 - 2、安装时不需要卸载HttpRunner，如果存在httprunner，会覆盖其hrun命令，另外的httprunner、ate命令依然可用；
 - 3、之所以不卸载HttpRunner，因为部分项目在debugtalk.py中导入了HttpRunner包并使用其已封装好的函数；
 
+## Document
+
+ApiMeter 用户使用文档：[https://utils.git.umlife.net/apimeter](https://utils.git.umlife.net/apimeter/)
 
 ## Development
 ```python
+# 本地开发与运行
 poetry install  # 拉取代码后安装依赖
 poetry run python -m apimeter /path/to/api  # 完整生成报告
 poetry run python -m apimeter /path/to/api --skip-success  # 报告忽略成功用例数据
+
+
+# 打包编译与发布
 poetry build  # 打包
 poetry publish  # 发布，根据提示输入pypi账号密码
 pip install -i https://pypi.Python.org/simple/ apimeter  # 指定安装源，因为刚发布其他平台未及时同步
+
+
+# 文档编译与部署 .gitlab-ci.yml(apimeter-部署-Pages)
+pip install mkdocs-material==3.3.0
+mkdocs build
+mkdocs serve
 
 
 # 如何将git项目本地的report分支推送到远程的master分支

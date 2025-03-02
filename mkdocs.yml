@@ -1,12 +1,11 @@
-# require mkdocs-material 3.x
-
-#
-# pip install mkdocs
-# pip install mkdocs-material
+# require mkdocs-material 3.3.0
+# pip install mkdocs-material==3.3.0
+# mkdocs build
+# mkdocs serve
 
 # Project information
-site_name: ApiMeter V2.x 中文使用文档
-site_description: ApiMeter V2.x User Documentation
+site_name: ApiMeter 用户使用文档
+site_description: ApiMeter User Documentation
 site_author: 'debugtalk'
 
 # Repository

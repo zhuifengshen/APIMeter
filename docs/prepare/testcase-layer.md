@@ -269,4 +269,4 @@ created file: demo/.env
 ## 相关参考
 
 - [《HttpRunner 的测试用例分层机制（已过期）》](/post/HttpRunner-testcase-layer)
-- 测试用例分层详细示例：[HttpRunner/tests](https://github.com/HttpRunner/HttpRunner/tree/master/tests)
+- 测试用例分层详细示例：[HttpRunner/tests](https://git.umlife.net/utils/apimeter/-/tree/master/tests)

@@ -1,7 +1,7 @@
 
-HttpRunner 是一款面向 HTTP(S) 协议的通用测试框架，只需编写维护一份 `YAML/JSON` 脚本，即可实现自动化测试、性能测试、线上监控、持续集成等多种测试需求。
+ApiMeter(HttpRunner) 是一款面向 HTTP(S) 协议的通用测试框架，只需编写维护一份 `YAML/JSON` 脚本，即可实现自动化测试、性能测试、线上监控、持续集成等多种测试需求。
 
-此文档适用于全新发布的 `HttpRunner 2.x` 版本，`1.x` 版本的使用文档请查看[历史链接][httprunner1]。
+此文档适用于 `HttpRunner 2.x` 系列版本。
 
 ## 设计理念
 
@@ -23,14 +23,7 @@ HttpRunner 是一款面向 HTTP(S) 协议的通用测试框架，只需编写维
 - 测试结果统计报告简洁清晰，附带详尽统计信息和日志记录
 - 极强的可扩展性，轻松实现二次开发和 Web 平台化
 
-## 更多信息
 
-关注 HttpRunner 的微信公众号，第一时间获得最新资讯。
-
-![](./assets/qrcode.jpg)
-
-
-[httprunner1]: https://v1.httprunner.org/
 [Requests]: http://docs.python-requests.org/en/master/
 [Locust]: http://locust.io/
 [har2case]: https://github.com/HttpRunner/har2case
