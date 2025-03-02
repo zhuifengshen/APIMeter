@@ -11,22 +11,15 @@ HttpRunner 是一个基于 Python 开发的测试框架，可以运行在 macOS�
 HttpRunner 的稳定版本托管在 PyPI 上，可以使用 `pip` 进行安装。
 
 ```bash
-$ pip install httprunner
-```
-
-如果你需要使用最新的开发版本，那么可以采用项目的 GitHub 仓库地址进行安装：
-
-```bash
-$ pip install git+https://github.com/HttpRunner/HttpRunner.git@master
+$ pip install apimeter
 ```
 
 ## 版本升级
 
-假如你之前已经安装过了 HttpRunner，现在需要升级到最新版本，那么你可以使用`-U`参数。该参数对以上三种安装方式均生效。
+假如你之前已经安装过了，现在需要升级到最新版本，那么你可以使用`-U`参数。该参数对以上三种安装方式均生效。
 
 ```bash
-$ pip install -U HttpRunner
-$ pip install -U git+https://github.com/HttpRunner/HttpRunner.git@master
+$ pip install -U apimeter
 ```
 
 ## 安装校验
