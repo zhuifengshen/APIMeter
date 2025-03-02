@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "apimeter"
-version = "2.6.3"
+version = "2.6.4"
 description = "One-stop solution for HTTP(S) testing."
 license = "Apache-2.0"
 readme = "README.md"
@@ -37,16 +37,17 @@ python = "~2.7 || ^3.5"
 requests = "^2.22.0"
 requests-toolbelt = "^0.9.1"
 pyyaml = "5.1.2"
-jinja2 = "^2.10.3"
-har2case = "^0.3.1"
-colorama = "^0.4.1"
-colorlog = "^4.0.2"
-filetype = "^1.0.5"
-jsonpath = "^0.82"
-sentry-sdk = "^0.13.5"
+markupsafe = "2.0.1"
+jinja2 = "2.10.3"
+har2case = "0.3.1"
+colorama = "0.4.1"
+colorlog = "4.0.2"
+filetype = "1.0.5"
+jsonpath = "0.82.2"
+sentry-sdk = "0.13.5"
 future = { version = "^0.18.1", python = "~2.7" }
 enum34 = { version = "^1.1.6", python = "~2.7" }
-jsonschema = "^3.2.0"
+jsonschema = "3.2.0"
 
 [tool.poetry.group.dev.dependencies]
 flask = "<1.0.0"
