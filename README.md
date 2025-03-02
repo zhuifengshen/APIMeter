@@ -12,7 +12,7 @@ apimeter /path/to/api --skip-success  # 报告忽略成功用例数
 注意事项
 - 1、安装后可用命令apimeter、hrun、apilocust；
 - 2、安装时不需要卸载HttpRunner，如果存在httprunner，会覆盖其hrun命令，另外的httprunner、ate命令依然可用；
-- 3、之所以不写字HttpRunner，因为部分项目在debugtalk.py中导入了HttpRunner包并使用其已封装好的函数；
+- 3、之所以不卸载HttpRunner，因为部分项目在debugtalk.py中导入了HttpRunner包并使用其已封装好的函数；
 
 
 ## Development
