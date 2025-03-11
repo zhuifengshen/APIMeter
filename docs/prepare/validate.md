@@ -11,9 +11,11 @@
 
 ## 2、支持自定义校验器
 对于自定义的校验函数，需要遵循三个规则：
+
 - (1)自定义校验函数需放置到debugtalk.py中;
 - (2)参数有两个：第一个为原始数据，第二个为原始数据经过运算后得到的预期结果值;
 - (3)在校验函数中通过assert将实际运算结果与预期结果值进行比较;
+
 ```
 # 用例
 - test:
@@ -38,10 +40,12 @@ def sum_status_code(status_code, expect_sum):
 
 ## 3、支持在校验器中引用变量
 在结果校验器validate中，check和expect均可实现实现变量的引用；而引用的变量，可以来自四种类型：
+
 - （1）当前test中定义的variables，例如expect_status_code
 - （2）当前test中提取（extract）的结果变量，例如token
 - （3）当前测试用例集testset中，先前test中提取（extract）的结果变量
 - （4）当前测试用例集testset中，全局配置config中定义的变量
+
 ```
 - test:
     name: get token
