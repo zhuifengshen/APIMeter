@@ -24,7 +24,13 @@ ApiMeter 用户使用文档：[https://utils.git.umlife.net/apimeter](https://ut
 poetry install  # 拉取代码后安装依赖
 poetry run python -m apimeter /path/to/api  # 完整生成报告
 poetry run python -m apimeter /path/to/api --skip-success  # 报告忽略成功用例数据
+python -m apimeter -h # 查看使用指南
 
+# 测试运行
+python -m unittest discover # 单元测试
+
+python tests/api_server.py # 启动测试示例服务器
+python -m apimeter tests/testcases --log-level debug --save-tests # 测试示例，同时设置日志与生成中间处理文件
 
 # 打包编译与发布
 poetry build  # 打包
@@ -176,6 +182,29 @@ def sum_status_code(status_code):
 | regex_match     | regex matches                  | re.match(B, A)               | 'abcdef' regex 'a|w+d'        |
 | startswith      | starts with                    | A.startswith(B) is True       | 'abc' startswith 'ab'         |
 | endswith        | ends with                      | A.endswith(B) is True         | 'abc' endswith 'bc'           |
+
+
+
+## 小技巧
+```
+# 用例skip机制，支持用例层和API层
+1. 无条件跳过：skip: skip this test unconditionally
+2. 自定义函数返回True：skipIf: ${skip_test_in_production_env()}
+3. 自定义函数返回False：skipUnless: ${skip_test_in_production_env()}
+
+# 日志输出需要指定绝对路径或相对路径，不能指定单独一个文件名（文件可以未创建）
+hrun --log-level debug --log-file ./test.log   api/youcloud/query_product_api.yml
+
+响应体默认引用变量：content或body
+
+$需要转义为：$$
+
+自定义函数使用了字典参数，需要使用双引号包围，避免YAML解析器会将其误认为是字典定义。例如：
+sign: "${get_sign_v3({device_sn: $device_sn, os_platform: $os_platform, app_version: $app_version})}"
+```
+
+
+
 
 
 ## FQA

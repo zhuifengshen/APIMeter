@@ -14,8 +14,8 @@ from apimeter.compat import basestring, numeric_types, str
 dolloar_regex_compile = re.compile(r"\$\$")
 # variable notation, e.g. ${var} or $var
 variable_regex_compile = re.compile(r"\$\{(\w+)\}|\$(\w+)")
-# function notation, e.g. ${func1($var_1, $var_3)}
-function_regex_compile = re.compile(r"\$\{(\w+)\(([\$\w\.\-/\s=,]*)\)\}")
+# function notation, e.g. ${func1($var_1, $var_3)} - updated to support complex parameters
+function_regex_compile = re.compile(r"\$\{(\w+)\(([^)]*)\)\}")
 
 """ Store parse failed api/testcase/testsuite file path
 """
@@ -40,6 +40,69 @@ def parse_string_value(str_value):
     except SyntaxError:
         # e.g. $var, ${func}
         return str_value
+
+
+def smart_split_params(params_str):
+    """智能分割函数参数，考虑嵌套的括号和引号
+    
+    Args:
+        params_str (str): 参数字符串
+        
+    Returns:
+        list: 分割后的参数列表
+        
+    Examples:
+        >>> smart_split_params("1, 2, 3")
+        ["1", "2", "3"]
+        
+        >>> smart_split_params("[$a, $b], $c")
+        ["[$a, $b]", "$c"]
+        
+        >>> smart_split_params('{"key": "value"}, $var')
+        ['{"key": "value"}', "$var"]
+    """
+    if not params_str.strip():
+        return []
+        
+    args = []
+    current_arg = ""
+    bracket_count = 0
+    brace_count = 0
+    paren_count = 0
+    in_quotes = False
+    quote_char = None
+    
+    for char in params_str:
+        if char in ['"', "'"] and not in_quotes:
+            in_quotes = True
+            quote_char = char
+        elif char == quote_char and in_quotes:
+            in_quotes = False
+            quote_char = None
+        elif not in_quotes:
+            if char == '[':
+                bracket_count += 1
+            elif char == ']':
+                bracket_count -= 1
+            elif char == '{':
+                brace_count += 1
+            elif char == '}':
+                brace_count -= 1
+            elif char == '(':
+                paren_count += 1
+            elif char == ')':
+                paren_count -= 1
+            elif char == ',' and bracket_count == 0 and brace_count == 0 and paren_count == 0:
+                args.append(current_arg.strip())
+                current_arg = ""
+                continue
+        
+        current_arg += char
+    
+    if current_arg.strip():
+        args.append(current_arg.strip())
+    
+    return args
 
 
 def is_var_or_func_exist(content):
@@ -490,6 +553,12 @@ def parse_function_params(params):
 
         >>> parse_function_params("1, 2, a=3, b=4")
         {'args': [1, 2], 'kwargs': {'a':3, 'b':4}}
+        
+        >>> parse_function_params("[$a, $b, $c]")
+        {'args': [['$a', '$b', '$c']], 'kwargs': {}}
+        
+        >>> parse_function_params('{"key": "value"}')
+        {'args': [{'key': 'value'}], 'kwargs': {}}
 
     """
     function_meta = {"args": [], "kwargs": {}}
@@ -498,12 +567,46 @@ def parse_function_params(params):
     if params_str == "":
         return function_meta
 
-    args_list = params_str.split(",")
+    # 使用智能分割来处理复杂参数
+    args_list = smart_split_params(params_str)
+    
     for arg in args_list:
         arg = arg.strip()
-        if "=" in arg:
-            key, value = arg.split("=")
-            function_meta["kwargs"][key.strip()] = parse_string_value(value.strip())
+        if "=" in arg and not (arg.startswith('[') or arg.startswith('{')):
+            # 只有在不是列表或对象的情况下才按等号分割（避免误判如 {"a": "b=c"}）
+            # 检查等号是否在引号外
+            equal_pos = -1
+            in_quotes = False
+            quote_char = None
+            bracket_count = 0
+            brace_count = 0
+            
+            for i, char in enumerate(arg):
+                if char in ['"', "'"] and not in_quotes:
+                    in_quotes = True
+                    quote_char = char
+                elif char == quote_char and in_quotes:
+                    in_quotes = False
+                    quote_char = None
+                elif not in_quotes:
+                    if char == '[':
+                        bracket_count += 1
+                    elif char == ']':
+                        bracket_count -= 1
+                    elif char == '{':
+                        brace_count += 1
+                    elif char == '}':
+                        brace_count -= 1
+                    elif char == '=' and bracket_count == 0 and brace_count == 0:
+                        equal_pos = i
+                        break
+            
+            if equal_pos > 0:
+                key = arg[:equal_pos].strip()
+                value = arg[equal_pos + 1:].strip()
+                function_meta["kwargs"][key] = parse_string_value(value)
+            else:
+                function_meta["args"].append(parse_string_value(arg))
         else:
             function_meta["args"].append(parse_string_value(arg))
 
@@ -592,8 +695,121 @@ class LazyFunction(object):
         variables_mapping = variables_mapping or {}
         args = parse_lazy_data(self._args, variables_mapping)
         kwargs = parse_lazy_data(self._kwargs, variables_mapping)
-        self.cache_key = self.__prepare_cache_key(args, kwargs)
-        return self._func(*args, **kwargs)
+        
+        # 对于列表和字典格式的字符串参数，尝试进一步解析
+        processed_args = []
+        for arg in args:
+            if isinstance(arg, str):
+                # 检查是否是列表格式
+                if arg.startswith('[') and arg.endswith(']'):
+                    try:
+                        # 尝试解析为实际的列表
+                        # 首先处理变量替换后的字符串，将其转换为有效的Python字面量
+                        processed_arg = self._convert_to_python_literal(arg, variables_mapping)
+                        processed_args.append(ast.literal_eval(processed_arg))
+                        continue
+                    except (ValueError, SyntaxError):
+                        pass
+                # 检查是否是字典格式
+                elif arg.startswith('{') and arg.endswith('}'):
+                    try:
+                        # 尝试解析为实际的字典
+                        processed_arg = self._convert_to_python_literal(arg, variables_mapping)
+                        processed_args.append(ast.literal_eval(processed_arg))
+                        continue
+                    except (ValueError, SyntaxError):
+                        pass
+            processed_args.append(arg)
+        
+        # 对kwargs也进行同样的处理
+        processed_kwargs = {}
+        for key, value in kwargs.items():
+            if isinstance(value, str):
+                if value.startswith('[') and value.endswith(']'):
+                    try:
+                        processed_value = self._convert_to_python_literal(value, variables_mapping)
+                        processed_kwargs[key] = ast.literal_eval(processed_value)
+                        continue
+                    except (ValueError, SyntaxError):
+                        pass
+                elif value.startswith('{') and value.endswith('}'):
+                    try:
+                        processed_value = self._convert_to_python_literal(value, variables_mapping)
+                        processed_kwargs[key] = ast.literal_eval(processed_value)
+                        continue
+                    except (ValueError, SyntaxError):
+                        pass
+            processed_kwargs[key] = value
+        
+        self.cache_key = self.__prepare_cache_key(processed_args, processed_kwargs)
+        return self._func(*processed_args, **processed_kwargs)
+    
+    def _convert_to_python_literal(self, arg_str, variables_mapping):
+        """将包含变量值的字符串转换为有效的Python字面量
+        
+        Args:
+            arg_str (str): 包含变量值的字符串，如 "[TESTCASE_SETUP_XXX, ios, 2.8.6]"
+            variables_mapping (dict): 变量映射（用于类型检查）
+            
+        Returns:
+            str: 有效的Python字面量字符串
+        """
+        import re
+        
+        def is_number(s):
+            """检查字符串是否是数字"""
+            try:
+                float(s.strip())
+                return True
+            except ValueError:
+                return False
+        
+        def is_quoted(s):
+            """检查字符串是否已经被引号包围"""
+            s = s.strip()
+            return (s.startswith('"') and s.endswith('"')) or (s.startswith("'") and s.endswith("'"))
+        
+        def quote_if_needed(s):
+            """如果需要的话给字符串加引号"""
+            s = s.strip()
+            if is_quoted(s) or is_number(s):
+                return s
+            if s.lower() in ['true', 'false', 'none', 'null']:
+                return s
+            # 转义引号并添加引号
+            escaped = s.replace('"', '\\"')
+            return f'"{escaped}"'
+        
+        # 简单的方法：分割字符串并重新组装
+        if arg_str.startswith('[') and arg_str.endswith(']'):
+            # 处理列表
+            inner = arg_str[1:-1]  # 去掉方括号
+            if inner.strip():
+                elements = [quote_if_needed(elem) for elem in inner.split(',')]
+                return '[' + ', '.join(elements) + ']'
+            else:
+                return '[]'
+        elif arg_str.startswith('{') and arg_str.endswith('}'):
+            # 处理字典 - 这个更复杂，暂时简化处理
+            # 对于简单的字典格式 {"key": value, "key2": value2}
+            inner = arg_str[1:-1]  # 去掉花括号
+            if inner.strip():
+                # 简单的键值对分割
+                pairs = []
+                for pair in inner.split(','):
+                    if ':' in pair:
+                        key_part, value_part = pair.split(':', 1)
+                        key = key_part.strip()
+                        value = quote_if_needed(value_part)
+                        # 确保key也被引号包围
+                        if not is_quoted(key):
+                            key = f'"{key.strip()}"'
+                        pairs.append(f'{key}: {value}')
+                return '{' + ', '.join(pairs) + '}'
+            else:
+                return '{}'
+        
+        return arg_str
 
 
 cached_functions_mapping = {}

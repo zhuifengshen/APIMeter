@@ -198,3 +198,7 @@ def delete_user(uid):
     response = make_response(json.dumps(result), status_code)
     response.headers["Content-Type"] = "application/json"
     return response
+
+
+if __name__ == "__main__":
+    app.run(port=FLASK_APP_PORT)
