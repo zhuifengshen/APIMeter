@@ -13,7 +13,7 @@ class TestModuleLoader(unittest.TestCase):
 
     def test_load_debugtalk_module(self):
         project_mapping = buildup.load_project_data(
-            os.path.join(os.getcwd(), "httprunner")
+            os.path.join(os.getcwd(), "apimeter")
         )
         self.assertNotIn("alter_response", project_mapping["functions"])
 
@@ -37,7 +37,7 @@ class TestModuleLoader(unittest.TestCase):
         self.assertEqual(project_working_directory, os.path.join(os.getcwd(), "tests"))
         self.assertIn("gen_md5", debugtalk_functions)
 
-        project_mapping = buildup.load_project_data("httprunner/__init__.py")
+        project_mapping = buildup.load_project_data("apimeter/__init__.py")
         project_working_directory = project_mapping["PWD"]
         debugtalk_functions = project_mapping["functions"]
         self.assertEqual(project_working_directory, os.getcwd())
