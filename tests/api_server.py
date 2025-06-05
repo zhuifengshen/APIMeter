@@ -56,8 +56,17 @@ def get_sign(*args):
     return sign
 
 
+# def gen_md5(*args):
+#     return hashlib.md5("".join(args).encode("utf-8")).hexdigest()
 def gen_md5(*args):
-    return hashlib.md5("".join(args).encode("utf-8")).hexdigest()
+    # Convert all arguments to strings, handling dict/list types
+    str_args = []
+    for arg in args:
+        if isinstance(arg, (dict, list)):
+            str_args.append(json.dumps(arg, sort_keys=True))
+        else:
+            str_args.append(str(arg))
+    return hashlib.md5("".join(str_args).encode("utf-8")).hexdigest()
 
 
 def validate_request(func):

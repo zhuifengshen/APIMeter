@@ -27,7 +27,8 @@ poetry run python -m apimeter /path/to/api --skip-success  # 报告忽略成功�
 python -m apimeter -h # 查看使用指南
 
 # 测试运行
-python -m unittest discover # 单元测试
+python -m unittest discover # 运行所有单元测试
+python -m unittest tests/test_context.py # 运行指定测试文件
 
 python tests/api_server.py # 启动测试示例服务器
 python -m apimeter tests/testcases --log-level debug --save-tests # 测试示例，同时设置日志与生成中间处理文件
