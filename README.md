@@ -34,6 +34,8 @@ python tests/api_server.py # 启动测试示例服务器
 python -m apimeter tests/testcases --log-level debug --save-tests # 测试示例，同时设置日志与生成中间处理文件
 
 # 打包编译与发布
+git tag v1.0.0 或 git tag -a v1.0.0 -m "发布正式版本 v1.0.0" # 打标签（轻量或附注）
+git push v1.0.0 或 git push --tags # 推送标签(单个或所有)
 poetry build  # 打包
 poetry publish  # 发布，根据提示输入pypi账号密码
 pip install -i https://pypi.Python.org/simple/ apimeter  # 指定安装源，因为刚发布其他平台未及时同步
