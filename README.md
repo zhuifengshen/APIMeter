@@ -369,3 +369,7 @@ ImportError: cannot import name 'soft_unicode' from 'markupsafe' (/Users/devin/.
 在 pyproject.toml 的 [tool.poetry.dependencies] 部分中添加：
 markupsafe = "2.0.1"
 jinja2 = "2.10.3"
+
+
+### 3、在APIMeter v2.7.1版本中调整为Python3.6+
+实际使用过程中，都是python3的环境的。但如果有需要，调整Python版本号，依旧可以在2.7+环境中正常使用。
