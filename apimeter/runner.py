@@ -275,6 +275,9 @@ class Runner(object):
             log_req_resp_details()
             raise
 
+        # add response object to variables for validate stage
+        self.session_context.update_test_variables("response", resp_obj)
+
         # validate
         validators = test_dict.get("validate") or test_dict.get("validators") or []
         validate_script = test_dict.get("validate_script", [])

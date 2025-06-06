@@ -12,8 +12,8 @@ from apimeter.compat import basestring, numeric_types, str
 
 # use $$ to escape $ notation
 dolloar_regex_compile = re.compile(r"\$\$")
-# variable notation, e.g. ${var} or $var
-variable_regex_compile = re.compile(r"\$\{(\w+)\}|\$(\w+)")
+# variable notation, e.g. ${var} or $var or ${var.prop} or $var.prop
+variable_regex_compile = re.compile(r"\$\{([\w\.]+)\}|\$([\w\.]+)")
 # function notation, e.g. ${func1($var_1, $var_3)} - updated to support complex parameters
 function_regex_compile = re.compile(r"\$\{(\w+)\(([^)]*)\)\}")
 
@@ -459,10 +459,10 @@ def extend_validators(raw_validators, override_validators):
 
 
 def get_mapping_variable(variable_name, variables_mapping):
-    """get variable from variables_mapping.
+    """get variable from variables_mapping, support nested property access.
 
     Args:
-        variable_name (str): variable name
+        variable_name (str): variable name, can include property access like "var.prop"
         variables_mapping (dict): variables mapping
 
     Returns:
@@ -471,11 +471,46 @@ def get_mapping_variable(variable_name, variables_mapping):
     Raises:
         exceptions.VariableNotFound: variable is not found.
 
+    Examples:
+        >>> get_mapping_variable("token", {"token": "abc123"})
+        "abc123"
+        
+        >>> get_mapping_variable("resp.token", {"resp": {"token": "abc123"}})
+        "abc123"
+        
+        >>> get_mapping_variable("content.token", {"content": {"token": "abc123"}})
+        "abc123"
+
     """
     try:
-        return variables_mapping[variable_name]
+        # Support nested property access like "resp.token" or "content.token"
+        if '.' in variable_name:
+            # Split the variable name by dots for property access
+            parts = variable_name.split('.')
+            value = variables_mapping
+            
+            for part in parts:
+                if isinstance(value, dict):
+                    value = value[part]
+                elif hasattr(value, part):
+                    # Support object attribute access
+                    value = getattr(value, part)
+                else:
+                    # Try to treat it as a key if it's dict-like
+                    try:
+                        value = value[part]
+                    except (KeyError, TypeError):
+                        raise exceptions.VariableNotFound("{} is not found.".format(variable_name))
+            
+            return value
+        else:
+            # Simple variable access
+            return variables_mapping[variable_name]
+            
     except KeyError:
         raise exceptions.VariableNotFound("{} is not found.".format(variable_name))
+    except (AttributeError, TypeError) as e:
+        raise exceptions.VariableNotFound("{} is not found or not accessible: {}".format(variable_name, str(e)))
 
 
 def get_mapping_function(function_name, functions_mapping):
@@ -696,7 +731,7 @@ class LazyFunction(object):
         args = parse_lazy_data(self._args, variables_mapping)
         kwargs = parse_lazy_data(self._kwargs, variables_mapping)
         
-        # 对于列表和字典格式的字符串参数，尝试进一步解析
+        # 对于列表和字典格式的字符串参数，以及变量引用，尝试进一步解析
         processed_args = []
         for arg in args:
             if isinstance(arg, str):
@@ -719,6 +754,31 @@ class LazyFunction(object):
                         continue
                     except (ValueError, SyntaxError):
                         pass
+                # 检查是否是变量引用（如 content.token, content等）
+                elif not arg.startswith('$') and not arg.startswith('"') and not arg.startswith("'"):
+                    # 可能是变量引用，尝试解析
+                    try:
+                        # 先检查是否是数字或布尔值等字面量
+                        if arg.lower() not in ['true', 'false', 'none', 'null']:
+                            try:
+                                float(arg)  # 测试是否是数字
+                            except ValueError:
+                                # 不是数字，尝试作为变量解析
+                                var_value = get_mapping_variable(arg, variables_mapping)
+                                processed_args.append(var_value)
+                                continue
+                    except exceptions.VariableNotFound:
+                        # 不是变量，尝试作为响应路径解析
+                        try:
+                            # 检查是否是响应路径（如 content.token, status_code 等）
+                            if 'response' in variables_mapping:
+                                resp_obj = variables_mapping['response']
+                                if hasattr(resp_obj, 'extract_field'):
+                                    resp_value = resp_obj.extract_field(arg)
+                                    processed_args.append(resp_value)
+                                    continue
+                        except Exception:
+                            pass
             processed_args.append(arg)
         
         # 对kwargs也进行同样的处理
@@ -739,6 +799,29 @@ class LazyFunction(object):
                         continue
                     except (ValueError, SyntaxError):
                         pass
+                # 检查是否是变量引用
+                elif not value.startswith('$') and not value.startswith('"') and not value.startswith("'"):
+                    try:
+                        if value.lower() not in ['true', 'false', 'none', 'null']:
+                            try:
+                                float(value)  # 测试是否是数字
+                            except ValueError:
+                                # 不是数字，尝试作为变量解析
+                                var_value = get_mapping_variable(value, variables_mapping)
+                                processed_kwargs[key] = var_value
+                                continue
+                    except exceptions.VariableNotFound:
+                        # 不是变量，尝试作为响应路径解析
+                        try:
+                            # 检查是否是响应路径（如 content.token, status_code 等）
+                            if 'response' in variables_mapping:
+                                resp_obj = variables_mapping['response']
+                                if hasattr(resp_obj, 'extract_field'):
+                                    resp_value = resp_obj.extract_field(value)
+                                    processed_kwargs[key] = resp_value
+                                    continue
+                        except Exception:
+                            pass
             processed_kwargs[key] = value
         
         self.cache_key = self.__prepare_cache_key(processed_args, processed_kwargs)
@@ -749,7 +832,7 @@ class LazyFunction(object):
         
         Args:
             arg_str (str): 包含变量值的字符串，如 "[TESTCASE_SETUP_XXX, ios, 2.8.6]"
-            variables_mapping (dict): 变量映射（用于类型检查）
+            variables_mapping (dict): 变量映射（用于类型检查和值解析）
             
         Returns:
             str: 有效的Python字面量字符串
@@ -769,9 +852,33 @@ class LazyFunction(object):
             s = s.strip()
             return (s.startswith('"') and s.endswith('"')) or (s.startswith("'") and s.endswith("'"))
         
+        def resolve_variable_reference(s):
+            """解析变量引用，如果是变量名则返回其值，否则返回原字符串"""
+            s = s.strip()
+            # 检查是否是变量引用（不以$开头但可能是变量名或属性访问）
+            if not s.startswith('$') and not is_quoted(s) and not is_number(s):
+                if s.lower() not in ['true', 'false', 'none', 'null']:
+                    # 尝试解析为变量
+                    try:
+                        value = get_mapping_variable(s, variables_mapping)
+                        # 如果值是字符串，需要适当处理
+                        if isinstance(value, str):
+                            return f'"{value}"'
+                        else:
+                            return str(value)
+                    except exceptions.VariableNotFound:
+                        # 不是变量，按普通字符串处理
+                        pass
+            return s
+        
         def quote_if_needed(s):
             """如果需要的话给字符串加引号"""
             s = s.strip()
+            # 先尝试解析变量引用
+            resolved = resolve_variable_reference(s)
+            if resolved != s:  # 如果解析成功，返回解析结果
+                return resolved
+                
             if is_quoted(s) or is_number(s):
                 return s
             if s.lower() in ['true', 'false', 'none', 'null']:
@@ -887,8 +994,10 @@ class LazyString(object):
             if var_match:
                 var_name = var_match.group(1) or var_match.group(2)
                 # check if any variable undefined in check_variables_set
-                if var_name not in self.check_variables_set:
-                    raise exceptions.VariableNotFound(var_name)
+                # for nested property access like "resp.token", only check the base variable "resp"
+                base_var_name = var_name.split('.')[0]
+                if base_var_name not in self.check_variables_set:
+                    raise exceptions.VariableNotFound(base_var_name)
 
                 self._args.append(var_name)
                 match_start_position = var_match.end()

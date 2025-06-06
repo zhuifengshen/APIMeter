@@ -1,7 +1,14 @@
  # ChangeLog 
  
- HttpRunner v2.5.9 之后扩展功能
- 
+HttpRunner v2.5.9 之后扩展功能，支持以下所有函数调用格式：
+1. 原始格式: ${get_sign($device_sn, $os_platform, $app_version)}
+2. 列表参数: ${get_sign_v2([$device_sn, $os_platform, $app_version])}
+3. 字典参数: ${get_sign_v3({device_sn: $device_sn, os_platform: $os_platform, app_version: $app_version})}
+4. 响应对象: ${validate_token_v2(content)}
+5. 响应路径: ${validate_token(content.token)}
+6. 变量属性: ${validate_token($resp.token)}
+
+
 
 ## 一、支持测试报告瘦身
 
@@ -104,48 +111,6 @@ def smart_split_params(params_str):
 - 增强了 `LazyFunction.to_value` 方法
 - 新增了 `_convert_to_python_literal` 方法
 
-## 额外修复
-
-### YAML语法问题
-在测试过程中发现，当函数参数包含花括号 `{}` 时，YAML解析器会将其误认为是字典定义，导致语法错误：
-```
-ERROR    mapping values are not allowed here
-```
-
-**解决方案**：将包含复杂参数的函数调用用引号包围：
-```yaml
-# 错误写法
-sign: ${get_sign_v3({"device_sn": $device_sn, "os_platform": $os_platform, "app_version": $app_version})}
-
-# 正确写法  
-sign: "${get_sign_v3({\"device_sn\": $device_sn, \"os_platform\": $os_platform, \"app_version\": $app_version})}"
-```
-
-更多示例
-```yaml
-sign: ${get_sign($device_sn, $os_platform, $app_version)}
-
-sign: "${get_sign_v2([$device_sn, $os_platform, $app_version])}"
-sign: ${get_sign_v2([$device_sn, $os_platform, $app_version])}
-
-sign: "${get_sign_v3({device_sn: $device_sn, os_platform: $os_platform, app_version: $app_version})}"
-sign: "${get_sign_v3({'device_sn': $device_sn, 'os_platform': $os_platform, 'app_version': $app_version})}"
-sign: "${get_sign_v3({\"device_sn\": $device_sn, \"os_platform\": $os_platform, \"app_version\": $app_version})}"
-```
-
-
-### Python兼容性问题
-修复了Python 3.11兼容性问题：
-```python
-# 原来的代码
-from collections import Iterable
-
-# 修复后的代码
-try:
-    from collections.abc import Iterable
-except ImportError:
-    from collections import Iterable
-```
 
 ## 使用示例
 
@@ -174,3 +139,131 @@ teststeps:
 1. **原有多参数格式**：`sign v1: 9e2d1dab9fffdbe8a6d4858ae93cdca9a4cc9d14` ✅
 2. **列表参数格式**：`sign v2: 9e2d1dab9fffdbe8a6d4858ae93cdca9a4cc9d14` ✅  
 3. **字典参数格式**：`sign v3: 9e2d1dab9fffdbe8a6d4858ae93cdca9a4cc9d14` ✅
+
+
+
+## 三、函数调用在YAML中的正确写法
+
+### 问题描述1
+在测试过程中发现，当函数参数包含花括号 `{}` 时，YAML解析器会将其误认为是字典定义，导致语法错误：
+```
+ERROR    mapping values are not allowed here
+```
+
+**解决方案**：将包含复杂参数的函数调用用引号包围：
+```yaml
+# 错误写法
+sign: ${get_sign_v3({"device_sn": $device_sn, "os_platform": $os_platform, "app_version": $app_version})}
+
+# 正确写法  
+sign: "${get_sign_v3({\"device_sn\": $device_sn, \"os_platform\": $os_platform, \"app_version\": $app_version})}"
+```
+
+### 字典参数的特殊处理
+
+对于包含字典参数的函数调用，有多种写法：
+
+```yaml
+# 方法1：使用双引号和转义
+sign: "${get_sign_v3({\"device_sn\": $device_sn, \"os_platform\": $os_platform})}"
+
+# 方法2：使用单引号（如果变量不包含单引号）
+sign: "${get_sign_v3({'device_sn': $device_sn, 'os_platform': $os_platform})}"
+
+# 方法3：YAML原生字典语法（推荐）
+sign: "${get_sign_v3({device_sn: $device_sn, os_platform: $os_platform})}"
+```
+
+另外，对于包含列表参数的函数调用方式如下：
+```yaml
+sign: ${get_sign($device_sn, $os_platform, $app_version)}
+sign: "${get_sign_v2([$device_sn, $os_platform, $app_version])}"
+sign: ${get_sign_v2([$device_sn, $os_platform, $app_version])}
+```
+
+
+### 问题描述2
+
+当在YAML的列表（数组）语法中使用包含特殊字符的函数调用时，可能会遇到解析错误：
+
+```
+ERROR    while parsing a flow sequence
+expected ',' or ']', but got '{'
+```
+
+### 解决方案
+
+#### ✅ 正确写法1：多行格式
+
+```yaml
+validate:
+  - eq: 
+    - ${validate_token($token)}
+    - true
+```
+
+#### ✅ 正确写法2：单行格式（加引号）
+
+```yaml
+validate:
+  - eq: ["${validate_token($token)}", true]
+```
+
+#### ❌ 错误写法：单行格式（无引号）
+
+```yaml
+validate:
+  - eq: [${validate_token($token)}, true]  # 这会导致YAML解析错误
+```
+
+### 规则总结
+
+1. **多行格式**：总是安全的，推荐用于复杂的函数调用
+2. **单行格式**：当函数调用包含特殊字符（如 `{`, `}`, `[`, `]`）时，必须用引号包围
+3. **简单函数调用**：如 `${func()}` 在单行格式中通常不需要引号
+
+### 实际示例
+
+```yaml
+# 各种函数调用的正确写法
+teststeps:
+-
+    name: test functions
+    validate:
+        # 简单函数调用 - 无需引号
+        - eq: [${get_timestamp()}, 1234567890]
+        
+        # 复杂函数调用 - 需要引号
+        - eq: ["${validate_data({\"key\": $value})}", true]
+        
+        # 列表参数 - 需要引号
+        - eq: ["${process_list([$item1, $item2])}", "success"]
+        
+        # 多行格式 - 总是安全
+        - eq:
+          - ${complex_function($param1, $param2)}
+          - expected_result
+```
+
+### 最佳实践
+
+1. **优先使用多行格式**：更清晰，不容易出错
+2. **复杂参数加引号**：包含 `{}[]` 等特殊字符时
+3. **保持一致性**：在同一个项目中使用统一的风格
+4. **测试验证**：修改YAML后及时验证语法正确性
+
+
+
+
+### Python兼容性问题
+修复了Python 3.11兼容性问题：
+```python
+# 原来的代码
+from collections import Iterable
+
+# 修复后的代码
+try:
+    from collections.abc import Iterable
+except ImportError:
+    from collections import Iterable
+```
