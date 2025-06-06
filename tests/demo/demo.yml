@@ -30,17 +30,25 @@ teststeps:
             Content-Type: "application/json"
             device_sn: $device_sn
         json:
-            sign: ${get_sign($device_sn, $os_platform, $app_version)}
+            # sign: ${get_sign($device_sn, $os_platform, $app_version)}
             # sign: "${get_sign_v2([$device_sn, $os_platform, $app_version])}"
             # sign: ${get_sign_v2([$device_sn, $os_platform, $app_version])}
-            # sign: "${get_sign_v3({device_sn: $device_sn, os_platform: $os_platform, app_version: $app_version})}"
+            sign: "${get_sign_v3({device_sn: $device_sn, os_platform: $os_platform, app_version: $app_version})}"
             # sign: "${get_sign_v3({'device_sn': $device_sn, 'os_platform': $os_platform, 'app_version': $app_version})}"
             # sign: "${get_sign_v3({\"device_sn\": $device_sn, \"os_platform\": $os_platform, \"app_version\": $app_version})}"
     extract:
         - token: content.token
+        - resp: content
     validate:
         - eq: ["status_code", 200]
         - len_eq: ["content.token", 16]
+        - eq: ["${validate_token($token)}", true]
+        - eq: ["${validate_token(content.token)}", true]
+        - eq: ["${validate_token_v2(content)}", true]
+        - eq: ["${validate_token($resp.token)}", true]
+        - eq:
+          - ${validate_token($resp.token)}
+          - true
 -
     name: reset all users
     variables:
