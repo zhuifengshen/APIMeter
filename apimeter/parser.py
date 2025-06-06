@@ -13,7 +13,7 @@ from apimeter.compat import basestring, numeric_types, str
 # use $$ to escape $ notation
 dolloar_regex_compile = re.compile(r"\$\$")
 # variable notation, e.g. ${var} or $var or ${var.prop} or $var.prop
-variable_regex_compile = re.compile(r"\$\{([\w\.]+)\}|\$([\w\.]+)")
+variable_regex_compile = re.compile(r"\$\{([\w]+(?:\.[\w]+)*)\}|\$([\w]+(?:\.[\w]+)*)")
 # function notation, e.g. ${func1($var_1, $var_3)} - updated to support complex parameters
 function_regex_compile = re.compile(r"\$\{(\w+)\(([^)]*)\)\}")
 
