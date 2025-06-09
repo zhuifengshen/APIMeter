@@ -768,17 +768,18 @@ class LazyFunction(object):
                                 processed_args.append(var_value)
                                 continue
                     except exceptions.VariableNotFound:
-                        # 不是变量，尝试作为响应路径解析
-                        try:
-                            # 检查是否是响应路径（如 content.token, status_code 等）
-                            if 'response' in variables_mapping:
-                                resp_obj = variables_mapping['response']
-                                if hasattr(resp_obj, 'extract_field'):
-                                    resp_value = resp_obj.extract_field(arg)
-                                    processed_args.append(resp_value)
-                                    continue
-                        except Exception:
-                            pass
+                        # 不是变量，检查是否看起来像响应路径（包含点号的才可能是路径）
+                        if '.' in arg or arg in ['status_code', 'headers', 'cookies', 'content', 'text', 'json', 'encoding', 'ok', 'reason', 'url']:
+                            try:
+                                # 检查是否是响应路径（如 content.token, status_code 等）
+                                if 'response' in variables_mapping:
+                                    resp_obj = variables_mapping['response']
+                                    if hasattr(resp_obj, 'extract_field'):
+                                        resp_value = resp_obj.extract_field(arg)
+                                        processed_args.append(resp_value)
+                                        continue
+                            except Exception:
+                                pass
             processed_args.append(arg)
         
         # 对kwargs也进行同样的处理
@@ -811,17 +812,18 @@ class LazyFunction(object):
                                 processed_kwargs[key] = var_value
                                 continue
                     except exceptions.VariableNotFound:
-                        # 不是变量，尝试作为响应路径解析
-                        try:
-                            # 检查是否是响应路径（如 content.token, status_code 等）
-                            if 'response' in variables_mapping:
-                                resp_obj = variables_mapping['response']
-                                if hasattr(resp_obj, 'extract_field'):
-                                    resp_value = resp_obj.extract_field(value)
-                                    processed_kwargs[key] = resp_value
-                                    continue
-                        except Exception:
-                            pass
+                        # 不是变量，检查是否看起来像响应路径（包含点号的才可能是路径）
+                        if '.' in value or value in ['status_code', 'headers', 'cookies', 'content', 'text', 'json', 'encoding', 'ok', 'reason', 'url']:
+                            try:
+                                # 检查是否是响应路径（如 content.token, status_code 等）
+                                if 'response' in variables_mapping:
+                                    resp_obj = variables_mapping['response']
+                                    if hasattr(resp_obj, 'extract_field'):
+                                        resp_value = resp_obj.extract_field(value)
+                                        processed_kwargs[key] = resp_value
+                                        continue
+                            except Exception:
+                                pass
             processed_kwargs[key] = value
         
         self.cache_key = self.__prepare_cache_key(processed_args, processed_kwargs)

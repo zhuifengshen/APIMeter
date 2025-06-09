@@ -198,7 +198,14 @@ def sum_status_code(status_code):
 # 日志输出需要指定绝对路径或相对路径，不能指定单独一个文件名（文件可以未创建）
 hrun --log-level debug --log-file ./test.log   api/youcloud/query_product_api.yml
 
-响应体默认引用变量：content或body
+响应体默认可引用属性变量：status_code, cookies, elapsed, headers, content, text, json, encoding, ok, reason, url
+e.g.
+"status_code"
+"content"
+"content.person.name.first_name"
+"headers"
+"headers.content-type"
+"cookies"
 
 $需要转义为：$$
 

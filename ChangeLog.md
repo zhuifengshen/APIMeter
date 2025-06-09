@@ -1,6 +1,6 @@
  # ChangeLog 
- 
-HttpRunner v2.5.9 之后扩展功能，支持以下所有函数调用格式：
+
+## HttpRunner v2.5.9 之后扩展功能，支持以下所有函数调用格式：
 1. 原始格式: ${get_sign($device_sn, $os_platform, $app_version)}
 2. 列表参数: ${get_sign_v2([$device_sn, $os_platform, $app_version])}
 3. 字典参数: ${get_sign_v3({device_sn: $device_sn, os_platform: $os_platform, app_version: $app_version})}
@@ -9,6 +9,46 @@ HttpRunner v2.5.9 之后扩展功能，支持以下所有函数调用格式：
 6. 变量属性: ${validate_token($resp.token)}
 
 
+## 自定义函数调用的正确语法格式
+```yaml
+# 一、校验器中自定义函数调用的正确语法格式
+✅ 正确写法1：多行格式
+validate:
+  - eq: 
+    - ${validate_token($token)}
+    - true
+✅ 正确写法2：单行格式（加引号）
+validate:
+  - eq: ["${validate_token($token)}", true]
+❌ 错误写法：单行格式（无引号）
+validate:
+  - eq: [${validate_token($token)}, true]  # 这会导致YAML解析错误
+
+# 二、对于包含字典参数的自定义函数调用的正确语法格式
+✅ 正确方法1：使用双引号和转义
+sign: "${get_sign_v3({\"device_sn\": $device_sn, \"os_platform\": $os_platform})}"
+
+✅ 正确方法2：使用单引号（如果变量不包含单引号）
+sign: "${get_sign_v3({'device_sn': $device_sn, 'os_platform': $os_platform})}"
+
+✅ 正确方法3：YAML原生字典语法（推荐）
+sign: "${get_sign_v3({device_sn: $device_sn, os_platform: $os_platform})}"
+
+❌ 错误写法：无引号
+sign: ${get_sign_v3({"device_sn": $device_sn, "os_platform": $os_platform, "app_version": $app_version})}
+
+# 三、对于包含列表参数的函数调用的正确语法格式
+sign: ${get_sign($device_sn, $os_platform, $app_version)}
+sign: "${get_sign_v2([$device_sn, $os_platform, $app_version])}"
+sign: ${get_sign_v2([$device_sn, $os_platform, $app_version])}
+
+# 四、其他注意事项
+1. content是全局默认响应体变量，不需要使用美元符号 $content；
+```
+
+
+
+# 附录-详细内容
 
 ## 一、支持测试报告瘦身
 
