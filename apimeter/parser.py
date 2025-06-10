@@ -769,7 +769,7 @@ class LazyFunction(object):
                                 continue
                     except exceptions.VariableNotFound:
                         # 不是变量，检查是否看起来像响应路径（包含点号的才可能是路径）
-                        if '.' in arg or arg in ['status_code', 'headers', 'cookies', 'content', 'text', 'json', 'encoding', 'ok', 'reason', 'url']:
+                        if '.' in arg or arg in ['status_code', 'headers', 'cookies', 'content', 'body', 'text', 'json', 'encoding', 'ok', 'reason', 'url']:
                             try:
                                 # 检查是否是响应路径（如 content.token, status_code 等）
                                 if 'response' in variables_mapping:
@@ -813,7 +813,7 @@ class LazyFunction(object):
                                 continue
                     except exceptions.VariableNotFound:
                         # 不是变量，检查是否看起来像响应路径（包含点号的才可能是路径）
-                        if '.' in value or value in ['status_code', 'headers', 'cookies', 'content', 'text', 'json', 'encoding', 'ok', 'reason', 'url']:
+                        if '.' in value or value in ['status_code', 'headers', 'cookies', 'content', 'body', 'text', 'json', 'encoding', 'ok', 'reason', 'url']:
                             try:
                                 # 检查是否是响应路径（如 content.token, status_code 等）
                                 if 'response' in variables_mapping:

@@ -37,14 +37,14 @@ teststeps:
             # sign: "${get_sign_v3({'device_sn': $device_sn, 'os_platform': $os_platform, 'app_version': $app_version})}"
             # sign: "${get_sign_v3({\"device_sn\": $device_sn, \"os_platform\": $os_platform, \"app_version\": $app_version})}"
     extract:
-        - token: content.token
-        - resp: content
+        - token: body.token
+        - resp: body
     validate:
         - eq: ["status_code", 200]
-        - len_eq: ["content.token", 16]
+        - len_eq: ["body.token", 16]
         - eq: ["${validate_token($token)}", true]
-        - eq: ["${validate_token(content.token)}", true]
-        - eq: ["${validate_token_v2(content)}", true]
+        - eq: ["${validate_token(body.token)}", true]
+        - eq: ["${validate_token_v2(body)}", true]
         - eq: ["${validate_token($resp.token)}", true]
         - eq:
           - ${validate_token($resp.token)}
@@ -62,4 +62,4 @@ teststeps:
             token: $token
     validate:
         - eq: ["status_code", 200]
-        - eq: ["content.success", true]            
+        - eq: ["body.success", true]

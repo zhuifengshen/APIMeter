@@ -233,7 +233,7 @@ class ResponseObject(object):
             err_msg = "Failed to extract attribute from response! => {}\n".format(field)
             err_msg += (
                 "available response attributes: status_code, cookies, elapsed, headers, content, "
-                "text, json, encoding, ok, reason, url.\n\n"
+                "body, text, json, encoding, ok, reason, url.\n\n"
             )
             err_msg += "If you want to set attribute in teardown_hooks, take the following example as reference:\n"
             err_msg += "response.new_attribute = 'new_attribute_value'\n"

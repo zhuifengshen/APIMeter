@@ -31,6 +31,7 @@ python -m unittest discover # 运行所有单元测试
 python -m unittest tests/test_context.py # 运行指定测试文件
 
 python tests/api_server.py # 启动测试示例服务器
+python -m apimeter tests/demo/demo.yml
 python -m apimeter tests/testcases --log-level debug --save-tests # 测试示例，同时设置日志与生成中间处理文件
 
 # 打包编译与发布
@@ -198,11 +199,13 @@ def sum_status_code(status_code):
 # 日志输出需要指定绝对路径或相对路径，不能指定单独一个文件名（文件可以未创建）
 hrun --log-level debug --log-file ./test.log   api/youcloud/query_product_api.yml
 
-响应体默认可引用属性变量：status_code, cookies, elapsed, headers, content, text, json, encoding, ok, reason, url
+响应体默认可引用属性变量：status_code, cookies, elapsed, headers, content, body, text, json, encoding, ok, reason, url
 e.g.
 "status_code"
 "content"
 "content.person.name.first_name"
+"body"
+"body.token"
 "headers"
 "headers.content-type"
 "cookies"
