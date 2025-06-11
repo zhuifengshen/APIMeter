@@ -16,6 +16,8 @@ dolloar_regex_compile = re.compile(r"\$\$")
 variable_regex_compile = re.compile(r"\$\{([\w]+(?:\.[\w]+)*)\}|\$([\w]+(?:\.[\w]+)*)")
 # function notation, e.g. ${func1($var_1, $var_3)} - updated to support complex parameters
 function_regex_compile = re.compile(r"\$\{(\w+)\(([^)]*)\)\}")
+# global variables
+global_variables = ['content', 'body', 'text', 'json', 'status_code', 'headers', 'cookies', 'encoding', 'ok', 'reason', 'url']
 
 """ Store parse failed api/testcase/testsuite file path
 """
@@ -768,8 +770,9 @@ class LazyFunction(object):
                                 processed_args.append(var_value)
                                 continue
                     except exceptions.VariableNotFound:
-                        # 不是变量，检查是否看起来像响应路径（包含点号的才可能是路径）
-                        if '.' in arg or arg in ['status_code', 'headers', 'cookies', 'content', 'body', 'text', 'json', 'encoding', 'ok', 'reason', 'url']:
+                        # 不是变量，检查是否是响应路径
+                        # 只有当参数本身在全局变量列表中，或者第一个单词在全局变量列表中时，才作为响应路径处理
+                        if ('.' in arg and arg.split('.')[0] in global_variables) or arg in global_variables:
                             try:
                                 # 检查是否是响应路径（如 content.token, status_code 等）
                                 if 'response' in variables_mapping:
@@ -812,8 +815,9 @@ class LazyFunction(object):
                                 processed_kwargs[key] = var_value
                                 continue
                     except exceptions.VariableNotFound:
-                        # 不是变量，检查是否看起来像响应路径（包含点号的才可能是路径）
-                        if '.' in value or value in ['status_code', 'headers', 'cookies', 'content', 'body', 'text', 'json', 'encoding', 'ok', 'reason', 'url']:
+                        # 不是变量，检查是否是响应路径
+                        # 只有当参数本身在全局变量列表中，或者第一个单词在全局变量列表中时，才作为响应路径处理
+                        if ('.' in value and value.split('.')[0] in global_variables) or value in global_variables:
                             try:
                                 # 检查是否是响应路径（如 content.token, status_code 等）
                                 if 'response' in variables_mapping:
