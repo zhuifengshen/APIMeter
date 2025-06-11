@@ -889,6 +889,54 @@ class LazyFunction(object):
                 return s
             if s.lower() in ['true', 'false', 'none', 'null']:
                 return s
+            
+            # 检查是否是列表格式
+            if s.startswith('[') and s.endswith(']'):
+                # 递归处理列表内容
+                inner = s[1:-1]  # 去掉方括号
+                if inner.strip():
+                    elements = []
+                    # 智能分割列表元素，考虑嵌套情况
+                    current_element = ""
+                    bracket_count = 0
+                    brace_count = 0
+                    in_quotes = False
+                    quote_char = None
+                    
+                    for char in inner:
+                        if char in ['"', "'"] and not in_quotes:
+                            in_quotes = True
+                            quote_char = char
+                        elif char == quote_char and in_quotes:
+                            in_quotes = False
+                            quote_char = None
+                        elif not in_quotes:
+                            if char == '[':
+                                bracket_count += 1
+                            elif char == ']':
+                                bracket_count -= 1
+                            elif char == '{':
+                                brace_count += 1
+                            elif char == '}':
+                                brace_count -= 1
+                            elif char == ',' and bracket_count == 0 and brace_count == 0:
+                                elements.append(quote_if_needed(current_element))
+                                current_element = ""
+                                continue
+                        
+                        current_element += char
+                    
+                    if current_element.strip():
+                        elements.append(quote_if_needed(current_element))
+                    
+                    return '[' + ', '.join(elements) + ']'
+                else:
+                    return '[]'
+            
+            # 检查是否是字典格式
+            if s.startswith('{') and s.endswith('}'):
+                return s  # 字典保持原样，让外层处理
+            
             # 转义引号并添加引号
             escaped = s.replace('"', '\\"')
             return f'"{escaped}"'
@@ -903,21 +951,57 @@ class LazyFunction(object):
             else:
                 return '[]'
         elif arg_str.startswith('{') and arg_str.endswith('}'):
-            # 处理字典 - 这个更复杂，暂时简化处理
-            # 对于简单的字典格式 {"key": value, "key2": value2}
+            # 处理字典 - 智能分割键值对，考虑嵌套情况
             inner = arg_str[1:-1]  # 去掉花括号
             if inner.strip():
-                # 简单的键值对分割
                 pairs = []
-                for pair in inner.split(','):
-                    if ':' in pair:
-                        key_part, value_part = pair.split(':', 1)
-                        key = key_part.strip()
-                        value = quote_if_needed(value_part)
-                        # 确保key也被引号包围
-                        if not is_quoted(key):
-                            key = f'"{key.strip()}"'
-                        pairs.append(f'{key}: {value}')
+                current_pair = ""
+                bracket_count = 0
+                brace_count = 0
+                in_quotes = False
+                quote_char = None
+                
+                for char in inner:
+                    if char in ['"', "'"] and not in_quotes:
+                        in_quotes = True
+                        quote_char = char
+                    elif char == quote_char and in_quotes:
+                        in_quotes = False
+                        quote_char = None
+                    elif not in_quotes:
+                        if char == '[':
+                            bracket_count += 1
+                        elif char == ']':
+                            bracket_count -= 1
+                        elif char == '{':
+                            brace_count += 1
+                        elif char == '}':
+                            brace_count -= 1
+                        elif char == ',' and bracket_count == 0 and brace_count == 0:
+                            # 处理当前键值对
+                            if ':' in current_pair:
+                                key_part, value_part = current_pair.split(':', 1)
+                                key = key_part.strip()
+                                value = quote_if_needed(value_part)
+                                # 确保key也被引号包围
+                                if not is_quoted(key):
+                                    key = f'"{key.strip()}"'
+                                pairs.append(f'{key}: {value}')
+                            current_pair = ""
+                            continue
+                    
+                    current_pair += char
+                
+                # 处理最后一个键值对
+                if current_pair.strip() and ':' in current_pair:
+                    key_part, value_part = current_pair.split(':', 1)
+                    key = key_part.strip()
+                    value = quote_if_needed(value_part)
+                    # 确保key也被引号包围
+                    if not is_quoted(key):
+                        key = f'"{key.strip()}"'
+                    pairs.append(f'{key}: {value}')
+                
                 return '{' + ', '.join(pairs) + '}'
             else:
                 return '{}'
