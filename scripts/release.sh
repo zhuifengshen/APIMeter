@@ -216,7 +216,7 @@ commit_version_changes() {
     log_info "提交版本更改..."
     
     # 添加更改的文件
-    [[ -f "$VERSION_FILE" ]] && git add "$(basename "$VERSION_FILE")"
+    [[ -f "$VERSION_FILE" ]] && git add "${VERSION_FILE##$PROJECT_ROOT/}"
     [[ -f "$PYPROJECT_FILE" ]] && git add "$(basename "$PYPROJECT_FILE")"
     
     # 提交更改
