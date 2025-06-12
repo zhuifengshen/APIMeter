@@ -216,8 +216,8 @@ commit_version_changes() {
     log_info "提交版本更改..."
     
     # 添加更改的文件
-    [[ -f "$VERSION_FILE" ]] && git add "${VERSION_FILE##$PROJECT_ROOT/}"
-    [[ -f "$PYPROJECT_FILE" ]] && git add "$(basename "$PYPROJECT_FILE")"
+    [[ -f "$VERSION_FILE" ]] && git add "apimeter/__init__.py"
+    [[ -f "$PYPROJECT_FILE" ]] && git add "pyproject.toml"
     
     # 提交更改
     git commit -m "chore: bump version to $version"
