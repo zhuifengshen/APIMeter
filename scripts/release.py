@@ -177,7 +177,7 @@ class ReleaseManager:
         print(f"🏷️  创建标签: {tag_name}")
         
         # 检查标签是否已存在
-        returncode, stdout, _ = self.run_command(f"git tag -l {tag_name}", check=False)
+        _, stdout, _ = self.run_command(f"git tag -l {tag_name}", check=False)
         if stdout.strip():  # 如果有输出，说明标签存在
             print(f"⚠️  标签 {tag_name} 已存在")
             response = input("是否删除现有标签并重新创建? (y/N): ")
