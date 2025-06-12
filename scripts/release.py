@@ -120,11 +120,33 @@ class ReleaseManager:
         """运行测试"""
         print("🧪 运行测试...")
         try:
-            self.run_command("python -m unittest discover tests/")
-            print("✅ 测试通过")
-        except subprocess.CalledProcessError:
-            print("❌ 测试失败")
-            response = input("测试失败，是否继续发布? (y/N): ")
+            returncode, stdout, stderr = self.run_command("python -m unittest discover tests/", check=False)
+            if returncode == 0:
+                print("✅ 测试通过")
+            else:
+                print("❌ 测试失败")
+                print("\n测试输出:")
+                if stdout:
+                    # 显示最后20行输出
+                    lines = stdout.strip().split('\n')
+                    for line in lines[-20:]:
+                        print(line)
+                else:
+                    print("无标准输出")
+                
+                if stderr:
+                    print("\n错误信息:")
+                    error_lines = stderr.strip().split('\n')
+                    for line in error_lines[-10:]:
+                        print(line)
+                
+                print("")
+                response = input("测试失败，是否继续发布? (y/N): ")
+                if response.lower() != 'y':
+                    sys.exit(1)
+        except Exception as e:
+            print(f"❌ 运行测试时出错: {e}")
+            response = input("测试运行出错，是否继续发布? (y/N): ")
             if response.lower() != 'y':
                 sys.exit(1)
     

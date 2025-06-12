@@ -113,10 +113,28 @@ check_git_status() {
 run_tests() {
     log_info "运行测试..."
     
-    if python -m unittest discover tests/ > /dev/null 2>&1; then
+    # 创建临时文件存储测试输出
+    local test_output=$(mktemp)
+    local test_error=$(mktemp)
+    
+    # 运行测试并捕获输出
+    if python -m unittest discover tests/ > "$test_output" 2> "$test_error"; then
         log_success "测试通过"
+        # 清理临时文件
+        rm -f "$test_output" "$test_error"
     else
         log_error "测试失败"
+        echo ""
+        echo "测试输出:"
+        tail -20 "$test_output" 2>/dev/null || echo "无标准输出"
+        echo ""
+        echo "错误信息:"
+        tail -10 "$test_error" 2>/dev/null || echo "无错误输出"
+        echo ""
+        
+        # 清理临时文件
+        rm -f "$test_output" "$test_error"
+        
         read -p "测试失败，是否继续发布? (y/N): " -n 1 -r
         echo
         if [[ ! $REPLY =~ ^[Yy]$ ]]; then
