@@ -169,13 +169,20 @@ class ResponseObject(object):
                 # extract headers
                 return headers
 
-            try:
+            # 首先尝试直接匹配
+            if sub_query in headers:
                 return headers[sub_query]
-            except KeyError:
-                err_msg = "Failed to extract header! => {}\n".format(field)
-                err_msg += "response headers: {}\n".format(headers)
-                logger.log_error(err_msg)
-                raise exceptions.ExtractFailure(err_msg)
+            
+            # 如果直接匹配失败，尝试大小写不敏感匹配
+            for header_key, header_value in headers.items():
+                if header_key.lower() == sub_query.lower():
+                    return header_value
+            
+            # 如果都失败了，抛出异常
+            err_msg = "Failed to extract header! => {}\n".format(field)
+            err_msg += "response headers: {}\n".format(headers)
+            logger.log_error(err_msg)
+            raise exceptions.ExtractFailure(err_msg)
 
         # response body
         elif top_query in ["body", "content", "text", "json"]:

@@ -1,6 +1,14 @@
 # encoding: utf-8
 
 import collections
+try:
+    # Python 3.10+ 中一些collections类型被移动到 collections.abc
+    from collections.abc import Iterable
+    collections_deque = collections.deque
+except ImportError:
+    # Python < 3.10 兼容性
+    from collections import Iterable
+    collections_deque = collections.deque
 import copy
 import io
 import itertools
@@ -393,7 +401,7 @@ def print_info(info_mapping):
     content += content_format.format("-" * 16, "-" * 29)
 
     for key, value in info_mapping.items():
-        if isinstance(value, (tuple, collections.deque)):
+        if isinstance(value, (tuple, collections_deque)):
             continue
         elif isinstance(value, (dict, list)):
             value = json.dumps(value)

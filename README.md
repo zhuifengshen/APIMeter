@@ -1,22 +1,18 @@
 # ApiMeter
 
-*ApiMeter* is a simple & elegant, yet powerful HTTP(S) testing framework. Enjoy! ✨ 🚀 ✨
+*ApiMeter* is a simple & elegant, yet powerful HTTP(S) API testing framework, base on HttpRunner v2.5.9. Enjoy! ✨ 🚀 ✨
 
 ## Document
 
 1. ApiMeter 用户使用文档：[https://utils.git.umlife.net/apimeter](https://utils.git.umlife.net/apimeter/)
-2. ApiMeter PYPI版本发布：[https://pypi.org/project/apimeter](https://pypi.org/project/apimeter) 
+2. ApiMeter PYPI发布版本：[https://pypi.org/project/apimeter](https://pypi.org/project/apimeter)
 
 ## Usage
 ```python
-pip install apimeter  # 安装
+pip install apimeter  # 安装，安装后可用内置命令：apimeter、hrun、apilocust
 apimeter /path/to/api  # 完整生成报告
 apimeter /path/to/api --skip-success  # 报告忽略成功用例数
 ```
-注意事项
-- 1、安装后可用命令apimeter、hrun、apilocust；
-- 2、安装时不需要卸载HttpRunner，如果存在httprunner，会覆盖其hrun命令，另外的httprunner、ate命令依然可用；
-- 3、之所以不卸载HttpRunner，因为部分项目在debugtalk.py中导入了HttpRunner包并使用其已封装好的函数；
 
 
 ## Development
@@ -211,13 +207,15 @@ sign: "${get_sign_v3({device_sn: $device_sn, os_platform: $os_platform, app_vers
 $$
 
 # 一键打包发布，更多内容参考 scripts
-make release-patch  MESSAGE="支持自动化打包发布，发布版本v2.8.4"
-make quick-release VERSION=v2.85 MESSAGE="完善使用说明文档，发布版本v2.8.5"
+make release-patch  MESSAGE="支持自动化打包发布，发布版本v2.8.4" # 自动累积小版本
+make quick-release VERSION=2.85 MESSAGE="完善使用说明文档，发布版本v2.8.5" # 跳过单元测试
 ```
 
-[Requests]: http://docs.python-requests.org/en/master/
-[unittest]: https://docs.python.org/3/library/unittest.html
-[Locust]: http://locust.io/
-[har2case]: https://github.com/httprunner/har2case
-[HAR]: http://httparchive.org/
-[Swagger]: https://swagger.io/
+## 附录-相关链接
+- HttpRunner: https://github.com/httprunner/
+- Requests: http://docs.python-requests.org/en/master/
+- unittest: https://docs.python.org/3/library/unittest.html
+- Locust: http://locust.io/
+- har2case: https://github.com/httprunner/har2case
+- HAR: http://httparchive.org/
+- Swagger: https://swagger.io/

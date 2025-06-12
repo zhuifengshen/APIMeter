@@ -3,6 +3,12 @@
 import ast
 import builtins
 import collections
+try:
+    # Python 3.10+ 中 collections.Hashable 被移动到 collections.abc
+    from collections.abc import Hashable
+except ImportError:
+    # Python < 3.10 兼容性
+    from collections import Hashable
 import json
 import re
 
@@ -407,7 +413,7 @@ def _convert_validators_to_mapping(validators):
     validators_mapping = {}
 
     for validator in validators:
-        if not isinstance(validator["check"], collections.Hashable):
+        if not isinstance(validator["check"], Hashable):
             check = json.dumps(validator["check"])
         else:
             check = validator["check"]

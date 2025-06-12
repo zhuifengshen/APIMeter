@@ -472,3 +472,104 @@ jinja2 = "2.10.3"
 
 ## 3、在APIMeter v2.7.1版本中调整为Python3.6+
 实际使用过程中，都是python3的环境的。但如果有需要，调整Python版本号，依旧可以在2.7+环境中正常使用。
+
+
+## 4、从Python 3.9.21切换到Python 3.11.11后，运行单元测试出现以下兼容性问题
+
+1. **collections.Hashable 导入错误**
+   ```
+   AttributeError: module 'collections' has no attribute 'Hashable'
+   ```
+
+2. **HTTP headers 大小写敏感性问题**
+   - 某些测试期望特定的header名称大小写，但实际返回的可能不同
+
+### 修复方案
+
+#### 1. collections.Hashable 兼容性修复
+
+**问题原因**: 在Python 3.10+中，`collections.Hashable` 被移动到了 `collections.abc.Hashable`
+
+**修复文件**: 
+- `apimeter/parser.py`
+- `apimeter/utils.py`
+
+**修复内容**:
+
+```python
+# apimeter/parser.py
+try:
+    # Python 3.10+ 中 collections.Hashable 被移动到 collections.abc
+    from collections.abc import Hashable
+except ImportError:
+    # Python < 3.10 兼容性
+    from collections import Hashable
+
+# 使用 Hashable 替代 collections.Hashable
+if not isinstance(validator["check"], Hashable):
+```
+
+```python
+# apimeter/utils.py
+try:
+    # Python 3.10+ 中一些collections类型被移动到 collections.abc
+    from collections.abc import Iterable
+    collections_deque = collections.deque
+except ImportError:
+    # Python < 3.10 兼容性
+    from collections import Iterable
+    collections_deque = collections.deque
+
+# 使用 collections_deque 替代 collections.deque
+if isinstance(value, (tuple, collections_deque)):
+```
+
+#### 2. HTTP Headers 大小写不敏感匹配
+
+**问题原因**: HTTP headers在不同服务器实现中可能有不同的大小写
+
+**修复文件**: `apimeter/response.py`
+
+**修复内容**:
+
+```python
+# headers
+elif top_query == "headers":
+    headers = self.headers
+    if not sub_query:
+        # extract headers
+        return headers
+
+    # 首先尝试直接匹配
+    if sub_query in headers:
+        return headers[sub_query]
+    
+    # 如果直接匹配失败，尝试大小写不敏感匹配
+    for header_key, header_value in headers.items():
+        if header_key.lower() == sub_query.lower():
+            return header_value
+    
+    # 如果都失败了，抛出异常
+    err_msg = "Failed to extract header! => {}\n".format(field)
+    err_msg += "response headers: {}\n".format(headers)
+    logger.log_error(err_msg)
+    raise exceptions.ExtractFailure(err_msg)
+```
+
+#### 3. CI/CD 配置更新
+
+**更新文件**:
+- `.github/workflows/unittest.yml`
+- `.github/workflows/smoketest.yml`
+
+**主要改进**:
+- 支持Python 3.6-3.12版本测试
+- 使用最新的GitHub Actions版本
+- 添加兼容性测试步骤
+- 优化缓存策略
+
+### 使用建议
+
+1. **本地开发**: 使用 `make test` 验证兼容性
+2. **CI/CD**: GitHub Actions会自动测试所有支持的Python版本
+3. **部署**: 确保目标环境Python版本在3.6+范围内
