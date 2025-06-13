@@ -20,6 +20,8 @@ jobs:
           # Python 3.7 在新版本的 Ubuntu 上不支持，所以需要排除
           - os: ubuntu-latest
             python-version: "3.7"
+          - os: macos-latest
+            python-version: "3.7"
 
     steps:
     - uses: actions/checkout@v4
