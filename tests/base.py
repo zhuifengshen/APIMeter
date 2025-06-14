@@ -27,9 +27,34 @@ class ApiServerUnittest(unittest.TestCase):
         cls.flask_process = multiprocessing.Process(target=run_flask)
         cls.httpbin_process = multiprocessing.Process(target=run_httpbin)
         cls.flask_process.start()
-        cls.httpbin_process.start()
-        time.sleep(1)
+        cls.httpbin_process.start()                
+        # Wait for servers to be ready with health check
+        cls._wait_for_server_ready()
         cls.api_client = requests.Session()
+    
+    @classmethod
+    def _wait_for_server_ready(cls, max_wait_time=30):
+        """Wait for the Flask server to be ready with health check"""
+        import time
+        start_time = time.time()
+        
+        while time.time() - start_time < max_wait_time:
+            try:
+                # Try to connect to the Flask server
+                response = requests.get(cls.host, timeout=3)
+                if response.status_code == 200 and "Hello World!" in response.text:
+                    # Server is ready and responding correctly
+                    time.sleep(0.5)  # Give it a bit more time to be fully ready
+                    return
+            except (requests.exceptions.ConnectionError, requests.exceptions.Timeout, requests.exceptions.RequestException):
+                # Server not ready yet, wait a bit more
+                pass
+            
+            time.sleep(0.5)
+        
+        # If we get here, server didn't start in time
+        raise RuntimeError(f"Flask server failed to start within {max_wait_time} seconds on port {cls.flask_port}")
+
 
     @classmethod
     def tearDownClass(cls):
