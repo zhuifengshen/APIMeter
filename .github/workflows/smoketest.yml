@@ -14,14 +14,8 @@ jobs:
       fail-fast: false
       max-parallel: 12
       matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.6", "3.7", "3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
         os: [windows-latest]
-        exclude:
-          # Python 3.7 在新版本的 Ubuntu 上不支持，所以需要排除
-          - os: ubuntu-latest
-            python-version: "3.7"
-          - os: macos-latest
-            python-version: "3.7"
 
     steps:
     - uses: actions/checkout@v4
