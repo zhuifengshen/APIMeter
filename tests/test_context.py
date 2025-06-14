@@ -64,7 +64,7 @@ class TestContext(ApiServerUnittest):
         self.context.init_test_variables(variables)
 
         request = {
-            "url": "http://127.0.0.1:5000/api/users/1000",
+            "url": "http://127.0.0.1:5001/api/users/1000",
             "method": "POST",
             "headers": {
                 "Content-Type": "application/json",
@@ -96,7 +96,7 @@ class TestContext(ApiServerUnittest):
                     {
                         "name": "test validation",
                         "request": {
-                            "url": "http://127.0.0.1:5000/",
+                            "url": "http://127.0.0.1:5001/",
                             "method": "GET",
                         },
                         "variables": {
@@ -142,7 +142,7 @@ class TestContext(ApiServerUnittest):
                     {
                         "name": "test validation",
                         "request": {
-                            "url": "http://127.0.0.1:5000/",
+                            "url": "http://127.0.0.1:5001/",
                             "method": "GET",
                         },
                         "variables": {

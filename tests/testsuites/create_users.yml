@@ -4,7 +4,7 @@ config:
         device_sn: ${gen_random_string(15)}
         var_a: ${gen_random_string(5)}
         var_b: $var_a
-    base_url: "http://127.0.0.1:5000"
+    base_url: "http://127.0.0.1:5001"
 
 testcases:
     create user 1000 and check result.:

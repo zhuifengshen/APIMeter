@@ -115,7 +115,7 @@ class TestUtils(ApiServerUnittest):
         origin_dict = {
             "Name": "test",
             "Request": {
-                "url": "http://127.0.0.1:5000",
+                "url": "http://127.0.0.1:5001",
                 "METHOD": "POST",
                 "Headers": {"Accept": "application/json", "User-Agent": "ios/9.3"},
             },
@@ -134,7 +134,7 @@ class TestUtils(ApiServerUnittest):
 
     def test_lower_dict_keys(self):
         request_dict = {
-            "url": "http://127.0.0.1:5000",
+            "url": "http://127.0.0.1:5001",
             "METHOD": "POST",
             "Headers": {"Accept": "application/json", "User-Agent": "ios/9.3"},
         }

@@ -31,7 +31,7 @@ class TestHttpRunner(ApiServerUnittest):
                     {
                         "name": "/api/get-token",
                         "request": {
-                            "url": "http://127.0.0.1:5000/api/get-token",
+                            "url": "http://127.0.0.1:5001/api/get-token",
                             "method": "POST",
                             "headers": {
                                 "Content-Type": "application/json",
@@ -54,7 +54,7 @@ class TestHttpRunner(ApiServerUnittest):
                     {
                         "name": "/api/users/1000",
                         "request": {
-                            "url": "http://127.0.0.1:5000/api/users/1000",
+                            "url": "http://127.0.0.1:5001/api/users/1000",
                             "method": "POST",
                             "headers": {
                                 "Content-Type": "application/json",

@@ -5,7 +5,7 @@ import time
 
 from tests.api_server import HTTPBIN_SERVER, gen_md5, get_sign
 
-BASE_URL = "http://127.0.0.1:5000"
+BASE_URL = "http://127.0.0.1:5001"
 
 
 def get_httpbin_server():

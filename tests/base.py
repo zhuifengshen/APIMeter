@@ -23,7 +23,7 @@ class ApiServerUnittest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.host = "http://127.0.0.1:5000"
+        cls.host = "http://127.0.0.1:5001"
         cls.flask_process = multiprocessing.Process(target=run_flask)
         cls.httpbin_process = multiprocessing.Process(target=run_httpbin)
         cls.flask_process.start()

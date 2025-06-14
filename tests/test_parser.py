@@ -563,7 +563,7 @@ class TestParserBasic(unittest.TestCase):
             "get_timestamp": lambda: int(time.time() * 1000),
         }
         testcase_template = {
-            "url": "http://127.0.0.1:5000/api/users/$uid/${add_two_nums(1,2)}",
+            "url": "http://127.0.0.1:5001/api/users/$uid/${add_two_nums(1,2)}",
             "method": "POST",
             "headers": {
                 "Content-Type": "application/json",
@@ -577,7 +577,7 @@ class TestParserBasic(unittest.TestCase):
             testcase_template, variables_mapping=variables, functions_mapping=functions
         )
         self.assertEqual(
-            parsed_testcase["url"], "http://127.0.0.1:5000/api/users/1000/3"
+            parsed_testcase["url"], "http://127.0.0.1:5001/api/users/1000/3"
         )
         self.assertEqual(
             parsed_testcase["headers"]["authorization"], variables["authorization"]
