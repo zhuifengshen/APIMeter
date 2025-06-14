@@ -53,7 +53,7 @@ class ApiServerUnittest(unittest.TestCase):
             time.sleep(0.5)
         
         # If we get here, server didn't start in time
-        raise RuntimeError(f"Flask server failed to start within {max_wait_time} seconds on port {cls.flask_port}")
+        raise RuntimeError(f"Flask server failed to start within {max_wait_time} seconds on port {FLASK_APP_PORT}")
 
 
     @classmethod
