@@ -12,7 +12,7 @@
                 "os_platform": "ios",
                 "user_agent": "iOS/10.3"
             },
-            "base_url": "http://127.0.0.1:5001",
+            "base_url": "http://127.0.0.1:5000",
             "id": "setup_and_reset"
         }
     },

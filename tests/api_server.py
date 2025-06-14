@@ -19,7 +19,7 @@ except ImportError:
     HTTPBIN_PORT = 80
     HTTPBIN_SERVER = "http://{}:{}".format(HTTPBIN_HOST, HTTPBIN_PORT)
 
-FLASK_APP_PORT = 5001
+FLASK_APP_PORT = 5000
 SECRET_KEY = "DebugTalk"
 
 app = Flask(__name__)

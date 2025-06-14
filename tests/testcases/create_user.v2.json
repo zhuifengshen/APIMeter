@@ -8,7 +8,7 @@
     "output": [
       "session_token"
     ],
-    "base_url": "http://127.0.0.1:5001",
+    "base_url": "http://127.0.0.1:5000",
     "name": "create user and check result."
   },
   "teststeps": [

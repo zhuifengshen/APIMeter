@@ -2,7 +2,7 @@ config:
     name: create users with parameters
     variables:
         device_sn: ${gen_random_string(15)}
-    base_url: "http://127.0.0.1:5001"
+    base_url: "http://127.0.0.1:5000"
 
 testcases:
     create user $uid and check result for $device_sn.:

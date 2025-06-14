@@ -1,11 +1,11 @@
 - config:
     name: "bugfix testcases."
-    base_url: http://127.0.0.1:5001
+    base_url: http://127.0.0.1:5000
 
 - test:
     name: bugfix type_match #84
     request:
-        url: http://127.0.0.1:5001/api/users/1000
+        url: http://127.0.0.1:5000/api/users/1000
         method: GET
     validate:
         - eq: [status_code, 401]

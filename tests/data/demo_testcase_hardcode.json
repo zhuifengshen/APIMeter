@@ -3,7 +3,7 @@
         "test": {
             "name": "get token",
             "request": {
-                "url": "http://127.0.0.1:5001/api/get-token",
+                "url": "http://127.0.0.1:5000/api/get-token",
                 "method": "POST",
                 "headers": {
                     "content-type": "application/json",
@@ -38,7 +38,7 @@
         "test": {
             "name": "create user which does not exist",
             "request": {
-                "url": "http://127.0.0.1:5001/api/users/2000",
+                "url": "http://127.0.0.1:5000/api/users/2000",
                 "method": "POST",
                 "headers": {
                     "content-type": "application/json",
@@ -63,7 +63,7 @@
         "test": {
             "name": "create user which existed",
             "request": {
-                "url": "http://127.0.0.1:5001/api/users/2000",
+                "url": "http://127.0.0.1:5000/api/users/2000",
                 "method": "POST",
                 "headers": {
                     "content-type": "application/json",

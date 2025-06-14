@@ -1,7 +1,7 @@
 - test:
     name: get token
     request:
-        url: http://127.0.0.1:5001/api/get-token
+        url: http://127.0.0.1:5000/api/get-token
         method: POST
         headers:
             Content-Type: application/json
@@ -28,7 +28,7 @@
 - test:
     name: create user which does not exist
     request:
-        url: http://127.0.0.1:5001/api/users/1000
+        url: http://127.0.0.1:5000/api/users/1000
         method: POST
         headers:
             Content-Type: application/json
@@ -51,7 +51,7 @@
     name: create user which existed
     times: 2
     request:
-        url: http://127.0.0.1:5001/api/users/1000
+        url: http://127.0.0.1:5000/api/users/1000
         method: POST
         headers:
             Content-Type: application/json
@@ -72,7 +72,7 @@
     skip: skip this test unconditionally
     times: 2
     request:
-        url: http://127.0.0.1:5001/api/users/1000
+        url: http://127.0.0.1:5000/api/users/1000
         method: POST
         headers:
             Content-Type: application/json
@@ -93,7 +93,7 @@
     skipIf: ${skip_test_in_production_env()}
     times: 2
     request:
-        url: http://127.0.0.1:5001/api/users/1000
+        url: http://127.0.0.1:5000/api/users/1000
         method: POST
         headers:
             Content-Type: application/json
@@ -114,7 +114,7 @@
     skipUnless: ${skip_test_in_production_env()}
     times: 2
     request:
-        url: http://127.0.0.1:5001/api/users/1000
+        url: http://127.0.0.1:5000/api/users/1000
         method: POST
         headers:
             Content-Type: application/json

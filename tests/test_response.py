@@ -8,7 +8,7 @@ from tests.base import ApiServerUnittest
 
 class TestResponse(ApiServerUnittest):
     def test_parse_response_object_json(self):
-        url = "http://127.0.0.1:5001/api/users"
+        url = "http://127.0.0.1:5000/api/users"
         resp = requests.get(url)
         resp_obj = response.ResponseObject(resp)
         self.assertTrue(hasattr(resp_obj, "status_code"))
@@ -19,7 +19,7 @@ class TestResponse(ApiServerUnittest):
         self.assertIn("success", resp_obj.json)
 
     def test_parse_response_object_content(self):
-        url = "http://127.0.0.1:5001/"
+        url = "http://127.0.0.1:5000/"
         resp = requests.get(url)
         resp_obj = response.ResponseObject(resp)
         self.assertEqual(bytes, type(resp_obj.content))
