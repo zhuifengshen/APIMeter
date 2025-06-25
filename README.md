@@ -27,6 +27,7 @@ python -m apimeter -h # 查看使用指南
 # 测试运行
 python -m unittest discover # 运行所有单元测试
 python -m unittest tests/test_context.py # 运行指定测试文件
+python -m unittest tests.test_api.TestHttpRunner.test_validate_response_content # 运行单个测试用例
 
 python -m tests.api_server 或 PYTHONPATH=. python tests/api_server.py # 启动测试示例服务器
 python -m apimeter tests/demo/demo.yml
