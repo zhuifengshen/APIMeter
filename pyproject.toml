@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "apimeter"
-version = "v2.85"
+version = "2.8.5"
 description = "One-stop solution for HTTP(S) testing."
 license = "Apache-2.0"
 readme = "README.md"
