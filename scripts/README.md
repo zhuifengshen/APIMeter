@@ -47,7 +47,7 @@ make release-major    # 主要版本 (2.8.3 -> 3.0.0)
 make release VERSION=2.8.4 MESSAGE="修复重要bug"
 
 # 快速发布（跳过测试）
-make quick-release VERSION=2.8.4
+make quick-release VERSION=2.8.4  MESSAGE="修复重要bug"
 ```
 
 ### 2. 直接使用 Shell 脚本

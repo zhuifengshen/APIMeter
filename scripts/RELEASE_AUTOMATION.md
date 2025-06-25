@@ -96,7 +96,7 @@ make release VERSION=2.9.0
 ### 场景3：紧急发布（跳过测试）
 ```bash
 # 紧急修复，跳过测试
-make quick-release VERSION=2.8.5
+make quick-release VERSION=2.8.5 MESSAGE="修复重要bug"
 ```
 
 ## 🔧 高级功能

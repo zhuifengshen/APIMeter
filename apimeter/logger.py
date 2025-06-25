@@ -38,11 +38,6 @@ def get_logger(name=None):
 
     _logger = logging.getLogger(name)
 
-    # 检查是否已经有handler，避免重复添加
-    if _logger.handlers:
-        loggers[logger_key] = _logger
-        return _logger
-
     log_level = LOG_LEVEL
     level = getattr(logging, log_level.upper(), None)
     if not level:
