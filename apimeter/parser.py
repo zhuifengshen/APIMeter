@@ -762,33 +762,33 @@ class LazyFunction(object):
                         continue
                     except (ValueError, SyntaxError):
                         pass
-                # 检查是否是变量引用（如 content.token, content等）
+                # 检查是否是响应字段引用（如 content.token, status_code等）
                 elif not arg.startswith('$') and not arg.startswith('"') and not arg.startswith("'"):
-                    # 可能是变量引用，尝试解析
-                    try:
-                        # 先检查是否是数字或布尔值等字面量
-                        if arg.lower() not in ['true', 'false', 'none', 'null']:
-                            try:
-                                float(arg)  # 测试是否是数字
-                            except ValueError:
-                                # 不是数字，尝试作为变量解析
-                                var_value = get_mapping_variable(arg, variables_mapping)
-                                processed_args.append(var_value)
-                                continue
-                    except exceptions.VariableNotFound:
-                        # 不是变量，检查是否是响应路径
-                        # 只有当参数本身在全局变量列表中，或者第一个单词在全局变量列表中时，才作为响应路径处理
-                        if ('.' in arg and arg.split('.')[0] in global_variables) or arg in global_variables:
-                            try:
-                                # 检查是否是响应路径（如 content.token, status_code 等）
-                                if 'response' in variables_mapping:
-                                    resp_obj = variables_mapping['response']
-                                    if hasattr(resp_obj, 'extract_field'):
-                                        resp_value = resp_obj.extract_field(arg)
-                                        processed_args.append(resp_value)
+                    # 只有当参数明确是响应字段时才尝试解析为变量引用
+                    # 这避免了将普通函数参数错误地当作变量处理
+                    if ('.' in arg and arg.split('.')[0] in global_variables) or arg in global_variables:
+                        try:
+                            # 先检查是否是数字或布尔值等字面量
+                            if arg.lower() not in ['true', 'false', 'none', 'null']:
+                                try:
+                                    float(arg)  # 测试是否是数字
+                                except ValueError:
+                                    # 不是数字，检查是否是响应路径
+                                    if 'response' in variables_mapping:
+                                        resp_obj = variables_mapping['response']
+                                        if hasattr(resp_obj, 'extract_field'):
+                                            resp_value = resp_obj.extract_field(arg)
+                                            processed_args.append(resp_value)
+                                            continue
+                                    # 如果不是响应路径，尝试作为变量解析（只针对全局变量）
+                                    try:
+                                        var_value = get_mapping_variable(arg, variables_mapping)
+                                        processed_args.append(var_value)
                                         continue
-                            except Exception:
-                                pass
+                                    except exceptions.VariableNotFound:
+                                        pass
+                        except Exception:
+                            pass
             processed_args.append(arg)
         
         # 对kwargs也进行同样的处理
@@ -809,31 +809,32 @@ class LazyFunction(object):
                         continue
                     except (ValueError, SyntaxError):
                         pass
-                # 检查是否是变量引用
+                # 检查是否是响应字段引用
                 elif not value.startswith('$') and not value.startswith('"') and not value.startswith("'"):
-                    try:
-                        if value.lower() not in ['true', 'false', 'none', 'null']:
-                            try:
-                                float(value)  # 测试是否是数字
-                            except ValueError:
-                                # 不是数字，尝试作为变量解析
-                                var_value = get_mapping_variable(value, variables_mapping)
-                                processed_kwargs[key] = var_value
-                                continue
-                    except exceptions.VariableNotFound:
-                        # 不是变量，检查是否是响应路径
-                        # 只有当参数本身在全局变量列表中，或者第一个单词在全局变量列表中时，才作为响应路径处理
-                        if ('.' in value and value.split('.')[0] in global_variables) or value in global_variables:
-                            try:
-                                # 检查是否是响应路径（如 content.token, status_code 等）
-                                if 'response' in variables_mapping:
-                                    resp_obj = variables_mapping['response']
-                                    if hasattr(resp_obj, 'extract_field'):
-                                        resp_value = resp_obj.extract_field(value)
-                                        processed_kwargs[key] = resp_value
+                    # 只有当参数明确是响应字段时才尝试解析为变量引用
+                    # 这避免了将普通函数参数错误地当作变量处理
+                    if ('.' in value and value.split('.')[0] in global_variables) or value in global_variables:
+                        try:
+                            if value.lower() not in ['true', 'false', 'none', 'null']:
+                                try:
+                                    float(value)  # 测试是否是数字
+                                except ValueError:
+                                    # 不是数字，检查是否是响应路径
+                                    if 'response' in variables_mapping:
+                                        resp_obj = variables_mapping['response']
+                                        if hasattr(resp_obj, 'extract_field'):
+                                            resp_value = resp_obj.extract_field(value)
+                                            processed_kwargs[key] = resp_value
+                                            continue
+                                    # 如果不是响应路径，尝试作为变量解析（只针对全局变量）
+                                    try:
+                                        var_value = get_mapping_variable(value, variables_mapping)
+                                        processed_kwargs[key] = var_value
                                         continue
-                            except Exception:
-                                pass
+                                    except exceptions.VariableNotFound:
+                                        pass
+                        except Exception:
+                            pass
             processed_kwargs[key] = value
         
         self.cache_key = self.__prepare_cache_key(processed_args, processed_kwargs)
