@@ -19,3 +19,4 @@ reports
 htmlcov/
 *.bak
 samples/
+general-validator/
