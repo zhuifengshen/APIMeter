@@ -2,6 +2,89 @@
 
 *ApiMeter* is a simple & elegant, yet powerful HTTP(S) API testing framework, base on HttpRunner v2.5.9. Enjoy! ✨ 🚀 ✨
 
+## 支持新特性
+1. 自定义函数的参数支持引用全局变量
+```yaml
+- eq: 
+    - ${validate_token_v2(content)}
+    - true
+```    
+
+2. 自定义函数的参数支持引用全局变量的链式取值
+```yaml
+- eq: 
+    - ${validate_token(content.token)}
+    - true
+```    
+
+3. 自定义函数的参数支持引用自定义变量链式取值
+```yaml
+- eq: 
+    - ${validate_token($resp.token)}
+    - true
+```    
+
+4. 自定义函数支持列表参数解析
+```yaml
+sign: ${get_sign_v2([$device_sn, $os_platform, $app_version])}
+```
+
+5. 自定义函数支持字典对象参数解析
+```
+sign: "${get_sign_v3({device_sn: $device_sn, os_platform: $os_platform, app_version: $app_version})}"
+``` 
+
+6. 自定义函数支持复杂嵌套对象参数解析
+```yaml
+- eq:
+    - "${check_nested_list_fields_not_empty(content, {list_path: productList, nested_list_field: sku, check_fields: [id, amount, origin_amount, currency, account_number, duration]})}"
+    - True
+```    
+
+7. 自定义函数支持链式参数｜通配符参数｜正则表达式参数解析
+```yaml
+- eq:
+    - ${check(content, data.product.purchasePlan.*.sku.*.id, data.product.purchasePlan.*.sku.*.amount, data.product.purchasePlan.*.sku.*.origin_amount, data.product.purchasePlan.*.sku.*.currency, data.product.purchasePlan.*.sku.*.account_number, data.product.purchasePlan.*.sku.*.duration)}
+    - True
+- eq:
+    - ${check(content, '_url ~= ^https?://[^\s/$.?#].[^\s]*$', 'default_currency =* [USD, CNY]', 'default_sku @= dict', 'sku @= list', 'product @= dict')} # 一次性校验所有字段
+    - True    
+```
+
+8. 内置全局变量，支持在用例中直接引用和参数引用，且无需添加前缀：$
+    - content / body / text / json
+    - status_code
+    - cookies
+    - elapsed
+    - headers
+    - encoding
+    - ok
+    - reason
+    - url
+```yaml
+# 全部变量值用例模板中可直接使用，且无需添加前缀：$，例如：
+"status_code"
+"content"
+"content.person.name.first_name"
+"body"
+"body.token"
+"headers"
+"headers.content-type"
+"cookies"
+```
+
+9. 全局变量转义功能，支持将全局变量名作为字面量字符串使用
+```yaml
+# 使用反斜杠转义全局变量，将其作为字面量字符串处理
+- eq:
+    - ${check_data_not_null(content.data.linesCollectList.data,2,lines,\content)}
+    - True
+# 这里 \content 会被解析为字符串 "content"，而不是全局变量 content 的值
+# 支持转义所有全局变量：\content, \body, \text, \json, \status_code, \headers, \cookies, \encoding, \ok, \reason, \url
+```
+
+
+
 ## Document
 
 1. ApiMeter 用户使用文档：[https://utils.git.umlife.net/apimeter](https://utils.git.umlife.net/apimeter/)

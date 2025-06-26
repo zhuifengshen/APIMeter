@@ -762,8 +762,16 @@ class LazyFunction(object):
                         continue
                     except (ValueError, SyntaxError):
                         pass
+                # 检查是否是转义的全局变量（如 \content 表示字面量 "content"）
+                elif arg.startswith('\\') and len(arg) > 1:
+                    # 检查转义后的字符串是否是全局变量
+                    unescaped = arg[1:]  # 去掉前面的反斜杠
+                    if ('.' in unescaped and unescaped.split('.')[0] in global_variables) or unescaped in global_variables:
+                        # 这是一个转义的全局变量，作为字面量字符串处理
+                        processed_args.append(unescaped)
+                        continue
                 # 检查是否是响应字段引用（如 content.token, status_code等）
-                elif not arg.startswith('$') and not arg.startswith('"') and not arg.startswith("'"):
+                elif not arg.startswith('$') and not arg.startswith('"') and not arg.startswith("'") and not arg.startswith('\\'):
                     # 只有当参数明确是响应字段时才尝试解析为变量引用
                     # 这避免了将普通函数参数错误地当作变量处理
                     if ('.' in arg and arg.split('.')[0] in global_variables) or arg in global_variables:
@@ -809,8 +817,16 @@ class LazyFunction(object):
                         continue
                     except (ValueError, SyntaxError):
                         pass
+                # 检查是否是转义的全局变量（如 \content 表示字面量 "content"）
+                elif value.startswith('\\') and len(value) > 1:
+                    # 检查转义后的字符串是否是全局变量
+                    unescaped = value[1:]  # 去掉前面的反斜杠
+                    if ('.' in unescaped and unescaped.split('.')[0] in global_variables) or unescaped in global_variables:
+                        # 这是一个转义的全局变量，作为字面量字符串处理
+                        processed_kwargs[key] = unescaped
+                        continue
                 # 检查是否是响应字段引用
-                elif not value.startswith('$') and not value.startswith('"') and not value.startswith("'"):
+                elif not value.startswith('$') and not value.startswith('"') and not value.startswith("'") and not value.startswith('\\'):
                     # 只有当参数明确是响应字段时才尝试解析为变量引用
                     # 这避免了将普通函数参数错误地当作变量处理
                     if ('.' in value and value.split('.')[0] in global_variables) or value in global_variables:
@@ -887,6 +903,15 @@ class LazyFunction(object):
         def quote_if_needed(s):
             """如果需要的话给字符串加引号"""
             s = s.strip()
+            
+            # 检查是否是转义的全局变量
+            if s.startswith('\\') and len(s) > 1:
+                unescaped = s[1:]  # 去掉前面的反斜杠
+                if ('.' in unescaped and unescaped.split('.')[0] in global_variables) or unescaped in global_variables:
+                    # 这是一个转义的全局变量，作为字面量字符串处理
+                    escaped = unescaped.replace('"', '\\"')
+                    return f'"{escaped}"'
+            
             # 先尝试解析变量引用
             resolved = resolve_variable_reference(s)
             if resolved != s:  # 如果解析成功，返回解析结果
