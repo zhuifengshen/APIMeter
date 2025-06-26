@@ -51,7 +51,10 @@ sign: "${get_sign_v3({device_sn: $device_sn, os_platform: $os_platform, app_vers
     - True    
 ```
 
-8. 内置全局变量，支持在用例中直接引用和参数引用，且无需添加前缀：$
+8. 内置全局变量
+
+全局变量支持在用例中直接使用和或作为参数入参，无需添加前缀：$。同时，支持全局变量转义功能，使用反斜杠'\'将全局变量名作为字面量字符串使用。
+
     - content / body / text / json
     - status_code
     - cookies
@@ -62,20 +65,17 @@ sign: "${get_sign_v3({device_sn: $device_sn, os_platform: $os_platform, app_vers
     - reason
     - url
 ```yaml
-# 全部变量值用例模板中可直接使用，且无需添加前缀：$，例如：
-"status_code"
-"content"
-"content.person.name.first_name"
-"body"
-"body.token"
-"headers"
+# 使用示例
+status_code
+content
+content.person.name.first_name
+body
+body.token
+headers
 "headers.content-type"
-"cookies"
-```
+cookies
 
-9. 全局变量转义功能，支持将全局变量名作为字面量字符串使用
-```yaml
-# 使用反斜杠转义全局变量，将其作为字面量字符串处理
+# 特殊情况：当数据字段与全局变量同名时，支持使用反斜杠'\'转义全局变量，将其作为字面量字符串处理
 - eq:
     - ${check_data_not_null(content.data.linesCollectList.data,2,lines,\content)}
     - True
@@ -235,20 +235,6 @@ def sum_status_code(status_code):
         - {"check": "LB123(.*)RB789", "comparator": "eq", "expect": "abc"}
 ```
 
-### 5、内置全局变量
-```yaml
-content, body, text, json, status_code, cookies, elapsed, headers, encoding, ok, reason, url
-```
-
-用例模板中直接使用，无效使用前缀：$，例如：
-"status_code"
-"content"
-"content.person.name.first_name"
-"body"
-"body.token"
-"headers"
-"headers.content-type"
-"cookies"
 
 ### 5、内置校验器
 | Comparator       | Description                    | A(check), B(expect)          | Examples                                     |
