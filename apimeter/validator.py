@@ -66,7 +66,7 @@ class Validator(object):
         result = {
             "validate_script": "<br/>".join(script),
             "check_result": "pass",
-            "output": "",
+            "output": "success",
         }
 
         script = "\n    ".join(script)

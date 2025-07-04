@@ -37,18 +37,25 @@ teststeps:
             # sign: "${get_sign_v3({'device_sn': $device_sn, 'os_platform': $os_platform, 'app_version': $app_version})}"
             # sign: "${get_sign_v3({\"device_sn\": $device_sn, \"os_platform\": $os_platform, \"app_version\": $app_version})}"
     extract:
-        - token: body.token
-        - resp: body
+        - token: content.token
+        - resp: content
     validate:
         - eq: ["status_code", 200]
-        - len_eq: ["body.token", 16]
-        - eq: ["${validate_token($token)}", true]
-        - eq: ["${validate_token(body.token)}", true]
-        - eq: ["${validate_token_v2(body)}", true]
-        - eq: ["${validate_token($resp.token)}", true]
+        - len_eq: ["content.token", 16]
+        - eq: ["${validate_token($token)}", True]
+        - eq: ["${validate_token(content.token)}", True]
+        - eq: ["${validate_token_v2(content)}", True]
+        - eq: ["${validate_token($resp.token)}", True]
         - eq:
           - ${validate_token($resp.token)}
-          - true
+          - True
+    validate_script:
+        - assert status_code ==  200
+        - assert len(content.token) == 16
+        - assert ${validate_token($token)} is True
+        # - assert ${validate_token(content.token)} is True
+        # - assert ${validate_token_v2(content)} is True
+        # - assert ${validate_token($resp.token)} is True
 -
     name: reset all users
     variables:
