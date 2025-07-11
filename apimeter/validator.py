@@ -122,24 +122,8 @@ class Validator(object):
         return expect_value
 
     def validate_script(self, script):
-        """make validation with python script"""
-        result = {
-            "validate_script": "<br/>".join(script),
-            "check_result": "pass",
-            "output": "success",
-        }
-
-        script = "\n    ".join(script)
-        code = """
-# encoding: utf-8
-
-def run_validate_script():
-    {}
-""".format(
-            script
-        )
-
-        # 添加响应字段的直接映射，复用现有的extract_field逻辑
+        """make validation with python script - 逐条执行并记录每条结果"""
+        # 准备变量环境
         variables = {
             "status_code": self.resp_obj.status_code,
             "response_json": self.resp_obj.json,
@@ -167,47 +151,55 @@ def run_validate_script():
         variables.update(self.session_context.test_variables_mapping)
         variables.update(globals())
 
-        try:
-            exec(code, variables)
-        except SyntaxError as ex:
-            logger.log_warning("SyntaxError in python validate script: {}".format(ex))
-            result["check_result"] = "fail"
-            result["output"] = "<br/>".join(
-                [
-                    "ErrorMessage: {}".format(ex.msg),
-                    "ErrorLine: {}".format(ex.lineno),
-                    "ErrorText: {}".format(ex.text),
-                ]
-            )
-            return result
-
-        try:
-            # run python validate script
-            variables["run_validate_script"]()
-        except Exception as ex:
-            logger.log_warning("run python validate script failed: {}".format(ex))
-            result["check_result"] = "fail"
-
-            _type, _value, _tb = sys.exc_info()
-
-            _lineno = -1
-            if _tb.tb_next:
-                _lineno = _tb.tb_next.tb_lineno
-                line_no = _lineno - 4
-            elif len(traceback.extract_tb(_tb)) > 0:
-                # filename, lineno, name, line
-                _, _lineno, _, _ = traceback.extract_tb(_tb)[-1]
-                line_no = _lineno - 4
-            else:
-                line_no = "N/A"
-
-            result["output"] = "<br/>".join(
-                [
-                    "ErrorType: {}".format(_type.__name__),
-                    "ErrorLine: {}".format(line_no),
-                ]
-            )
-
+        # 逐条执行脚本
+        script_results = []
+        overall_success = True
+        
+        for script_line in script:
+            script_dict = {
+                "script": script_line,
+                "check_result": "pass",
+                "output": "success",
+            }
+            
+            try:
+                # 解析脚本内容（支持变量和函数）
+                parsed_script_line = self.session_context.eval_content(script_line)
+                # 执行单条脚本
+                exec(parsed_script_line, variables.copy())
+                
+                validate_msg = "validate_script: {} ==> pass".format(script_line)
+                logger.log_debug(validate_msg)
+                
+            except SyntaxError as ex:
+                overall_success = False
+                script_dict["check_result"] = "fail"
+                script_dict["output"] = "SyntaxError: {} (Line: {})".format(ex.msg, ex.lineno)
+                
+                validate_msg = "validate_script: {} ==> fail".format(script_line)
+                validate_msg += "\nSyntaxError: {}".format(ex.msg)
+                logger.log_error(validate_msg)
+                
+            except Exception as ex:
+                overall_success = False
+                script_dict["check_result"] = "fail"
+                script_dict["output"] = "{}: {}".format(type(ex).__name__, str(ex)) if str(ex) else "{}".format(type(ex).__name__)
+                
+                validate_msg = "validate_script: {} ==> fail".format(script_line)
+                validate_msg += "\n{}: {}".format(type(ex).__name__, str(ex))
+                logger.log_error(validate_msg)
+            
+            script_results.append(script_dict)
+        
+        # 返回结果，兼容原有格式但增加详细信息
+        result = {
+            # 修复TypeError: sequence item 2: expected str instance, LazyString found
+            "validate_script": "<br/>".join([str(line) for line in script]),
+            "check_result": "pass" if overall_success else "fail", 
+            "output": "success" if overall_success else "some script validations failed",
+            "details": script_results  # 新增详细结果
+        }
+        
         return result
 
     def validate(self, validators):
@@ -224,8 +216,8 @@ def run_validate_script():
         for validator in validators:
 
             if isinstance(validator, dict) and validator.get("type") == "python_script":
-                script = self.session_context.eval_content(validator["script"])
-                result = self.validate_script(script)
+                # script = self.session_context.eval_content(validator["script"])
+                result = self.validate_script(validator["script"])
                 if result["check_result"] == "fail":
                     validate_pass = False
                     failures.append(result["output"])

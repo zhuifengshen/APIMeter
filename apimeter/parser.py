@@ -1141,6 +1141,9 @@ class LazyString(object):
     def __repr__(self):
         return "LazyString({})".format(self.raw_string)
 
+    def __str__(self):
+        return self.raw_string
+
     def to_value(self, variables_mapping=None):
         """parse lazy data with evaluated variables mapping.
         Notice: variables_mapping should not contain any variable or function.

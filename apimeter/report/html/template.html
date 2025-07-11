@@ -288,7 +288,7 @@
                       {% elif validator.check_result == "unchecked" %}
                       <td class="unchecked">
                       {% endif %}
-                        {{validator.check | e}}
+                        <pre>{{validator.check | e}}</pre>
                       </td>
                       <td>{{validator.comparator}}</td>
                       <td>{{validator.expect | e}}</td>
@@ -300,6 +300,26 @@
 
                 {% set validate_script = meta_data.validators.validate_script %}
                 {% if validate_script %}
+                    {% if validate_script.details %}
+                    <!-- 新版逐条显示的validate_script结果 -->
+                    <table>
+                        <tr>
+                            <th>validate script</th>
+                            <th>output</th>
+                        </tr>
+                        {% for script_item in validate_script.details %}
+                        <tr>
+                            {% if script_item.check_result == "pass" %}
+                            <td class="passed"><pre>{{script_item.script | e}}</pre></td>
+                            {% elif script_item.check_result == "fail" %}
+                            <td class="failed"><pre>{{script_item.script | e}}</pre></td>
+                            {% endif %}
+                            <td>{{script_item.output | e}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    {% else %}
+                    <!-- 旧版整体显示的validate_script结果（向后兼容） -->
                     <table>
                         <tr>
                             <th>validate script</th><th>output</th>
@@ -315,6 +335,7 @@
                             </td>
                         </tr>
                     </table>
+                    {% endif %}
                 {% endif %}
               </div>
 
