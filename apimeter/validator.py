@@ -122,7 +122,10 @@ class Validator(object):
         return expect_value
 
     def validate_script(self, script):
-        """make validation with python script - 逐条执行并记录每条结果"""
+        """make validation with python script:
+        1. assert 语句
+        2. 自定义函数
+        """
         # 准备变量环境
         variables = {
             "status_code": self.resp_obj.status_code,
@@ -163,14 +166,16 @@ class Validator(object):
             }
             
             try:
-                # 解析脚本内容（支持变量和函数）
+                # 解析脚本内容（支持assert语句和自定义函数）
                 parsed_script_line = self.session_context.eval_content(script_line)
-                # 执行单条脚本
-                exec(parsed_script_line, variables.copy())
-                
-                validate_msg = "validate_script: {} ==> pass".format(script_line)
-                logger.log_debug(validate_msg)
-                
+                logger.log_debug(f"parsed_script_line: {parsed_script_line}")
+                if isinstance(parsed_script_line, str) and parsed_script_line.strip().startswith('assert'):
+                    # 1. assert 语句
+                    exec(parsed_script_line, variables.copy())
+                else:
+                    # 2. 自定义函数
+                    script_dict["output"] = str(parsed_script_line)
+                logger.log_debug("validate_script: {} ==> pass".format(script_line))
             except SyntaxError as ex:
                 overall_success = False
                 script_dict["check_result"] = "fail"
