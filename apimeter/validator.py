@@ -109,8 +109,17 @@ class Validator(object):
                 check_value = self.resp_obj.extract_field(check_item)
 
             return check_value
+        except (exceptions.ParamsError, exceptions.ExtractFailure) as ex:
+            # 对于关键异常（如字段不存在、参数错误等），继续抛出以保持原有行为
+            # 这些异常通常表示测试用例配置错误，应该导致测试失败或错误
+            logger.log_error("Validator get check value failed for '{}': {}".format(check_item, str(ex)))
+            raise
+        except (exceptions.VariableNotFound, exceptions.FunctionNotFound) as ex:
+            # 对于资源找不到的异常，也应该抛出，因为这通常是配置问题
+            logger.log_error("Validator get check value failed for '{}': {}".format(check_item, str(ex)))
+            raise
         except Exception as ex:
-            # 当校验点执行异常时，将异常信息作为check_value返回，不中断其他校验点
+            # 对于其他类型的异常（如一些运行时异常），将异常信息作为check_value返回，避免中断其他校验点
             error_msg = "{}: {}".format(type(ex).__name__, str(ex)) if str(ex) else "{}".format(type(ex).__name__)
             logger.log_error("Validator get check value failed for '{}': {}".format(check_item, error_msg))
             return error_msg
@@ -127,8 +136,16 @@ class Validator(object):
         try:
             expect_value = self.session_context.eval_content(expect_item)
             return expect_value
+        except (exceptions.ParamsError, exceptions.ExtractFailure) as ex:
+            # 对于关键异常，继续抛出
+            logger.log_error("Validator get expect value failed for '{}': {}".format(expect_item, str(ex)))
+            raise
+        except (exceptions.VariableNotFound, exceptions.FunctionNotFound) as ex:
+            # 对于资源找不到的异常，也应该抛出
+            logger.log_error("Validator get expect value failed for '{}': {}".format(expect_item, str(ex)))
+            raise
         except Exception as ex:
-            # 当期望值解析异常时，将异常信息作为expect_value返回
+            # 对于其他异常，将异常信息作为expect_value返回
             error_msg = "{}: {}".format(type(ex).__name__, str(ex)) if str(ex) else "{}".format(type(ex).__name__)
             logger.log_error("Validator get expect value failed for '{}': {}".format(expect_item, error_msg))
             return error_msg

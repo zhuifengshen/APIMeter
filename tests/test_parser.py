@@ -1150,7 +1150,7 @@ class TestParser(unittest.TestCase):
         }
         parsed_testcases = parser.parse_tests(tests_mapping)
         test_dict = parsed_testcases[0]["teststeps"][0]
-        self.assertEqual(str(test_dict["base_url"]), "LazyString($host)")
+        self.assertEqual(repr(test_dict["base_url"]), "LazyString($host)")
         self.assertEqual(test_dict["request"]["verify"], True)
 
     def test_parse_tests_verify_config_set(self):
