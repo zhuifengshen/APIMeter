@@ -52,4 +52,40 @@ def validate_token(token):
 
 def validate_token_v2(content):
     log_debug(f"validate_token_v2: {content}")
+    raise Exception("test...")
     return len(content["token"]) == 16
+
+def validate_token_v3(content):
+    log_debug(f"validate_token_v3: {content}")
+    raise Exception("test...")
+    return len(content["token"]) == 16
+
+def get_str():
+    return "123"
+
+def get_int():
+    return 123
+
+def get_float():
+    return 123.456
+
+def get_bool():
+    return True
+
+def get_none():
+    return None
+
+def get_empty_str():
+    return ""
+
+def get_empty_list():
+    return []
+
+def get_empty_dict():
+    return {}
+
+def get_list():
+    return [1, 2, 3]
+
+def get_dict():
+    return {"a": 1, "b": 2, "c": 3}

@@ -53,9 +53,29 @@ teststeps:
         - assert status_code ==  200
         - assert len(content.token) == 16
         - assert ${validate_token($token)} is True
-        # - assert ${validate_token(content.token)} is True
-        # - assert ${validate_token_v2(content)} is True
-        # - assert ${validate_token($resp.token)} is True
+        - assert ${validate_token(content.token)} is True
+        - assert ${validate_token_v2(content)} is True
+        - assert ${validate_token($resp.token)} is True
+        - assert ${validate_token_v3(content)} is True
+        - assert content.success is True
+        - assert content.token is not None
+        # - assert $token is not None
+        - assert "$token" is not None
+        # - assert len($token) == 16
+        - assert len("$token") == 16
+        - ${get_sign($device_sn, $os_platform, $app_version)}
+        - ${get_sign_v2([$device_sn, $os_platform, $app_version])}
+        - '${get_sign_v3({device_sn: $device_sn, os_platform: $os_platform, app_version: $app_version})}'
+        - ${get_str()}
+        - ${get_int()}
+        - ${get_float()}
+        - ${get_list()}
+        - ${get_dict()}
+        - ${get_bool()}
+        - ${get_none()}
+        - ${get_empty_str()}
+        - ${get_empty_list()}
+        - ${get_empty_dict()}
 -
     name: reset all users
     variables:
