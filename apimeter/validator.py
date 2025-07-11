@@ -98,16 +98,22 @@ class Validator(object):
                 5, regex string, e.g. "LB[\d]*(.*)RB[\d]*"
 
         """
-        if isinstance(check_item, (dict, list)) or isinstance(
-            check_item, parser.LazyString
-        ):
-            # format 1/2/3
-            check_value = self.session_context.eval_content(check_item)
-        else:
-            # format 4/5
-            check_value = self.resp_obj.extract_field(check_item)
+        try:
+            if isinstance(check_item, (dict, list)) or isinstance(
+                check_item, parser.LazyString
+            ):
+                # format 1/2/3
+                check_value = self.session_context.eval_content(check_item)
+            else:
+                # format 4/5
+                check_value = self.resp_obj.extract_field(check_item)
 
-        return check_value
+            return check_value
+        except Exception as ex:
+            # 当校验点执行异常时，将异常信息作为check_value返回，不中断其他校验点
+            error_msg = "{}: {}".format(type(ex).__name__, str(ex)) if str(ex) else "{}".format(type(ex).__name__)
+            logger.log_error("Validator get check value failed for '{}': {}".format(check_item, error_msg))
+            return error_msg
 
     def __eval_validator_expect(self, expect_item):
         """evaluate expect item in validator.
@@ -118,8 +124,14 @@ class Validator(object):
                 2, actual value, e.g. 200
 
         """
-        expect_value = self.session_context.eval_content(expect_item)
-        return expect_value
+        try:
+            expect_value = self.session_context.eval_content(expect_item)
+            return expect_value
+        except Exception as ex:
+            # 当期望值解析异常时，将异常信息作为expect_value返回
+            error_msg = "{}: {}".format(type(ex).__name__, str(ex)) if str(ex) else "{}".format(type(ex).__name__)
+            logger.log_error("Validator get expect value failed for '{}': {}".format(expect_item, error_msg))
+            return error_msg
 
     def validate_script(self, script):
         """make validation with python script:
