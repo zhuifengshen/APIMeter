@@ -6,6 +6,66 @@ import traceback
 from apimeter import exceptions, logger, parser
 
 
+class ResponseFieldProxy(object):
+    """响应字段代理，支持点号访问语法，复用现有的extract_field逻辑"""
+    
+    def __init__(self, resp_obj, field_name):
+        self._resp_obj = resp_obj
+        self._field_name = field_name
+        self._cached_value = None
+        self._cached = False
+    
+    def __getattr__(self, name):
+        # 构建完整的字段路径，如 content.token
+        full_field = f"{self._field_name}.{name}"
+        try:
+            # 复用现有的extract_field逻辑
+            value = self._resp_obj.extract_field(full_field)
+            # 如果返回的是字典，则创建新的代理对象以支持进一步的点号访问
+            if isinstance(value, dict):
+                return ResponseFieldProxy(self._resp_obj, full_field)
+            return value
+        except (exceptions.ExtractFailure, exceptions.ParamsError):
+            raise AttributeError(f"'{self._field_name}' object has no attribute '{name}'")
+    
+    def __getitem__(self, key):
+        # 支持字典式访问，如 headers["Content-Type"]
+        full_field = f"{self._field_name}.{key}"
+        try:
+            return self._resp_obj.extract_field(full_field)
+        except (exceptions.ExtractFailure, exceptions.ParamsError):
+            raise KeyError(key)
+    
+    def __contains__(self, key):
+        # 支持 in 操作符
+        try:
+            full_field = f"{self._field_name}.{key}"
+            self._resp_obj.extract_field(full_field)
+            return True
+        except (exceptions.ExtractFailure, exceptions.ParamsError):
+            return False
+    
+    def __str__(self):
+        if not self._cached:
+            try:
+                self._cached_value = self._resp_obj.extract_field(self._field_name)
+                self._cached = True
+            except (exceptions.ExtractFailure, exceptions.ParamsError):
+                self._cached_value = f"<{self._field_name}>"
+        return str(self._cached_value)
+    
+    def __repr__(self):
+        return f"ResponseFieldProxy({self._field_name})"
+    
+    def __len__(self):
+        # 支持len()函数
+        try:
+            value = self._resp_obj.extract_field(self._field_name)
+            return len(value)
+        except (exceptions.ExtractFailure, exceptions.ParamsError):
+            raise TypeError(f"object of type '{self._field_name}' has no len()")
+
+
 class Validator(object):
     """Validate tests
 
@@ -79,11 +139,31 @@ def run_validate_script():
             script
         )
 
+        # 添加响应字段的直接映射，复用现有的extract_field逻辑
         variables = {
             "status_code": self.resp_obj.status_code,
             "response_json": self.resp_obj.json,
             "response": self.resp_obj,
         }
+        
+        # 使用ResponseFieldProxy复用现有的extract_field逻辑，避免代码重复
+        try:
+            variables.update({
+                "content": ResponseFieldProxy(self.resp_obj, "content"),
+                "body": ResponseFieldProxy(self.resp_obj, "body"),
+                "text": ResponseFieldProxy(self.resp_obj, "text"),
+                "json": ResponseFieldProxy(self.resp_obj, "json"),
+                "headers": ResponseFieldProxy(self.resp_obj, "headers"),
+                "cookies": ResponseFieldProxy(self.resp_obj, "cookies"),
+                "encoding": self.resp_obj.encoding,
+                "ok": self.resp_obj.ok,
+                "reason": self.resp_obj.reason,
+                "url": self.resp_obj.url,
+            })
+        except Exception as e:
+            # 如果获取响应字段失败，记录警告但继续执行
+            logger.log_warning("Failed to add response field variables: {}".format(e))
+        
         variables.update(self.session_context.test_variables_mapping)
         variables.update(globals())
 
