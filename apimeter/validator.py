@@ -158,7 +158,7 @@ class Validator(object):
         # 准备变量环境
         variables = {
             "status_code": self.resp_obj.status_code,
-            "response_json": self.resp_obj.json,
+            # "response_json": self.resp_obj.json,
             "response": self.resp_obj,
         }
         
@@ -171,6 +171,7 @@ class Validator(object):
                 "json": ResponseFieldProxy(self.resp_obj, "json"),
                 "headers": ResponseFieldProxy(self.resp_obj, "headers"),
                 "cookies": ResponseFieldProxy(self.resp_obj, "cookies"),
+                "elapsed": ResponseFieldProxy(self.resp_obj, "elapsed"),
                 "encoding": self.resp_obj.encoding,
                 "ok": self.resp_obj.ok,
                 "reason": self.resp_obj.reason,
@@ -198,29 +199,30 @@ class Validator(object):
                 # 解析脚本内容（支持assert语句和自定义函数）
                 parsed_script_line = self.session_context.eval_content(script_line)
                 logger.log_debug(f"parsed_script_line: {parsed_script_line}")
+                # exec(parsed_script_line, variables.copy()) # TODO: 这里需要优化，不能直接执行，需要判断是否是assert语句，因为自定义函数已解析，不能直接执行
                 if isinstance(parsed_script_line, str) and parsed_script_line.strip().startswith('assert'):
                     # 1. assert 语句
                     exec(parsed_script_line, variables.copy())
-                else:
+                else: # TODO: 这里需要优化，因为不管是自定义函数，还是其他任意内容，都作为自定义函数处理了
                     # 2. 自定义函数
                     script_dict["output"] = str(parsed_script_line)
                 logger.log_debug("validate_script: {} ==> pass".format(script_line))
             except SyntaxError as ex:
+                err_msg = "SyntaxError: {} (Line: {})".format(ex.msg, ex.lineno)
                 overall_success = False
                 script_dict["check_result"] = "fail"
-                script_dict["output"] = "SyntaxError: {} (Line: {})".format(ex.msg, ex.lineno)
+                script_dict["output"] = err_msg
                 
-                validate_msg = "validate_script: {} ==> fail".format(script_line)
-                validate_msg += "\nSyntaxError: {}".format(ex.msg)
+                validate_msg = "validate_script: {} ==> fail\n{}".format(script_line, err_msg)
                 logger.log_error(validate_msg)
                 
             except Exception as ex:
+                err_msg = "{}: {}".format(type(ex).__name__, str(ex)) if str(ex) else "{}".format(type(ex).__name__)
                 overall_success = False
                 script_dict["check_result"] = "fail"
-                script_dict["output"] = "{}: {}".format(type(ex).__name__, str(ex)) if str(ex) else "{}".format(type(ex).__name__)
+                script_dict["output"] = err_msg
                 
-                validate_msg = "validate_script: {} ==> fail".format(script_line)
-                validate_msg += "\n{}: {}".format(type(ex).__name__, str(ex))
+                validate_msg = "validate_script: {} ==> fail\n{}".format(script_line, err_msg)
                 logger.log_error(validate_msg)
             
             script_results.append(script_dict)
@@ -230,7 +232,7 @@ class Validator(object):
             # 修复TypeError: sequence item 2: expected str instance, LazyString found
             "validate_script": "<br/>".join([str(line) for line in script]),
             "check_result": "pass" if overall_success else "fail", 
-            "output": "success" if overall_success else "some script validations failed",
+            "output": "success" if overall_success else "script validation failed",
             "details": script_results  # 新增详细结果
         }
         

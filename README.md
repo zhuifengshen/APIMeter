@@ -74,6 +74,7 @@ body.token
 headers
 "headers.content-type"
 cookies
+elapsed.total_seconds
 
 # 特殊情况：当数据字段与全局变量同名时，支持使用反斜杠'\'转义全局变量，将其作为字面量字符串处理
 - eq:

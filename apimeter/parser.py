@@ -23,7 +23,7 @@ variable_regex_compile = re.compile(r"\$\{([\w]+(?:\.[\w]+)*)\}|\$([\w]+(?:\.[\w
 # function notation, e.g. ${func1($var_1, $var_3)} - updated to support complex parameters
 function_regex_compile = re.compile(r"\$\{(\w+)\(([^)]*)\)\}")
 # global variables
-global_variables = ['content', 'body', 'text', 'json', 'status_code', 'headers', 'cookies', 'encoding', 'ok', 'reason', 'url']
+global_variables = ['content', 'body', 'text', 'json', 'status_code', 'headers', 'cookies', 'encoding', 'ok', 'reason', 'url', 'elapsed']
 
 """ Store parse failed api/testcase/testsuite file path
 """
