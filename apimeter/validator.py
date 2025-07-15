@@ -158,7 +158,7 @@ class Validator(object):
         # 准备变量环境
         variables = {
             "status_code": self.resp_obj.status_code,
-            # "response_json": self.resp_obj.json,
+            # "response_json": self.resp_obj.json, # TODO: response_json变量用于获取响应的json数据，但当返回非json数据时，会报错，所以暂时不使用
             "response": self.resp_obj,
         }
         
@@ -199,13 +199,14 @@ class Validator(object):
                 # 解析脚本内容（支持assert语句和自定义函数）
                 parsed_script_line = self.session_context.eval_content(script_line)
                 logger.log_debug(f"parsed_script_line: {parsed_script_line}")
-                # exec(parsed_script_line, variables.copy()) # TODO: 这里需要优化，不能直接执行，需要判断是否是assert语句，因为自定义函数已解析，不能直接执行
-                if isinstance(parsed_script_line, str) and parsed_script_line.strip().startswith('assert'):
-                    # 1. assert 语句
-                    exec(parsed_script_line, variables.copy())
-                else: # TODO: 这里需要优化，因为不管是自定义函数，还是其他任意内容，都作为自定义函数处理了
-                    # 2. 自定义函数
+                if parser.function_regex_compile.match(str(script_line)):
+                    # 如果是自定义函数，直接赋值输出
+                    logger.log_debug("自定义函数: {}".format(script_line))
                     script_dict["output"] = str(parsed_script_line)
+                else:
+                    # 否则当做python脚本执行（包括assert语句等）
+                    logger.log_debug("python脚本: {}".format(script_line))
+                    exec(parsed_script_line, variables.copy())
                 logger.log_debug("validate_script: {} ==> pass".format(script_line))
             except SyntaxError as ex:
                 err_msg = "SyntaxError: {} (Line: {})".format(ex.msg, ex.lineno)
