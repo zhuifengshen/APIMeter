@@ -280,7 +280,7 @@ class Runner(object):
 
         # validate
         validators = test_dict.get("validate") or test_dict.get("validators") or []
-        validate_script = test_dict.get("validate_script", [])
+        validate_script = test_dict.get("script", [])
         if validate_script:
             validators.append({"type": "python_script", "script": validate_script})
 

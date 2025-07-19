@@ -49,7 +49,7 @@ teststeps:
         - eq:
           - ${validate_token($resp.token)}
           - True
-    validate_script:
+    script:
         - assert status_code ==  200
         - assert len(content.token) == 16
         - assert ${validate_token($token)} is True
@@ -76,6 +76,12 @@ teststeps:
         - ${get_empty_str()}
         - ${get_empty_list()}
         - ${get_empty_dict()}
+        - assert elapsed.total_seconds < 2.0
+        - |
+            if status_code == 200:
+                assert content.success is True
+            else:
+                assert content.success is False
 -
     name: reset all users
     variables:

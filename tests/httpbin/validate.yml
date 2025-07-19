@@ -14,7 +14,7 @@
         - eq: ["status_code", 200]
         - eq: ["json.args.a", '1']
         - eq: ["json.args.b", '2']
-    validate_script:
+    script:
         - "assert status_code == 200"
 
 
@@ -28,7 +28,7 @@
         method: GET
     validate:
         - eq: ["status_code", 200]
-    validate_script:
+    script:
         - "assert status_code == 201"
-        - "a = response_json.get('args').get('a')"
+        - "a = response.get('args').get('a')"
         - "assert a == '1'"

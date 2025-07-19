@@ -1,0 +1,100 @@
+config:
+  name: "script 校验功能演示"
+  variables:
+    expected_status: 200
+    min_token_length: 16
+  base_url: "https://httpbin.org"
+
+teststeps:
+- name: 基础assert语句校验
+  # skip: true
+  request:
+    url: /get
+    method: GET
+    params:
+      test: "script_validate_demo"
+  script:
+    # 基础状态码校验
+    - assert status_code == 200
+    - assert status_code == $expected_status
+    
+    # 响应头校验
+    - assert headers["Content-Type"] == "application/json"
+    - assert "Server" in headers
+    
+    # 响应体校验
+    # - assert json.args.test == "script_validate_demo"
+    - assert json.url.startswith("https://httpbin.org")
+    
+    # 复杂条件校验
+    - assert status_code in [200, 201, 202]
+    - assert len(json.headers) > 0
+    - assert json.origin is not None
+
+- name: 自定义函数校验演示
+  # skip: true
+  request:
+    url: /json
+    method: GET
+  script:
+    # 直接调用自定义函数（返回值作为输出）
+    - ${validate_json_structure(json)}
+    - ${check_response_time(elapsed.total_seconds)}
+    
+    # 结合assert使用
+    - assert ${validate_json_structure(json)} is True
+    - assert ${check_response_time(elapsed.total_seconds)} is True
+    
+    # 带参数的自定义函数
+    - ${validate_field_exists(json, "slideshow")}
+    - ${count_json_fields(json)} > 0
+
+- name: 错误处理演示
+  # skip: true
+  request:
+    url: /status/200
+    method: GET
+  script:
+    # 成功的校验
+    - assert status_code == 200
+    
+    # 故意失败的校验（不会中断其他校验）
+    - assert status_code == 404, "This will fail but won't stop other validations"
+    
+    # 变量不存在的校验
+    - assert undefined_variable == "test"
+    
+    # 继续执行的校验
+    - assert ok is True
+    
+    # 自定义函数异常处理
+    - ${failing_validation_function()}
+
+- name: 复杂数据校验
+  # skip: true
+  request:
+    url: /json
+    method: GET
+  script:
+    # 嵌套数据访问
+    - assert json.slideshow.title == "Sample Slide Show"
+    - assert len(json.slideshow.slides) == 2
+    
+    # 数组元素校验
+    # 这里的'|'在YAML中叫做“块标量（block scalar）”，具体是“保留换行的多行字符串”写法。它的作用是让后面的多行内容作为一个整体字符串，并且保留换行符。
+    # 在script这种场景下，'|'后面缩进的多行内容会被当作一条完整的脚本（如多行Python代码）传递给后端执行。
+    # 例如，下面的内容会被整体作为一段Python代码执行：
+    - |
+      for slide in json.slideshow.slides:
+          assert slide.get("title") is not None
+          assert slide.get("type") is not None
+    
+    # 条件校验
+    - |
+      if json.slideshow.author:
+          assert len(json.slideshow.author) > 0
+      else:
+          assert json.slideshow.author is None
+    
+    # 自定义错误信息
+    - "assert json.slideshow.title != '', f'Title should not be empty, got: {json.slideshow.title}'"

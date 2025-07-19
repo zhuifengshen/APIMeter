@@ -157,9 +157,12 @@ class Validator(object):
         """
         # 准备变量环境
         variables = {
-            "status_code": self.resp_obj.status_code,
-            # "response_json": self.resp_obj.json, # TODO: response_json变量用于获取响应的json数据，但当返回非json数据时，会报错，所以暂时不使用
             "response": self.resp_obj,
+            "status_code": self.resp_obj.status_code,
+            "url": self.resp_obj.url,
+            "ok": self.resp_obj.ok,
+            "encoding": self.resp_obj.encoding,
+            "reason": self.resp_obj.reason,
         }
         
         # 使用ResponseFieldProxy复用现有的extract_field逻辑，避免代码重复
@@ -172,10 +175,6 @@ class Validator(object):
                 "headers": ResponseFieldProxy(self.resp_obj, "headers"),
                 "cookies": ResponseFieldProxy(self.resp_obj, "cookies"),
                 "elapsed": ResponseFieldProxy(self.resp_obj, "elapsed"),
-                "encoding": self.resp_obj.encoding,
-                "ok": self.resp_obj.ok,
-                "reason": self.resp_obj.reason,
-                "url": self.resp_obj.url,
             })
         except Exception as e:
             # 如果获取响应字段失败，记录警告但继续执行

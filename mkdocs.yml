@@ -67,6 +67,7 @@ nav:
         - 参数化数据驱动: prepare/parameters.md
         - 用例格式化: prepare/pretty.md
         - 校验器用法: prepare/validate.md
+        - 自定义脚本校验: prepare/script.md
         - 信息安全: prepare/security.md
         - 文件上传场景: prepare/upload-case.md
     - 测试执行:
