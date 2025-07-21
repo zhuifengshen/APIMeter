@@ -126,7 +126,7 @@ poetry publish  # 发布，根据提示输入pypi账号密码
 pip install -i https://pypi.Python.org/simple/ apimeter  # 指定安装源，因为刚发布其他平台未及时同步
 
 
-# 文档编译与部署 .gitlab-ci.yml(apimeter-部署-Pages)
+# 文档编译与部署 .gitlab-ci.yml(设置apimeter-部署-Pages/完善功能文档，更新mkdocs.yml配置)
 pip install mkdocs-material==3.3.0
 mkdocs build
 mkdocs serve
