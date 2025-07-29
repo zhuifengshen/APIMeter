@@ -1,0 +1,1944 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="ApiMeter User Documentation">
+      
+      
+      
+        <meta name="author" content="debugtalk">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-3.3.0">
+    
+    
+      
+        <title>自定义脚本校验 - ApiMeter 用户使用文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.962652e9.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114587036-2"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-114587036-2")</script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="ApiMeter 用户使用文档" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                ApiMeter 用户使用文档
+              </span>
+              <span class="md-header-nav__topic">
+                自定义脚本校验
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://git.umlife.net/utils/apimeter" title="前往 Github 仓库" class="md-source" data-md-source="">
+    
+    <div class="md-source__repository">
+      ApiMeter
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="ApiMeter 用户使用文档" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    ApiMeter 用户使用文档
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://git.umlife.net/utils/apimeter" title="前往 Github 仓库" class="md-source" data-md-source="">
+    
+    <div class="md-source__repository">
+      ApiMeter
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="介绍" class="md-nav__link">
+      介绍
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../Installation/" title="安装说明" class="md-nav__link">
+      安装说明
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../quickstart/" title="快速上手" class="md-nav__link">
+      快速上手
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      基础概念
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        基础概念
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../concept/nominal/" title="名词解释" class="md-nav__link">
+      名词解释
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      测试准备
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        测试准备
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../record/" title="录制生成用例" class="md-nav__link">
+      录制生成用例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../project-structure/" title="项目文件组织" class="md-nav__link">
+      项目文件组织
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../testcase-structure/" title="测试用例组织" class="md-nav__link">
+      测试用例组织
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../request-hook/" title="hook机制" class="md-nav__link">
+      hook机制
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dot-env/" title="环境变量" class="md-nav__link">
+      环境变量
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../testcase-layer/" title="测试用例分层" class="md-nav__link">
+      测试用例分层
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../parameters/" title="参数化数据驱动" class="md-nav__link">
+      参数化数据驱动
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../validate/" title="校验器用法" class="md-nav__link">
+      校验器用法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        自定义脚本校验
+      </label>
+    
+    <a href="./" title="自定义脚本校验" class="md-nav__link md-nav__link--active">
+      自定义脚本校验
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="📋 自定义脚本校验功能概述" class="md-nav__link">
+    📋 自定义脚本校验功能概述
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="🎯 核心特性" class="md-nav__link">
+    🎯 核心特性
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" title="1. 两种校验模式" class="md-nav__link">
+    1. 两种校验模式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" title="2. 异常即失败原则" class="md-nav__link">
+    2. 异常即失败原则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" title="3. 逐条执行机制" class="md-nav__link">
+    3. 逐条执行机制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" title="4. 丰富的内置功变量" class="md-nav__link">
+    4. 丰富的内置功变量
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="🚀 基本语法" class="md-nav__link">
+    🚀 基本语法
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" title="🔧 可用变量" class="md-nav__link">
+    🔧 可用变量
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" title="🧪 单元测试" class="md-nav__link">
+    🧪 单元测试
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" title="🔧 核心组件技术实现" class="md-nav__link">
+    🔧 核心组件技术实现
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" title="💼 详细使用说明" class="md-nav__link">
+    💼 详细使用说明
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-python" title="1️⃣ Python 脚本校验" class="md-nav__link">
+    1️⃣ Python 脚本校验
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" title="基础断言" class="md-nav__link">
+    基础断言
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" title="条件判断" class="md-nav__link">
+    条件判断
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" title="多行脚本" class="md-nav__link">
+    多行脚本
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" title="自定义错误信息" class="md-nav__link">
+    自定义错误信息
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" title="2️⃣ 自定义函数校验" class="md-nav__link">
+    2️⃣ 自定义函数校验
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" title="函数定义" class="md-nav__link">
+    函数定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" title="函数调用" class="md-nav__link">
+    函数调用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" title="参数传递" class="md-nav__link">
+    参数传递
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" title="3️⃣ 变量引用" class="md-nav__link">
+    3️⃣ 变量引用
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" title="测试变量引用" class="md-nav__link">
+    测试变量引用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" title="提取变量引用" class="md-nav__link">
+    提取变量引用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" title="4️⃣ 错误处理" class="md-nav__link">
+    4️⃣ 错误处理
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" title="容错机制" class="md-nav__link">
+    容错机制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" title="异常类型说明" class="md-nav__link">
+    异常类型说明
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" title="5️⃣ 高级用法" class="md-nav__link">
+    5️⃣ 高级用法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" title="响应字段深度访问" class="md-nav__link">
+    响应字段深度访问
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" title="动态校验" class="md-nav__link">
+    动态校验
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" title="批量校验" class="md-nav__link">
+    批量校验
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" title="6️⃣ 最佳实践" class="md-nav__link">
+    6️⃣ 最佳实践
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-debugtalkpy" title="1. 模块化校验函数 - 将复杂逻辑封装到 debugtalk.py 中" class="md-nav__link">
+    1. 模块化校验函数 - 将复杂逻辑封装到 debugtalk.py 中
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-assert" title="2. 清晰的错误信息 - 使用自定义assert消息" class="md-nav__link">
+    2. 清晰的错误信息 - 使用自定义assert消息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-yaml" title="3. 脚本组织 - 避免在YAML中写过程的脚本，同时确保脚本来源可信" class="md-nav__link">
+    3. 脚本组织 - 避免在YAML中写过程的脚本，同时确保脚本来源可信
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7" title="7️⃣ 完整示例" class="md-nav__link">
+    7️⃣ 完整示例
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_22" title="🏆 总结" class="md-nav__link">
+    🏆 总结
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../pretty/" title="用例格式化" class="md-nav__link">
+      用例格式化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../yaml-issue/" title="常见格式问题" class="md-nav__link">
+      常见格式问题
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" title="信息安全" class="md-nav__link">
+      信息安全
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../upload-case/" title="文件上传场景" class="md-nav__link">
+      文件上传场景
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      测试执行
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        测试执行
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../run-tests/cli/" title="运行测试(CLI)" class="md-nav__link">
+      运行测试(CLI)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../run-tests/report/" title="测试报告" class="md-nav__link">
+      测试报告
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../run-tests/load-test/" title="性能测试" class="md-nav__link">
+      性能测试
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      开发扩展
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        开发扩展
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/architecture/" title="Pipline" class="md-nav__link">
+      Pipline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/dev-api/" title="基础库调用" class="md-nav__link">
+      基础库调用
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      实践案例
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        实践案例
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/testerhome-login/" title="TesterHome 登录" class="md-nav__link">
+      TesterHome 登录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/demo-klook/" title="klook" class="md-nav__link">
+      klook
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../related-docs/" title="相关资料" class="md-nav__link">
+      相关资料
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../CHANGELOG/" title="CHANGELOG" class="md-nav__link">
+      CHANGELOG
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="📋 自定义脚本校验功能概述" class="md-nav__link">
+    📋 自定义脚本校验功能概述
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="🎯 核心特性" class="md-nav__link">
+    🎯 核心特性
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" title="1. 两种校验模式" class="md-nav__link">
+    1. 两种校验模式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" title="2. 异常即失败原则" class="md-nav__link">
+    2. 异常即失败原则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" title="3. 逐条执行机制" class="md-nav__link">
+    3. 逐条执行机制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" title="4. 丰富的内置功变量" class="md-nav__link">
+    4. 丰富的内置功变量
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="🚀 基本语法" class="md-nav__link">
+    🚀 基本语法
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" title="🔧 可用变量" class="md-nav__link">
+    🔧 可用变量
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" title="🧪 单元测试" class="md-nav__link">
+    🧪 单元测试
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" title="🔧 核心组件技术实现" class="md-nav__link">
+    🔧 核心组件技术实现
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" title="💼 详细使用说明" class="md-nav__link">
+    💼 详细使用说明
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-python" title="1️⃣ Python 脚本校验" class="md-nav__link">
+    1️⃣ Python 脚本校验
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" title="基础断言" class="md-nav__link">
+    基础断言
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" title="条件判断" class="md-nav__link">
+    条件判断
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" title="多行脚本" class="md-nav__link">
+    多行脚本
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" title="自定义错误信息" class="md-nav__link">
+    自定义错误信息
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" title="2️⃣ 自定义函数校验" class="md-nav__link">
+    2️⃣ 自定义函数校验
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" title="函数定义" class="md-nav__link">
+    函数定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" title="函数调用" class="md-nav__link">
+    函数调用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" title="参数传递" class="md-nav__link">
+    参数传递
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" title="3️⃣ 变量引用" class="md-nav__link">
+    3️⃣ 变量引用
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" title="测试变量引用" class="md-nav__link">
+    测试变量引用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" title="提取变量引用" class="md-nav__link">
+    提取变量引用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" title="4️⃣ 错误处理" class="md-nav__link">
+    4️⃣ 错误处理
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" title="容错机制" class="md-nav__link">
+    容错机制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" title="异常类型说明" class="md-nav__link">
+    异常类型说明
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" title="5️⃣ 高级用法" class="md-nav__link">
+    5️⃣ 高级用法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" title="响应字段深度访问" class="md-nav__link">
+    响应字段深度访问
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" title="动态校验" class="md-nav__link">
+    动态校验
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" title="批量校验" class="md-nav__link">
+    批量校验
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" title="6️⃣ 最佳实践" class="md-nav__link">
+    6️⃣ 最佳实践
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-debugtalkpy" title="1. 模块化校验函数 - 将复杂逻辑封装到 debugtalk.py 中" class="md-nav__link">
+    1. 模块化校验函数 - 将复杂逻辑封装到 debugtalk.py 中
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-assert" title="2. 清晰的错误信息 - 使用自定义assert消息" class="md-nav__link">
+    2. 清晰的错误信息 - 使用自定义assert消息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-yaml" title="3. 脚本组织 - 避免在YAML中写过程的脚本，同时确保脚本来源可信" class="md-nav__link">
+    3. 脚本组织 - 避免在YAML中写过程的脚本，同时确保脚本来源可信
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7" title="7️⃣ 完整示例" class="md-nav__link">
+    7️⃣ 完整示例
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_22" title="🏆 总结" class="md-nav__link">
+    🏆 总结
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>自定义脚本校验</h1>
+                
+                <h2 id="_1">📋 <strong>自定义脚本校验功能概述</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><code>script</code> 是 HttpRunner 提供的简洁而强大的校验功能，支持使用 Python 脚本进行灵活的响应校验。它采用 <strong>"异常即失败"</strong> 的设计理念，与 Python assert 语句完全一致，不增加用户记忆负担，符合开发者直觉。</p>
+<h2 id="_2">🎯 <strong>核心特性</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="1">1. <strong>两种校验模式</strong><a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Python 脚本</strong> - 支持任意 Python 语句（assert、条件判断、循环等）</li>
+<li><strong>自定义函数</strong> - 调用 debugtalk.py 中定义的校验函数</li>
+</ul>
+<h3 id="2">2. <strong>异常即失败原则</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>脚本执行无异常 = 校验通过</li>
+<li>脚本抛出异常 = 校验失败</li>
+<li>与 Python assert 语句设计理念一致</li>
+</ul>
+<h3 id="3">3. <strong>逐条执行机制</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>每条脚本独立执行</li>
+<li>单条失败不中断其他脚本继续执行</li>
+<li>详细的错误日志和测试报告</li>
+</ul>
+<h3 id="4">4. <strong>丰富的内置功变量</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>直接访问响应数据：<code>status_code</code>, <code>headers</code>, <code>content</code>, <code>json</code> 等</li>
+<li>支持点号访问语法：<code>content.user.name</code></li>
+<li>变量引用：<code>$token</code>, <code>$user_id</code></li>
+</ul>
+<h2 id="_3">🚀 <strong>基本语法</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>在测试用例中使用 <code>script</code> 字段：</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">teststeps</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">示例测试步骤</span>
+<span class="w">  </span><span class="nt">request</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/api/example</span>
+<span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GET</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert status_code == 200</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert content.success is True</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${custom_validation_function($token)}</span>
+</code></pre></div>
+
+<h2 id="_4">🔧 <strong>可用变量</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>在 <code>script</code> 中可以直接使用以下响应变量：</p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>类型</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>status_code</code></td>
+<td>int</td>
+<td>HTTP状态码</td>
+<td><code>assert status_code == 200</code></td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>proxy</td>
+<td>响应头信息</td>
+<td><code>assert headers["Content-Type"] == "application/json"</code></td>
+</tr>
+<tr>
+<td><code>cookies</code></td>
+<td>proxy</td>
+<td>Cookie信息</td>
+<td><code>assert "session_id" in cookies</code></td>
+</tr>
+<tr>
+<td><code>content</code></td>
+<td>proxy</td>
+<td>响应内容（自动解析JSON）</td>
+<td><code>assert content.token is not None</code></td>
+</tr>
+<tr>
+<td><code>body</code></td>
+<td>proxy</td>
+<td>原始响应体</td>
+<td><code>assert "success" in body</code></td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td>proxy</td>
+<td>响应文本</td>
+<td><code>assert len(text) &gt; 0</code></td>
+</tr>
+<tr>
+<td><code>json</code></td>
+<td>proxy</td>
+<td>JSON响应内容</td>
+<td><code>assert json["code"] == 0</code></td>
+</tr>
+<tr>
+<td><code>elapsed</code></td>
+<td>proxy</td>
+<td>响应时间对象</td>
+<td><code>assert elapsed.total_seconds &lt; 2.0</code></td>
+</tr>
+<tr>
+<td><code>encoding</code></td>
+<td>str</td>
+<td>响应编码</td>
+<td><code>assert encoding == "utf-8"</code></td>
+</tr>
+<tr>
+<td><code>ok</code></td>
+<td>bool</td>
+<td>请求是否成功</td>
+<td><code>assert ok is True</code></td>
+</tr>
+<tr>
+<td><code>reason</code></td>
+<td>str</td>
+<td>状态码说明</td>
+<td><code>assert reason == "OK"</code></td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>str</td>
+<td>请求URL</td>
+<td><code>assert "api" in url</code></td>
+</tr>
+<tr>
+<td><code>response</code></td>
+<td>object</td>
+<td>完整响应对象</td>
+<td><code>assert response.status_code == 200</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_5">🧪 单元测试<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<ul>
+<li>✅ Assert 语句校验（成功/失败）</li>
+<li>✅ 自定义函数校验（成功/失败）</li>
+<li>✅ 异常处理（语法错误、变量不存在等）</li>
+<li>✅ 响应字段访问（headers、content、json等）</li>
+<li>✅ 变量引用和解析</li>
+<li>✅ 复杂表达式和条件校验</li>
+<li>✅ 异常分类处理（关键异常 vs 运行时异常）</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 运行所有validator测试</span>
+python<span class="w"> </span>-m<span class="w"> </span>unittest<span class="w"> </span>tests.test_validator<span class="w"> </span>-v
+
+<span class="c1"># 运行特定测试</span>
+python<span class="w"> </span>-m<span class="w"> </span>unittest<span class="w"> </span>tests.test_validator.TestValidator.test_validate_script_assert_success<span class="w"> </span>-v
+</code></pre></div>
+
+<h2 id="_6">🔧 核心组件技术实现<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Validator.validate_script()</strong> - 主要校验逻辑</li>
+<li><strong>ResponseFieldProxy</strong> - 响应字段代理访问</li>
+<li><strong>异常处理分层</strong> - 区分关键异常和运行时异常</li>
+<li><strong>逐条执行机制</strong> - 独立执行每条校验脚本</li>
+</ol>
+<h2 id="_7">💼 详细使用说明<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="1-python">1️⃣ <strong>Python 脚本校验</strong><a class="headerlink" href="#1-python" title="Permanent link">&para;</a></h3>
+<h4 id="_8"><strong>基础断言</strong><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert status_code == 200</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert content.success is True</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert len(content.token) == 16</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert content.user_id &gt; 0</span>
+</code></pre></div>
+
+<h4 id="_9"><strong>条件判断</strong><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert status_code in [200, 201, 202]</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert content.status in [&quot;active&quot;, &quot;pending&quot;]</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert len(content.items) &gt; 0 and all(item.get(&quot;id&quot;) for item in content.items)</span>
+</code></pre></div>
+
+<h4 id="_10"><strong>多行脚本</strong><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 使用 YAML 的 | 语法编写多行脚本</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">    </span><span class="no">if status_code == 200:</span>
+<span class="w">        </span><span class="no">assert content.success is True</span>
+<span class="w">    </span><span class="no">elif status_code == 400:</span>
+<span class="w">        </span><span class="no">assert content.error_code is not None</span>
+<span class="w">    </span><span class="no">else:</span>
+<span class="w">        </span><span class="no">assert False, f&quot;Unexpected status code: {status_code}&quot;</span>
+
+<span class="w">  </span><span class="c1"># 循环校验</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">    </span><span class="no">for item in content.items:</span>
+<span class="w">        </span><span class="no">assert item.get(&quot;id&quot;) is not None</span>
+<span class="w">        </span><span class="no">assert item.get(&quot;name&quot;) is not None</span>
+</code></pre></div>
+
+<h4 id="_11"><strong>自定义错误信息</strong><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert status_code == 200, f&quot;Expected 200, got {status_code}&quot;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert content.success is True, &quot;API call should succeed&quot;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert len(content.token) == 16, f&quot;Token length invalid</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">expected 16, got {len(content.token)}&quot;</span>
+</code></pre></div>
+
+<h3 id="2_1">2️⃣ <strong>自定义函数校验</strong><a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<h4 id="_12"><strong>函数定义</strong><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<p>在 <code>debugtalk.py</code> 中定义校验函数：</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">validate_token</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;验证token格式&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">token</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">16</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Token length should be 16, got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">token</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">token</span><span class="o">.</span><span class="n">isalnum</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Token should be alphanumeric&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_user_info</span><span class="p">(</span><span class="n">user_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;验证用户信息完整性&quot;&quot;&quot;</span>
+    <span class="n">required_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">required_fields</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">field</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">user_data</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing required field: </span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">check_response_time</span><span class="p">(</span><span class="n">elapsed_seconds</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;检查响应时间&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">elapsed_seconds</span> <span class="o">&gt;=</span> <span class="mf">2.0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Response time too slow: </span><span class="si">{</span><span class="n">elapsed_seconds</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
+
+<h4 id="_13"><strong>函数调用</strong><a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 直接调用函数，函数返回值作为输出显示</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${validate_token(content.token)}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${validate_user_info(content.user)}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${check_response_time(elapsed.total_seconds)}</span>
+
+<span class="w">  </span><span class="c1"># 结合assert使用（推荐）</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert ${validate_token(content.token)} is True</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert ${validate_user_info(content.user)} is True</span>
+</code></pre></div>
+
+<h4 id="_14"><strong>参数传递</strong><a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 传递单个参数</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${validate_token($token)}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${validate_token(content.token)}</span>
+
+<span class="w">  </span><span class="c1"># 传递多个参数</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${validate_signature($device_sn, $os_platform, $app_version)}</span>
+
+<span class="w">  </span><span class="c1"># 传递列表参数</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${validate_list_data([$device_sn, $os_platform, $app_version])}</span>
+
+<span class="w">  </span><span class="c1"># 传递字典参数</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${validate_dict_data({device_sn</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$device_sn, platform</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$os_platform})}</span>
+
+<span class="w">  </span><span class="c1"># 传递复杂对象</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${validate_response_data(content)}</span>
+</code></pre></div>
+
+<h3 id="3_1">3️⃣ <strong>变量引用</strong><a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<h4 id="_15"><strong>测试变量引用</strong><a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">variables</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">expected_status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200</span>
+<span class="w">  </span><span class="nt">expected_token_length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16</span>
+
+<span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert status_code == $expected_status</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert len(content.token) == $expected_token_length</span>
+</code></pre></div>
+
+<h4 id="_16"><strong>提取变量引用</strong><a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">extract</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">user_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">content.user.id</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">content.token</span>
+
+<span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert $user_id &gt; 0</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert len(&quot;$token&quot;) == 16</span><span class="w">  </span><span class="c1"># 字符串形式的变量引用需要加引号</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${validate_token($token)}</span>
+</code></pre></div>
+
+<h3 id="4_1">4️⃣ <strong>错误处理</strong><a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h3>
+<h4 id="_17"><strong>容错机制</strong><a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
+<p>当某条脚本校验失败时，系统会：</p>
+<ol>
+<li><strong>记录详细错误信息</strong></li>
+<li><strong>继续执行后续脚本</strong></li>
+<li><strong>在测试报告中显示失败详情</strong></li>
+</ol>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert status_code == 200</span><span class="w">        </span><span class="c1"># 通过</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert content.invalid_field == &quot;test&quot;</span><span class="w">  </span><span class="c1"># 失败，但不中断后续校验</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert content.success is True</span><span class="w">   </span><span class="c1"># 继续执行</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${validate_token(content.token)}</span><span class="w"> </span><span class="c1"># 继续执行</span>
+</code></pre></div>
+
+<h4 id="_18"><strong>异常类型说明</strong><a class="headerlink" href="#_18" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>AssertionError</strong> - assert 语句失败</li>
+<li><strong>NameError</strong> - 变量不存在</li>
+<li><strong>AttributeError</strong> - 属性访问错误</li>
+<li><strong>TypeError</strong> - 类型错误</li>
+<li><strong>ValueError</strong> - 值错误（自定义函数常用）</li>
+<li><strong>SyntaxError</strong> - 语法错误</li>
+</ul>
+<h3 id="5">5️⃣ <strong>高级用法</strong><a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<h4 id="_19"><strong>响应字段深度访问</strong><a class="headerlink" href="#_19" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 嵌套数据访问</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert content.user.profile.age &gt; 0</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert len(content.user.permissions) &gt; 0</span>
+
+<span class="w">  </span><span class="c1"># 数组访问</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert len(content.items) &gt; 0</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert content.items[0].id is not None</span>
+
+<span class="w">  </span><span class="c1"># 字典访问</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert headers[&quot;Content-Type&quot;] == &quot;application/json&quot;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert &quot;Authorization&quot; in headers</span>
+</code></pre></div>
+
+<h4 id="_20"><strong>动态校验</strong><a class="headerlink" href="#_20" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 根据响应内容动态校验</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">    </span><span class="no">if content.user.type == &quot;vip&quot;:</span>
+<span class="w">        </span><span class="no">assert content.user.vip_level &gt; 0</span>
+<span class="w">        </span><span class="no">assert content.user.vip_expires is not None</span>
+<span class="w">    </span><span class="no">else:</span>
+<span class="w">        </span><span class="no">assert content.user.vip_level == 0</span>
+</code></pre></div>
+
+<h4 id="_21"><strong>批量校验</strong><a class="headerlink" href="#_21" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 校验数组中的每个元素</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">    </span><span class="no">for item in content.products:</span>
+<span class="w">        </span><span class="no">assert item.get(&quot;id&quot;) is not None</span>
+<span class="w">        </span><span class="no">assert item.get(&quot;price&quot;) &gt; 0</span>
+<span class="w">        </span><span class="no">assert item.get(&quot;status&quot;) in [&quot;active&quot;, &quot;inactive&quot;]</span>
+</code></pre></div>
+
+<h3 id="6">6️⃣ <strong>最佳实践</strong><a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
+<h4 id="1-debugtalkpy">1. <strong>模块化校验函数</strong> - 将复杂逻辑封装到 debugtalk.py 中<a class="headerlink" href="#1-debugtalkpy" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># debugtalk.py</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_user_data</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;用户数据校验&quot;&quot;&quot;</span>
+    <span class="n">validate_required_fields</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">])</span>
+    <span class="n">validate_user_id</span><span class="p">(</span><span class="n">user</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])</span>
+    <span class="n">validate_email_format</span><span class="p">(</span><span class="n">user</span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_required_fields</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">fields</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;必填字段校验&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">data</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Missing required field: </span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">assert</span> <span class="n">data</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Field &#39;</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2">&#39; cannot be None&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_user_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;用户ID校验&quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;User ID must be integer, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">assert</span> <span class="n">user_id</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;User ID must be positive, got </span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_email_format</span><span class="p">(</span><span class="n">email</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;邮箱格式校验&quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$&#39;</span>
+    <span class="k">assert</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">email</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Invalid email format: </span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_api_response</span><span class="p">(</span><span class="n">response_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API响应校验的最佳实践</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        response_data: 响应数据</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: 校验结果</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        AssertionError: 校验失败时抛出详细错误信息</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># 使用断言提供清晰的错误信息</span>
+    <span class="k">assert</span> <span class="s2">&quot;code&quot;</span> <span class="ow">in</span> <span class="n">response_data</span><span class="p">,</span> <span class="s2">&quot;Response missing &#39;code&#39; field&quot;</span>
+    <span class="k">assert</span> <span class="s2">&quot;message&quot;</span> <span class="ow">in</span> <span class="n">response_data</span><span class="p">,</span> <span class="s2">&quot;Response missing &#39;message&#39; field&quot;</span>
+
+    <span class="c1"># 业务逻辑检查</span>
+    <span class="k">if</span> <span class="n">response_data</span><span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="s2">&quot;data&quot;</span> <span class="ow">in</span> <span class="n">response_data</span><span class="p">,</span> <span class="s2">&quot;Success response missing &#39;data&#39; field&quot;</span>
+        <span class="k">assert</span> <span class="n">response_data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Success response data is None&quot;</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
+
+<h4 id="2-assert">2. <strong>清晰的错误信息</strong> - 使用自定义assert消息<a class="headerlink" href="#2-assert" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 提供清晰的错误信息</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert status_code == 200, f&quot;Expected status 200, got {status_code}&quot;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert content.success is True, f&quot;API call failed</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nv">content.get(&#39;message&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Unknown</span><span class="nv"> </span><span class="s">error&#39;</span><span class="nv">)</span><span class="p p-Indicator">}</span><span class="s">&quot;</span>
+<span class="w">  </span><span class="s">-</span><span class="nv"> </span><span class="s">assert</span><span class="nv"> </span><span class="s">len(content.token)</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">16,</span><span class="nv"> </span><span class="s">f&quot;</span><span class="nt">Token length invalid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">expected 16, got {len(content.token)}&quot;</span>
+</code></pre></div>
+
+<h4 id="3-yaml">3. <strong>脚本组织</strong> - 避免在YAML中写过程的脚本，同时确保脚本来源可信<a class="headerlink" href="#3-yaml" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 基础校验</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert status_code == 200</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert content.success is True</span>
+
+<span class="w">  </span><span class="c1"># 数据完整性校验</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${validate_required_fields(content, [&quot;id&quot;, &quot;name&quot;, &quot;email&quot;])}</span>
+
+<span class="w">  </span><span class="c1"># 业务逻辑校验</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${validate_business_rules(content)}</span>
+
+<span class="w">  </span><span class="c1"># 性能校验</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert elapsed.total_seconds &lt; 2.0</span>
+</code></pre></div>
+
+<h3 id="7">7️⃣  <strong>完整示例</strong><a class="headerlink" href="#7" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nt">config</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;用户API测试&quot;</span>
+<span class="w">  </span><span class="nt">variables</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">expected_status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200</span>
+<span class="w">    </span><span class="nt">min_token_length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16</span>
+
+<span class="nt">teststeps</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">获取用户信息</span>
+<span class="w">  </span><span class="nt">request</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/api/user/profile</span>
+<span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GET</span>
+<span class="w">  </span><span class="nt">extract</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">user_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">content.user.id</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">content.token</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># 基础校验</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert status_code == $expected_status</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert content.success is True</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert content.message == &quot;success&quot;</span>
+
+<span class="w">    </span><span class="c1"># 数据校验</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert content.user is not None</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert content.user.id &gt; 0</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert len(content.token) &gt;= $min_token_length</span>
+
+<span class="w">    </span><span class="c1"># 自定义函数校验</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${validate_user_data(content.user)}</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${validate_token_format(content.token)}</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert ${check_permissions(content.user.permissions)} is True</span>
+
+<span class="w">    </span><span class="c1"># 复杂条件校验</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">      </span><span class="no">if content.user.vip_level &gt; 0:</span>
+<span class="w">          </span><span class="no">assert content.user.vip_expires is not None</span>
+<span class="w">      </span><span class="no">else:</span>
+<span class="w">          </span><span class="no">assert content.user.vip_expires is None</span>
+</code></pre></div>
+
+<h2 id="_22">🏆 <strong>总结</strong><a class="headerlink" href="#_22" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>传统 validate</th>
+<th>script 校验</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>学习成本</td>
+<td>需要记忆特定语法</td>
+<td>标准Python语法</td>
+</tr>
+<tr>
+<td>灵活性</td>
+<td>固定格式</td>
+<td>任意Python脚本</td>
+</tr>
+<tr>
+<td>错误处理</td>
+<td>单点失败中断</td>
+<td>逐条执行，容错处理</td>
+</tr>
+<tr>
+<td>自定义函数</td>
+<td>有限支持</td>
+<td>完全支持</td>
+</tr>
+<tr>
+<td>复杂逻辑</td>
+<td>有限支持</td>
+<td>支持条件、循环等</td>
+</tr>
+<tr>
+<td>调试能力</td>
+<td>基础</td>
+<td>强大（逐条结果）</td>
+</tr>
+<tr>
+<td>数据校验能力</td>
+<td>不通用且结果单一</td>
+<td>自定义任意结果</td>
+</tr>
+</tbody>
+</table>
+<p>通过以上功能，<code>script</code> 提供了比传统 <code>validate</code> 更加灵活和强大的校验能力，特别适合复杂的业务逻辑校验场景，而且完美地平衡了<strong>简单性</strong>和<strong>强大性</strong></p>
+<ul>
+<li>✅ <strong>简单直观</strong> - 使用标准Python语法，零学习成本</li>
+<li>✅ <strong>功能强大</strong> - 支持任意复杂的校验逻辑</li>
+<li>✅ <strong>设计精良</strong> - 逐条执行、智能异常处理、详细报告</li>
+<li>✅ <strong>实现完整</strong> - 从解析、执行到报告的完整流程</li>
+<li>✅ <strong>用户友好</strong> - 与assert一脉相承，符合开发者直觉</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../validate/" title="校验器用法" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                校验器用法
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../pretty/" title="用例格式化" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前进
+                </span>
+                用例格式化
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2017 - 2025 debugtalk
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://git.umlife.net/utils/apimeter" class="md-footer-social__link fa fa-globe"></a>
+    
+      <a href="https://git.umlife.net/utils/apimeter" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.a353778b.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.6.1",url:{base:"../.."}})</script>
+      
+        <script src="../../js/slardar.js"></script>
+      
+    
+  </body>
+</html>
