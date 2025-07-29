@@ -22,8 +22,29 @@ jobs:
           python -m pip install --upgrade pip
           pip install mkdocs-material==3.3.0
           
+      - name: Debug - Check files
+        run: |
+          echo "=== 当前目录 ==="
+          pwd
+          ls -la
+          echo "=== docs 目录 ==="
+          ls -la docs/
+          echo "=== mkdocs.yml 内容 ==="
+          cat mkdocs.yml
+          
       - name: Build documentation
-        run: mkdocs build --verbose --clean
+        run: |
+          echo "=== 开始构建 ==="
+          mkdocs build --verbose --clean
+          echo "=== 构建完成，检查输出 ==="
+          ls -la
+          if [ -d "site" ]; then
+            echo "=== site 目录存在 ==="
+            ls -la site/
+          else
+            echo "❌ site 目录不存在！"
+            exit 1
+          fi
         
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
