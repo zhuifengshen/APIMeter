@@ -32,7 +32,6 @@ jobs:
           # 建议升级到更新版本
           # pip install mkdocs>=1.4.0
           # pip install mkdocs-material>=8.0.0
-          # 或者如果你坚持使用旧版本：
           pip install mkdocs-material==3.3.0
           
       - name: Build documentation
