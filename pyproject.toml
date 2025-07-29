@@ -8,7 +8,7 @@ authors = ["debugtalk <debugtalk@gmail.com>"]
 
 homepage = "https://github.com/httprunner/httprunner"
 repository = "https://github.com/httprunner/httprunner"
-documentation = "https://docs.httprunner.org"
+documentation = "https://zhuifengshen.github.io/APIMeter/"
 
 keywords = ["HTTP", "api", "test", "requests", "locustio"]
 
