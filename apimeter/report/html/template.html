@@ -473,12 +473,29 @@
   {% endfor %}
 
 <script>
-// 判断是否为JSON字符串
+// 判断是否为JSON字符串或类JSON字符串
 function isJsonString(str) {
   try {
     var obj = JSON.parse(str);
     return typeof obj === 'object' && obj !== null;
   } catch (e) {
+    // 检查是否是Python字典格式的字符串
+    var trimmed = str.trim();
+    if ((trimmed.startsWith('{') && trimmed.endsWith('}')) || 
+        (trimmed.startsWith('[') && trimmed.endsWith(']'))) {
+      // 尝试将Python格式转换为JSON格式
+      try {
+        var converted = trimmed
+          .replace(/'/g, '"')           // 单引号转双引号
+          .replace(/None/g, 'null')     // Python None转null
+          .replace(/True/g, 'true')     // Python True转true
+          .replace(/False/g, 'false');  // Python False转false
+        JSON.parse(converted);
+        return true;
+      } catch (e2) {
+        return false;
+      }
+    }
     return false;
   }
 }
@@ -583,9 +600,10 @@ function setupCollapsibleContent() {
   preElements.forEach(function(pre) {
     var content = pre.textContent || pre.innerText;
     var lineCount = content.split('\n').length;
+    var contentLength = content.length;
     
-    // 如果内容超过10行
-    if (lineCount > 10) {
+    // 如果内容超过10行或者单行内容超过500字符
+    if (lineCount > 10 || (lineCount <= 3 && contentLength > 500)) {
       var wrapper = document.createElement('div');
       wrapper.className = 'collapsible-content';
       
@@ -595,7 +613,18 @@ function setupCollapsibleContent() {
       // 检查是否为JSON格式
       if (isJsonString(content.trim())) {
         try {
-          var jsonObj = JSON.parse(content.trim());
+          var jsonObj;
+          try {
+            jsonObj = JSON.parse(content.trim());
+          } catch (e) {
+            // 尝试转换Python格式
+            var converted = content.trim()
+              .replace(/'/g, '"')
+              .replace(/None/g, 'null')
+              .replace(/True/g, 'true')
+              .replace(/False/g, 'false');
+            jsonObj = JSON.parse(converted);
+          }
           var jsonHtml = createJsonTree(jsonObj);
           preview.innerHTML = '<div class="json-tree">' + jsonHtml + '</div>';
         } catch (e) {
@@ -607,7 +636,33 @@ function setupCollapsibleContent() {
       
       var expandBtn = document.createElement('button');
       expandBtn.className = 'expand-btn';
-      expandBtn.textContent = '展开 (' + lineCount + ' 行)';
+      
+      // 计算显示的行数（对于JSON格式，使用格式化后的行数）
+      var displayLineCount = lineCount;
+      if (isJsonString(content.trim()) && lineCount <= 3 && contentLength > 500) {
+        try {
+          var jsonObj;
+          try {
+            jsonObj = JSON.parse(content.trim());
+          } catch (e) {
+            // 尝试转换Python格式
+            var converted = content.trim()
+              .replace(/'/g, '"')
+              .replace(/None/g, 'null')
+              .replace(/True/g, 'true')
+              .replace(/False/g, 'false');
+            jsonObj = JSON.parse(converted);
+          }
+          // 计算格式化JSON的行数
+          var formattedJson = JSON.stringify(jsonObj, null, 2);
+          displayLineCount = formattedJson.split('\n').length;
+        } catch (e) {
+          // JSON解析失败，使用原始行数
+        }
+      }
+      
+      expandBtn.textContent = '展开 (' + displayLineCount + ' 行)';
+      
       expandBtn.onclick = function() {
         preview.classList.remove('collapsed');
         preview.classList.add('content-full');
@@ -631,10 +686,21 @@ function setupCollapsibleContent() {
       wrapper.appendChild(collapseBtn);
       
       pre.parentNode.replaceChild(wrapper, pre);
-    } else if (isJsonString(content.trim())) {
-      // 即使不超过10行，如果是JSON也进行格式化
+    } else if (isJsonString(content.trim()) && (lineCount > 1 || contentLength > 100)) {
+      // 对于短内容或明显的JSON格式进行格式化（避免处理过短的JSON）
       try {
-        var jsonObj = JSON.parse(content.trim());
+        var jsonObj;
+        try {
+          jsonObj = JSON.parse(content.trim());
+        } catch (e) {
+          // 尝试转换Python格式
+          var converted = content.trim()
+            .replace(/'/g, '"')
+            .replace(/None/g, 'null')
+            .replace(/True/g, 'true')
+            .replace(/False/g, 'false');
+          jsonObj = JSON.parse(converted);
+        }
         var jsonHtml = createJsonTree(jsonObj);
         var jsonDiv = document.createElement('div');
         jsonDiv.className = 'json-tree';
