@@ -593,75 +593,76 @@ function escapeHtml(text) {
   return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
 
+// HTML实体解码
+function unescapeHtml(text) {
+  var map = {
+    '&amp;': '&',
+    '&lt;': '<',
+    '&gt;': '>',
+    '&quot;': '"',
+    '&#39;': "'",
+    '&#039;': "'"
+  };
+  return text.replace(/&amp;|&lt;|&gt;|&quot;|&#39;|&#039;/g, function(m) { return map[m]; });
+}
+
 // 处理内容的折叠展开
 function setupCollapsibleContent() {
   var preElements = document.querySelectorAll('pre');
   
   preElements.forEach(function(pre) {
     var content = pre.textContent || pre.innerText;
-    var lineCount = content.split('\n').length;
-    var contentLength = content.length;
+    // 先进行HTML实体解码，处理HTML模板中的转义字符
+    var decodedContent = unescapeHtml(content);
+    var processedElement = pre;
+    var finalContent = content;
     
-    // 如果内容超过10行或者单行内容超过500字符
-    if (lineCount > 10 || (lineCount <= 3 && contentLength > 500)) {
+    // 步骤1：如果是JSON/Python字典，转换为树形结构
+    if (isJsonString(decodedContent.trim())) {
+      try {
+        var jsonObj;
+        try {
+          jsonObj = JSON.parse(decodedContent.trim());
+        } catch (e) {
+          // 尝试转换Python格式
+          var converted = decodedContent.trim()
+            .replace(/'/g, '"')
+            .replace(/None/g, 'null')
+            .replace(/True/g, 'true')
+            .replace(/False/g, 'false');
+          jsonObj = JSON.parse(converted);
+        }
+        var jsonHtml = createJsonTree(jsonObj);
+        var jsonDiv = document.createElement('div');
+        jsonDiv.className = 'json-tree';
+        jsonDiv.innerHTML = jsonHtml;
+        pre.parentNode.replaceChild(jsonDiv, pre);
+        processedElement = jsonDiv;
+        
+        // 对于JSON树形结构，使用格式化后的JSON字符串计算行数
+        var formattedJson = JSON.stringify(jsonObj, null, 2);
+        finalContent = formattedJson;
+      } catch (e) {
+        // JSON解析失败，保持原样
+      }
+    }
+    
+    // 步骤2：判断是否需要折叠（转换后超过10行）
+    var lineCount = finalContent.split('\n').length;
+    var originalLineCount = decodedContent.split('\n').length;
+    var originalLength = decodedContent.length;
+    
+    if (lineCount > 10) {
       var wrapper = document.createElement('div');
       wrapper.className = 'collapsible-content';
       
       var preview = document.createElement('div');
       preview.className = 'content-preview collapsed';
-      
-      // 检查是否为JSON格式
-      if (isJsonString(content.trim())) {
-        try {
-          var jsonObj;
-          try {
-            jsonObj = JSON.parse(content.trim());
-          } catch (e) {
-            // 尝试转换Python格式
-            var converted = content.trim()
-              .replace(/'/g, '"')
-              .replace(/None/g, 'null')
-              .replace(/True/g, 'true')
-              .replace(/False/g, 'false');
-            jsonObj = JSON.parse(converted);
-          }
-          var jsonHtml = createJsonTree(jsonObj);
-          preview.innerHTML = '<div class="json-tree">' + jsonHtml + '</div>';
-        } catch (e) {
-          preview.appendChild(pre.cloneNode(true));
-        }
-      } else {
-        preview.appendChild(pre.cloneNode(true));
-      }
+      preview.appendChild(processedElement.cloneNode(true));
       
       var expandBtn = document.createElement('button');
       expandBtn.className = 'expand-btn';
-      
-      // 计算显示的行数（对于JSON格式，使用格式化后的行数）
-      var displayLineCount = lineCount;
-      if (isJsonString(content.trim()) && lineCount <= 3 && contentLength > 500) {
-        try {
-          var jsonObj;
-          try {
-            jsonObj = JSON.parse(content.trim());
-          } catch (e) {
-            // 尝试转换Python格式
-            var converted = content.trim()
-              .replace(/'/g, '"')
-              .replace(/None/g, 'null')
-              .replace(/True/g, 'true')
-              .replace(/False/g, 'false');
-            jsonObj = JSON.parse(converted);
-          }
-          // 计算格式化JSON的行数
-          var formattedJson = JSON.stringify(jsonObj, null, 2);
-          displayLineCount = formattedJson.split('\n').length;
-        } catch (e) {
-          // JSON解析失败，使用原始行数
-        }
-      }
-      
-      expandBtn.textContent = '展开 (' + displayLineCount + ' 行)';
+      expandBtn.textContent = '展开 (' + lineCount + ' 行)';
       
       expandBtn.onclick = function() {
         preview.classList.remove('collapsed');
@@ -685,30 +686,7 @@ function setupCollapsibleContent() {
       wrapper.appendChild(expandBtn);
       wrapper.appendChild(collapseBtn);
       
-      pre.parentNode.replaceChild(wrapper, pre);
-    } else if (isJsonString(content.trim()) && (lineCount > 1 || contentLength > 100)) {
-      // 对于短内容或明显的JSON格式进行格式化（避免处理过短的JSON）
-      try {
-        var jsonObj;
-        try {
-          jsonObj = JSON.parse(content.trim());
-        } catch (e) {
-          // 尝试转换Python格式
-          var converted = content.trim()
-            .replace(/'/g, '"')
-            .replace(/None/g, 'null')
-            .replace(/True/g, 'true')
-            .replace(/False/g, 'false');
-          jsonObj = JSON.parse(converted);
-        }
-        var jsonHtml = createJsonTree(jsonObj);
-        var jsonDiv = document.createElement('div');
-        jsonDiv.className = 'json-tree';
-        jsonDiv.innerHTML = jsonHtml;
-        pre.parentNode.replaceChild(jsonDiv, pre);
-      } catch (e) {
-        // JSON解析失败，保持原样
-      }
+      processedElement.parentNode.replaceChild(wrapper, processedElement);
     }
   });
 }
