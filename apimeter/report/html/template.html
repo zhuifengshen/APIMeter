@@ -393,11 +393,12 @@
 
                 {% set validate_script = meta_data.validators.validate_script %}
                 {% if validate_script %}
+                    <h3>Scripts:</h3>
                     {% if validate_script.details %}
                     <!-- 新版逐条显示的validate_script结果 -->
                     <table>
                         <tr>
-                            <th>validate script</th>
+                            <th>script</th>
                             <th>output</th>
                         </tr>
                         {% for script_item in validate_script.details %}
