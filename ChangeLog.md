@@ -593,7 +593,8 @@ elif top_query == "headers":
   - Response headers（响应头）
   - Validator expect value（校验器期望值）
   - Validator actual value（校验器实际值）
-  - Script output（脚本执行结果）
+  - Script（自定义脚本）
+  - Output（脚本执行结果）
 
 #### 🌳 JSON/Python字典树形展示
 - **格式自动识别**：

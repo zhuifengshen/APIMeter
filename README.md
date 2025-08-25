@@ -127,12 +127,20 @@ teststeps:
             assert item.get("name") is not None
 ```
 
-10. HTML测试报告支持内容智能折叠和JSON数据树形展示，提升大数据量场景下的查看体验
+10. HTML测试报告支持内容智能折叠和JSON数据树形展示，提升大数据量场景下测试报告的可读性和查看体验
   - 当内容超过10行时自动进行折叠显示
-  - 支持JSON/Python字典格式数据的树形展示
+  - 支持JSON数据、Python对象数据树形结构展示
   - 提供彩色语法高亮和节点级别的展开/折叠交互
-  - 应用于请求体、响应体、请求头、响应头、校验器期望值和实际值字段、脚本执行结果字段
-  - 大幅提升包含大量数据的API测试报告的可读性和查看体验
+  - 应用于所有关键数据字段
+    - Request body（请求体）
+    - Response body（响应体）
+    - Request headers（请求头）
+    - Response headers（响应头）
+    - Validator expect value（校验器期望值）
+    - Validator actual value（校验器实际值）
+    - Script（自定义脚本）
+    - Output（脚本执行结果）
+  
 
 ## Validate核心用法
 
