@@ -48,9 +48,17 @@ def main():
         "--report-file",
         help="Specify report file path, this has higher priority than specifying report dir.",
     )
-    parser.add_argument(
-        '--skip-success', action='store_true', default=False,
-        help="Specify skip success testcases in report.")    
+    # skip-success 参数组：互斥参数，默认为 True
+    skip_success_group = parser.add_mutually_exclusive_group()
+    skip_success_group.add_argument(
+        '--skip-success', dest='skip_success', action='store_true',
+        help="Skip success testcases in report (default behavior)."
+    )
+    skip_success_group.add_argument(
+        '--no-skip-success', dest='skip_success', action='store_false',
+        help="Don't skip success testcases in report."
+    )
+    parser.set_defaults(skip_success=True)  # 默认值为 True
     parser.add_argument(
         "--save-tests",
         action="store_true",
