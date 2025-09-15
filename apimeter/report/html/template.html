@@ -683,6 +683,48 @@ function toggleJsonNodeLazy(id, toggleElement) {
   }
 }
 
+// 递归展开容器内所有JSON节点
+function expandAllJsonNodes(container) {
+  var collapsedNodes = container.querySelectorAll('.json-item.json-collapsed');
+  collapsedNodes.forEach(function(node) {
+    var toggle = node.parentNode.querySelector('.json-toggle');
+    if (toggle && node.classList.contains('json-collapsed')) {
+      // 展开节点
+      node.classList.remove('json-collapsed');
+      toggle.innerHTML = '▼';
+      toggle.title = '点击折叠';
+      
+      // 检查是否需要懒加载内容
+      var placeholder = node.querySelector('.json-lazy-placeholder');
+      if (placeholder) {
+        // 需要懒加载，替换占位符为实际内容
+        loadJsonNodeContent(node, placeholder);
+        // 递归处理新加载的内容
+        setTimeout(function() {
+          expandAllJsonNodes(node);
+        }, 10);
+      } else {
+        // 递归处理子节点
+        expandAllJsonNodes(node);
+      }
+    }
+  });
+}
+
+// 递归折叠容器内所有JSON节点  
+function collapseAllJsonNodes(container) {
+  var expandedNodes = container.querySelectorAll('.json-item:not(.json-collapsed)');
+  expandedNodes.forEach(function(node) {
+    var toggle = node.parentNode.querySelector('.json-toggle');
+    if (toggle && !node.classList.contains('json-collapsed')) {
+      // 折叠节点
+      node.classList.add('json-collapsed');
+      toggle.innerHTML = '▶';
+      toggle.title = '点击展开';
+    }
+  });
+}
+
 // 懒加载JSON节点内容
 function loadJsonNodeContent(element, placeholder) {
   try {
@@ -853,10 +895,10 @@ function processPreElement(pre) {
     // 解析失败则保持原样
   }
   
-  // 步骤2：判断是否需要折叠（转换后超过10行）
+  // 步骤2：判断是否需要折叠（转换后超过15行）
   var lineCount = finalContent.split('\n').length;
   
-  if (lineCount > 10) {
+  if (lineCount > 15) {
     var wrapper = document.createElement('div');
     wrapper.className = 'collapsible-content';
     
@@ -873,6 +915,9 @@ function processPreElement(pre) {
       preview.classList.add('content-full');
       expandBtn.style.display = 'none';
       collapseBtn.style.display = 'inline-block';
+      
+      // 同时展开所有JSON节点
+      expandAllJsonNodes(preview);
     };
     
     var collapseBtn = document.createElement('button');
@@ -884,6 +929,9 @@ function processPreElement(pre) {
       preview.classList.remove('content-full');
       expandBtn.style.display = 'inline-block';
       collapseBtn.style.display = 'none';
+      
+      // 同时折叠所有JSON节点
+      collapseAllJsonNodes(preview);
     };
 
     var copyBtn = document.createElement('button');

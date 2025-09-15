@@ -53,6 +53,8 @@ coverage = "^4.5.4"
 
 [tool.poetry.scripts]
 apimeter = "apimeter.cli:main"
+api = "apimeter.cli:main"
+meter = "apimeter.cli:main"
 apilocust = "apimeter.ext.locusts.cli:main"
 hrun = "apimeter.cli:main"
 
