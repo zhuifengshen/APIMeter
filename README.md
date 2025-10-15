@@ -355,15 +355,15 @@ pip install -i https://pypi.Python.org/simple/ apimeter  # 指定安装源，因
 
 
 # 文档编译与部署 
-## 1. 本地构建
+# 1. 本地构建
 pip install mkdocs-material==3.3.0
 mkdocs build
 mkdocs serve
 
-## 2. Gitlab CI 自动化构建
+# 2. Gitlab CI 自动化构建
 添加.gitlab-ci.yml配置文件，apimeter仓库设置-部署-Pages/完善功能文档，更新mkdocs.yml配置
 
-## 3. Github Action 自动化构建
+# 3. Github Action 自动化构建
 添加.github/workflows/docs.yml配置文件，apimeter参考设置-pages-Source选择：Deploy from a branch-分支选择：gh-pages（注意避坑：Source不要选择Github Actions、另外添加disable_nojekyll: false不使用默认Jekyll主题）
 
 
