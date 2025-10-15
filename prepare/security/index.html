@@ -40,7 +40,7 @@
     
     
       
-        <title>信息安全 - ApiMeter 用户使用文档</title>
+        <title>信息安全 - ApiMeter Docs</title>
       
     
     
@@ -99,7 +99,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../.." title="ApiMeter 用户使用文档" class="md-header-nav__button md-logo">
+        <a href="../.." title="ApiMeter Docs" class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -113,7 +113,7 @@
           
             
               <span class="md-header-nav__topic">
-                ApiMeter 用户使用文档
+                ApiMeter Docs
               </span>
               <span class="md-header-nav__topic">
                 信息安全
@@ -189,12 +189,12 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../.." title="ApiMeter 用户使用文档" class="md-nav__button md-logo">
+    <a href="../.." title="ApiMeter Docs" class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
     </a>
-    ApiMeter 用户使用文档
+    ApiMeter Docs
   </label>
   
     <div class="md-nav__source">
@@ -451,6 +451,8 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
+    
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
         信息安全
@@ -464,19 +466,21 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">目录</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" title="背景" class="md-nav__link">
+  <a href="#_2" title="背景" class="md-nav__link">
     背景
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" title="解决方案" class="md-nav__link">
+  <a href="#_3" title="解决方案" class="md-nav__link">
     解决方案
   </a>
   
@@ -595,8 +599,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../development/architecture/" title="Pipline" class="md-nav__link">
-      Pipline
+    <a href="../../development/architecture/" title="代码框架" class="md-nav__link">
+      代码框架
     </a>
   </li>
 
@@ -607,8 +611,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../development/dev-api/" title="基础库调用" class="md-nav__link">
-      基础库调用
+    <a href="../../development/dev-api/" title="开发扩展" class="md-nav__link">
+      开发扩展
     </a>
   </li>
 
@@ -716,19 +720,21 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">目录</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" title="背景" class="md-nav__link">
+  <a href="#_2" title="背景" class="md-nav__link">
     背景
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" title="解决方案" class="md-nav__link">
+  <a href="#_3" title="解决方案" class="md-nav__link">
     解决方案
   </a>
   
@@ -749,17 +755,17 @@
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
+
                 
                 
-                  <h1>信息安全</h1>
-                
-                <h2 id="_1">背景<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+                <h1 id="_1">信息安全<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">背景<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>很多时候项目代码在运行时需要使用到账号、密码、key等敏感数据信息，但是从信息安全的角度考虑，我们是不能将这些敏感数据提交到代码仓库的，主要原因有两个：</p>
 <ul>
 <li>加强权限管控：参与项目的开发人员可能会有很多，大家都有读取代码仓库的权限，但是像 key 这类极度敏感的信息不应该所有人都有权限获取；</li>
 <li>减少代码泄漏的危害性：假如代码出现泄漏，敏感数据信息不应该也同时泄漏。</li>
 </ul>
-<h2 id="_2">解决方案<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="_3">解决方案<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>那代码部署到服务器或 Jenkins 执行机后，运行时要使用到这些敏感数据信息，该怎么操作呢？</p>
 <p>推荐的操作方式为：</p>
 <ul>
@@ -772,6 +778,15 @@
                   
                 
               
+
+<!-- AI助手浮窗脚本 -->
+<script
+async
+defer
+src="https://view.umlife.net/chat/api/embed?protocol=https&host=view.umlife.net&token=1d8f7ca0d76e223f">
+</script>
+
+
               
                 
 

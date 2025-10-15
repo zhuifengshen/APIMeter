@@ -40,7 +40,7 @@
     
     
       
-        <title>hook机制 - ApiMeter 用户使用文档</title>
+        <title>hook机制 - ApiMeter Docs</title>
       
     
     
@@ -90,7 +90,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#_1" tabindex="1" class="md-skip">
+      <a href="#hook" tabindex="1" class="md-skip">
         跳转至
       </a>
     
@@ -99,7 +99,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../.." title="ApiMeter 用户使用文档" class="md-header-nav__button md-logo">
+        <a href="../.." title="ApiMeter Docs" class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -113,7 +113,7 @@
           
             
               <span class="md-header-nav__topic">
-                ApiMeter 用户使用文档
+                ApiMeter Docs
               </span>
               <span class="md-header-nav__topic">
                 hook机制
@@ -189,12 +189,12 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../.." title="ApiMeter 用户使用文档" class="md-nav__button md-logo">
+    <a href="../.." title="ApiMeter Docs" class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
     </a>
-    ApiMeter 用户使用文档
+    ApiMeter Docs
   </label>
   
     <div class="md-nav__source">
@@ -355,6 +355,8 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
+    
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
         hook机制
@@ -368,6 +370,8 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">目录</label>
     <ul class="md-nav__list" data-md-scrollfix>
@@ -380,7 +384,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#hook" title="调用 hook 函数" class="md-nav__link">
+  <a href="#hook_1" title="调用 hook 函数" class="md-nav__link">
     调用 hook 函数
   </a>
   
@@ -407,7 +411,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#hook_1" title="编写 hook 函数" class="md-nav__link">
+  <a href="#hook_2" title="编写 hook 函数" class="md-nav__link">
     编写 hook 函数
   </a>
   
@@ -642,8 +646,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../development/architecture/" title="Pipline" class="md-nav__link">
-      Pipline
+    <a href="../../development/architecture/" title="代码框架" class="md-nav__link">
+      代码框架
     </a>
   </li>
 
@@ -654,8 +658,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../development/dev-api/" title="基础库调用" class="md-nav__link">
-      基础库调用
+    <a href="../../development/dev-api/" title="开发扩展" class="md-nav__link">
+      开发扩展
     </a>
   </li>
 
@@ -763,6 +767,8 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">目录</label>
     <ul class="md-nav__list" data-md-scrollfix>
@@ -775,7 +781,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#hook" title="调用 hook 函数" class="md-nav__link">
+  <a href="#hook_1" title="调用 hook 函数" class="md-nav__link">
     调用 hook 函数
   </a>
   
@@ -802,7 +808,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#hook_1" title="编写 hook 函数" class="md-nav__link">
+  <a href="#hook_2" title="编写 hook 函数" class="md-nav__link">
     编写 hook 函数
   </a>
   
@@ -843,13 +849,13 @@
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
+
                 
                 
-                  <h1>hook机制</h1>
-                
-                <h2 id="_1">概述<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+                <h1 id="hook">hook机制<a class="headerlink" href="#hook" title="Permanent link">&para;</a></h1>
+<h2 id="_1">概述<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>HttpRunner 从 <code>1.4.5</code> 版本开始实现了全新的 hook 机制，可以在请求前和请求后调用钩子函数。</p>
-<h2 id="hook">调用 hook 函数<a class="headerlink" href="#hook" title="Permanent link">&para;</a></h2>
+<h2 id="hook_1">调用 hook 函数<a class="headerlink" href="#hook_1" title="Permanent link">&para;</a></h2>
 <p>hook 机制分为两个层级：</p>
 <ul>
 <li>测试用例层面（testcase）</li>
@@ -904,7 +910,7 @@
 <span class="p">}</span>
 </code></pre></div>
 
-<h2 id="hook_1">编写 hook 函数<a class="headerlink" href="#hook_1" title="Permanent link">&para;</a></h2>
+<h2 id="hook_2">编写 hook 函数<a class="headerlink" href="#hook_2" title="Permanent link">&para;</a></h2>
 <p>hook 函数的定义放置在项目的 <code>debugtalk.py</code> 中，在 YAML/JSON 中调用 hook 函数仍然是采用 <code>${func($a, $b)}</code> 的形式。</p>
 <p>对于测试用例层面的 hook 函数，与 YAML/JSON 中自定义的函数完全相同，可通过自定义参数传参的形式来实现灵活应用。</p>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hook_print</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
@@ -970,6 +976,15 @@
                   
                 
               
+
+<!-- AI助手浮窗脚本 -->
+<script
+async
+defer
+src="https://view.umlife.net/chat/api/embed?protocol=https&host=view.umlife.net&token=1d8f7ca0d76e223f">
+</script>
+
+
               
                 
 

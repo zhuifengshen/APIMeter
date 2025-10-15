@@ -40,7 +40,7 @@
     
     
       
-        <title>性能测试 - ApiMeter 用户使用文档</title>
+        <title>性能测试 - ApiMeter Docs</title>
       
     
     
@@ -99,7 +99,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../.." title="ApiMeter 用户使用文档" class="md-header-nav__button md-logo">
+        <a href="../.." title="ApiMeter Docs" class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -113,7 +113,7 @@
           
             
               <span class="md-header-nav__topic">
-                ApiMeter 用户使用文档
+                ApiMeter Docs
               </span>
               <span class="md-header-nav__topic">
                 性能测试
@@ -189,12 +189,12 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../.." title="ApiMeter 用户使用文档" class="md-nav__button md-logo">
+    <a href="../.." title="ApiMeter Docs" class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
     </a>
-    ApiMeter 用户使用文档
+    ApiMeter Docs
   </label>
   
     <div class="md-nav__source">
@@ -523,6 +523,8 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
+    
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
         性能测试
@@ -536,33 +538,35 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">目录</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" title="原理图" class="md-nav__link">
+  <a href="#_2" title="原理图" class="md-nav__link">
     原理图
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" title="安装依赖包" class="md-nav__link">
+  <a href="#_3" title="安装依赖包" class="md-nav__link">
     安装依赖包
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" title="运行性能测试" class="md-nav__link">
+  <a href="#_4" title="运行性能测试" class="md-nav__link">
     运行性能测试
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" title="多进程运行模式" class="md-nav__link">
+  <a href="#_5" title="多进程运行模式" class="md-nav__link">
     多进程运行模式
   </a>
   
@@ -609,8 +613,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../development/architecture/" title="Pipline" class="md-nav__link">
-      Pipline
+    <a href="../../development/architecture/" title="代码框架" class="md-nav__link">
+      代码框架
     </a>
   </li>
 
@@ -621,8 +625,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../development/dev-api/" title="基础库调用" class="md-nav__link">
-      基础库调用
+    <a href="../../development/dev-api/" title="开发扩展" class="md-nav__link">
+      开发扩展
     </a>
   </li>
 
@@ -730,33 +734,35 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">目录</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" title="原理图" class="md-nav__link">
+  <a href="#_2" title="原理图" class="md-nav__link">
     原理图
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" title="安装依赖包" class="md-nav__link">
+  <a href="#_3" title="安装依赖包" class="md-nav__link">
     安装依赖包
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" title="运行性能测试" class="md-nav__link">
+  <a href="#_4" title="运行性能测试" class="md-nav__link">
     运行性能测试
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" title="多进程运行模式" class="md-nav__link">
+  <a href="#_5" title="多进程运行模式" class="md-nav__link">
     多进程运行模式
   </a>
   
@@ -777,14 +783,14 @@
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
+
                 
                 
-                  <h1>性能测试</h1>
-                
-                <p>HttpRunner 通过复用 <a href="http://locust.io/"><code>Locust</code></a>，可以在无需对 YAML/JSON 进行任何修改的情况下，直接运行性能测试。</p>
-<h2 id="_1">原理图<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+                <h1 id="_1">性能测试<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>HttpRunner 通过复用 <a href="http://locust.io/"><code>Locust</code></a>，可以在无需对 YAML/JSON 进行任何修改的情况下，直接运行性能测试。</p>
+<h2 id="_2">原理图<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><img alt="" src="../../images/loadtest-schematic-diagram.jpg" /></p>
-<h2 id="_2">安装依赖包<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="_3">安装依赖包<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>安装完成 HttpRunner 后，系统中会新增<code>locusts</code>命令，但不会同时安装 Locust。</p>
 <p>在系统中未安装 Locust 的情况下，运行<code>locusts</code>命令时会出现如下提示。</p>
 <div class="codehilite"><pre><span></span><code>$<span class="w"> </span>locusts<span class="w"> </span>-V
@@ -877,7 +883,7 @@ Options:
 
 <p>可以看出，<code>loucsts</code> 命令与 <code>locust</code> 命令的用法基本相同。</p>
 <p>相比于 <code>locust</code> 命令，<code>loucsts</code>命令主要存在如下两项差异。</p>
-<h2 id="_3">运行性能测试<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="_4">运行性能测试<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>在 <code>-f</code> 参数后面，<code>loucsts</code> 命令不仅可以指定 Locust 支持的 Python 文件，同时可以直接指定 YAML/JSON 格式的测试用例文件。在具体实现上，当 <code>-f</code> 指定 YAML/JSON 格式的测试用例文件时，会先将其转换为 Python 格式的 locustfile，然后再将 locustfile.py 传给 locust 命令。</p>
 <div class="codehilite"><pre><span></span><code>$<span class="w"> </span>locusts<span class="w"> </span>-f<span class="w"> </span>examples/first-testcase.yml
 <span class="o">[</span><span class="m">2017</span>-08-18<span class="w"> </span><span class="m">17</span>:20:43,915<span class="o">]</span><span class="w"> </span>Leos-MacBook-Air.local/INFO/locust.main:<span class="w"> </span>Starting<span class="w"> </span>web<span class="w"> </span>monitor<span class="w"> </span>at<span class="w"> </span>*:8089
@@ -885,7 +891,7 @@ Options:
 </code></pre></div>
 
 <p>执行上述命令后，即完成了 Locust 服务的启动，后续就可以在 Locust 的 Web 管理界面中进行操作了，使用方式与 Locust 完全相同。</p>
-<h2 id="_4">多进程运行模式<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h2 id="_5">多进程运行模式<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>默认情况下，在 Locust 中如需使用 master-slave 模式启动多个进程（使用多核处理器的能力），只能先启动 master，然后再逐一启动若干个 slave。</p>
 <div class="codehilite"><pre><span></span><code>$ locust -f locustfile.py --master
 $ locust -f locustfile.py --slave &amp;
@@ -914,6 +920,15 @@ $ locust -f locustfile.py --slave &amp;
                   
                 
               
+
+<!-- AI助手浮窗脚本 -->
+<script
+async
+defer
+src="https://view.umlife.net/chat/api/embed?protocol=https&host=view.umlife.net&token=1d8f7ca0d76e223f">
+</script>
+
+
               
                 
 
@@ -945,13 +960,13 @@ $ locust -f locustfile.py --slave &amp;
           </a>
         
         
-          <a href="../../development/architecture/" title="Pipline" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../development/architecture/" title="代码框架" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   前进
                 </span>
-                Pipline
+                代码框架
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

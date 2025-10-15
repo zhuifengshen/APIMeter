@@ -40,7 +40,7 @@
     
     
       
-        <title>项目文件组织 - ApiMeter 用户使用文档</title>
+        <title>项目文件组织 - ApiMeter Docs</title>
       
     
     
@@ -99,7 +99,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../.." title="ApiMeter 用户使用文档" class="md-header-nav__button md-logo">
+        <a href="../.." title="ApiMeter Docs" class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -113,7 +113,7 @@
           
             
               <span class="md-header-nav__topic">
-                ApiMeter 用户使用文档
+                ApiMeter Docs
               </span>
               <span class="md-header-nav__topic">
                 项目文件组织
@@ -189,12 +189,12 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../.." title="ApiMeter 用户使用文档" class="md-nav__button md-logo">
+    <a href="../.." title="ApiMeter Docs" class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
     </a>
-    ApiMeter 用户使用文档
+    ApiMeter Docs
   </label>
   
     <div class="md-nav__source">
@@ -331,6 +331,8 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
+    
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
         项目文件组织
@@ -344,19 +346,21 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">目录</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" title="文件类型说明" class="md-nav__link">
-    文件类型说明
+  <a href="#_2" title="文件类型说明" class="md-nav__link">
+    文件类型说明
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" title="项目文件结构" class="md-nav__link">
+  <a href="#_3" title="项目文件结构" class="md-nav__link">
     项目文件结构
   </a>
   
@@ -595,8 +599,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../development/architecture/" title="Pipline" class="md-nav__link">
-      Pipline
+    <a href="../../development/architecture/" title="代码框架" class="md-nav__link">
+      代码框架
     </a>
   </li>
 
@@ -607,8 +611,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../development/dev-api/" title="基础库调用" class="md-nav__link">
-      基础库调用
+    <a href="../../development/dev-api/" title="开发扩展" class="md-nav__link">
+      开发扩展
     </a>
   </li>
 
@@ -716,19 +720,21 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">目录</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" title="文件类型说明" class="md-nav__link">
-    文件类型说明
+  <a href="#_2" title="文件类型说明" class="md-nav__link">
+    文件类型说明
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" title="项目文件结构" class="md-nav__link">
+  <a href="#_3" title="项目文件结构" class="md-nav__link">
     项目文件结构
   </a>
   
@@ -749,11 +755,11 @@
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
+
                 
                 
-                  <h1>项目文件组织</h1>
-                
-                <h2 id="_1">文件类型说明<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+                <h1 id="_1">项目文件组织<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">文件类型说明<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>在 HttpRunner 自动化测试项目中，主要存在如下几类文件：</p>
 <ul>
 <li><code>YAML/JSON</code>（必须）：测试用例文件，存储接口测试相关信息</li>
@@ -768,8 +774,8 @@
 <li><code>.csv</code>（可选）：项目数据文件，用于进行数据驱动</li>
 <li><code>reports</code>：默认生成测试报告的存储文件夹</li>
 </ul>
-<h2 id="_2">项目文件结构<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>对于接口数比较少，或者测试场景比较简单的项目，组织测试用例时无需分层。在此种情况下，项目文件的目录结构没有任何要求，在项目中只需要一堆 <code>YAML/JSON</code> 文件即可，每一个文件单独对应一条测试用例；根据需要，项目中可能还会有 <code>debugtalk.py</code>、<code>.env</code>等文件。</p>
+<h2 id="_3">项目文件结构<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>对于接口数比较少，或者测试场景比较简单的项目，组织测试用例时无需分层。在此种情况下，项目文件的目录结构没有任何要求，在项目中只需要一堆 <code>YAML/JSON</code> 文件即可，每一个文件单独对应一条测试用例；根据需要，项目中可能还会有 <code>debugtalk.py</code>、<code>.env</code>等文件。</p>
 <p>推荐的项目文件目录结构示例如下：</p>
 <div class="codehilite"><pre><span></span><code>$<span class="w"> </span>tree<span class="w"> </span>demo<span class="w"> </span>-a
 demo
@@ -783,6 +789,15 @@ demo
                   
                 
               
+
+<!-- AI助手浮窗脚本 -->
+<script
+async
+defer
+src="https://view.umlife.net/chat/api/embed?protocol=https&host=view.umlife.net&token=1d8f7ca0d76e223f">
+</script>
+
+
               
                 
 
