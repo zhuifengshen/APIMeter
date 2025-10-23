@@ -1,0 +1,2292 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="ApiMeter User Documentation">
+      
+      
+      
+        <meta name="author" content="debugtalk">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-3.3.0">
+    
+    
+      
+        <title>自定义函数高级用法 - ApiMeter Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.962652e9.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114587036-2"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-114587036-2")</script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="ApiMeter Docs" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                ApiMeter Docs
+              </span>
+              <span class="md-header-nav__topic">
+                自定义函数高级用法
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://git.umlife.net/utils/apimeter" title="前往 Github 仓库" class="md-source" data-md-source="">
+    
+    <div class="md-source__repository">
+      ApiMeter
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="ApiMeter Docs" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    ApiMeter Docs
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://git.umlife.net/utils/apimeter" title="前往 Github 仓库" class="md-source" data-md-source="">
+    
+    <div class="md-source__repository">
+      ApiMeter
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="介绍" class="md-nav__link">
+      介绍
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../Installation/" title="安装说明" class="md-nav__link">
+      安装说明
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      基础概念
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        基础概念
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../concept/nominal/" title="名词解释" class="md-nav__link">
+      名词解释
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      测试准备
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        测试准备
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/record/" title="录制生成用例" class="md-nav__link">
+      录制生成用例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/project-structure/" title="项目文件组织" class="md-nav__link">
+      项目文件组织
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/testcase-structure/" title="测试用例组织" class="md-nav__link">
+      测试用例组织
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/request-hook/" title="hook机制" class="md-nav__link">
+      hook机制
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/dot-env/" title="环境变量" class="md-nav__link">
+      环境变量
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/testcase-layer/" title="测试用例分层" class="md-nav__link">
+      测试用例分层
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/parameters/" title="参数化数据驱动" class="md-nav__link">
+      参数化数据驱动
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/validate/" title="校验器用法" class="md-nav__link">
+      校验器用法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/script/" title="自定义脚本校验" class="md-nav__link">
+      自定义脚本校验
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/pretty/" title="用例格式化" class="md-nav__link">
+      用例格式化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/yaml-issue/" title="常见格式问题" class="md-nav__link">
+      常见格式问题
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/security/" title="信息安全" class="md-nav__link">
+      信息安全
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/upload-case/" title="文件上传场景" class="md-nav__link">
+      文件上传场景
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      测试执行
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        测试执行
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../run-tests/cli/" title="运行测试(CLI)" class="md-nav__link">
+      运行测试(CLI)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../run-tests/report/" title="测试报告" class="md-nav__link">
+      测试报告
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../run-tests/load-test/" title="性能测试" class="md-nav__link">
+      性能测试
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      开发扩展
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        开发扩展
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/architecture/" title="代码框架" class="md-nav__link">
+      代码框架
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/dev-api/" title="开发扩展" class="md-nav__link">
+      开发扩展
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      实践案例
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        实践案例
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/quickstart-case/" title="快速上手案例" class="md-nav__link">
+      快速上手案例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/testerhome-login/" title="TesterHome 登录" class="md-nav__link">
+      TesterHome 登录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/demo-klook/" title="klook" class="md-nav__link">
+      klook
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../related-docs/" title="相关资料" class="md-nav__link">
+      相关资料
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../CHANGELOG/" title="CHANGELOG" class="md-nav__link">
+      CHANGELOG
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="📚 目录" class="md-nav__link">
+    📚 目录
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="为什么需要高级参数解析？" class="md-nav__link">
+    为什么需要高级参数解析？
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="实际场景的复杂性" class="md-nav__link">
+    实际场景的复杂性
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" title="1. 基础回顾" class="md-nav__link">
+    1. 基础回顾
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" title="1.1 简单参数传递" class="md-nav__link">
+    1.1 简单参数传递
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" title="1.2 多个参数传递" class="md-nav__link">
+    1.2 多个参数传递
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" title="2. 链式取值" class="md-nav__link">
+    2. 链式取值
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" title="2.1 全局变量链式取值" class="md-nav__link">
+    2.1 全局变量链式取值
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" title="2.2 自定义变量链式取值" class="md-nav__link">
+    2.2 自定义变量链式取值
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" title="2.3 数组索引访问" class="md-nav__link">
+    2.3 数组索引访问
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" title="3. 列表参数解析" class="md-nav__link">
+    3. 列表参数解析
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" title="3.1 基本语法" class="md-nav__link">
+    3.1 基本语法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" title="3.2 使用场景：签名生成" class="md-nav__link">
+    3.2 使用场景：签名生成
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" title="3.3 使用场景：批量校验" class="md-nav__link">
+    3.3 使用场景：批量校验
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" title="3.4 列表参数 + 变量引用" class="md-nav__link">
+    3.4 列表参数 + 变量引用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" title="4. 字典对象参数解析" class="md-nav__link">
+    4. 字典对象参数解析
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" title="4.1 基本语法" class="md-nav__link">
+    4.1 基本语法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" title="4.2 使用场景：复杂签名配置" class="md-nav__link">
+    4.2 使用场景：复杂签名配置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" title="4.3 使用场景：配置对象传递" class="md-nav__link">
+    4.3 使用场景：配置对象传递
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" title="5. 复杂嵌套对象参数" class="md-nav__link">
+    5. 复杂嵌套对象参数
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" title="5.1 使用场景：嵌套列表批量校验" class="md-nav__link">
+    5.1 使用场景：嵌套列表批量校验
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" title="5.2 使用场景：多级配置对象" class="md-nav__link">
+    5.2 使用场景：多级配置对象
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" title="6. 通配符批量校验" class="md-nav__link">
+    6. 通配符批量校验
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" title="6.1 通配符 * 语法" class="md-nav__link">
+    6.1 通配符 * 语法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" title="6.2 单层通配符" class="md-nav__link">
+    6.2 单层通配符
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63" title="6.3 多层通配符" class="md-nav__link">
+    6.3 多层通配符
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64" title="6.4 通配符 + 链式取值" class="md-nav__link">
+    6.4 通配符 + 链式取值
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" title="7. 正则表达式校验" class="md-nav__link">
+    7. 正则表达式校验
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" title="7.1 正则表达式语法 ~=" class="md-nav__link">
+    7.1 正则表达式语法 ~=
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-url" title="7.2 使用场景：URL 格式校验" class="md-nav__link">
+    7.2 使用场景：URL 格式校验
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" title="8. 类型校验" class="md-nav__link">
+    8. 类型校验
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81" title="8.1 类型校验语法 @=" class="md-nav__link">
+    8.1 类型校验语法 @=
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82" title="8.2 使用场景：数据结构校验" class="md-nav__link">
+    8.2 使用场景：数据结构校验
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83" title="8.3 包含校验语法 =*" class="md-nav__link">
+    8.3 包含校验语法 =*
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" title="9. 综合实战案例" class="md-nav__link">
+    9. 综合实战案例
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-api" title="案例 1：电商 API 完整校验" class="md-nav__link">
+    案例 1：电商 API 完整校验
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" title="案例 2：用户信息复杂校验" class="md-nav__link">
+    案例 2：用户信息复杂校验
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" title="案例 3：多环境配置签名" class="md-nav__link">
+    案例 3：多环境配置签名
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" title="10. 最佳实践" class="md-nav__link">
+    10. 最佳实践
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101" title="10.1 参数命名规范" class="md-nav__link">
+    10.1 参数命名规范
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102" title="10.2 函数职责单一" class="md-nav__link">
+    10.2 函数职责单一
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103" title="10.3 提供清晰的错误信息" class="md-nav__link">
+    10.3 提供清晰的错误信息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104" title="10.4 合理使用通配符" class="md-nav__link">
+    10.4 合理使用通配符
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#105" title="10.5 文档注释" class="md-nav__link">
+    10.5 文档注释
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#106" title="10.6 性能考虑" class="md-nav__link">
+    10.6 性能考虑
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" title="📝 总结" class="md-nav__link">
+    📝 总结
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+
+                
+                
+                <h1 id="_1">自定义函数高级用法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>本文档详细介绍 ApiMeter 中自定义函数的高级参数传递功能，包括列表参数、字典参数、嵌套对象参数以及通配符批量校验等强大特性。</p>
+<h2 id="_2">📚 目录<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#为什么需要高级参数解析">为什么需要高级参数解析？</a></li>
+<li><a href="#1-基础回顾">1. 基础回顾</a></li>
+<li><a href="#2-链式取值">2. 链式取值</a></li>
+<li><a href="#3-列表参数解析">3. 列表参数解析</a></li>
+<li><a href="#4-字典对象参数解析">4. 字典对象参数解析</a></li>
+<li><a href="#5-复杂嵌套对象参数">5. 复杂嵌套对象参数</a></li>
+<li><a href="#6-通配符批量校验">6. 通配符批量校验</a></li>
+<li><a href="#7-正则表达式校验">7. 正则表达式校验</a></li>
+<li><a href="#8-类型校验">8. 类型校验</a></li>
+<li><a href="#9-综合实战案例">9. 综合实战案例</a></li>
+<li><a href="#10-最佳实践">10. 最佳实践</a></li>
+</ul>
+<h2 id="_3">为什么需要高级参数解析？<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="_4">实际场景的复杂性<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>在实际 API 测试中，我们常常遇到以下复杂场景：</p>
+<p><strong>场景 1：签名生成</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 需要将多个参数组合生成签名</span>
+<span class="n">sign</span> <span class="o">=</span> <span class="n">md5</span><span class="p">(</span><span class="n">device_sn</span> <span class="o">+</span> <span class="n">os_platform</span> <span class="o">+</span> <span class="n">app_version</span> <span class="o">+</span> <span class="n">timestamp</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>场景 2：批量数据校验</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;products&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;sku&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">}]},</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;sku&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">250</span><span class="p">}]}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>需要校验所有 sku 中的 id 和 price 字段。</p>
+<p><strong>场景 3：复杂配置传递</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 需要传递复杂的配置对象</span>
+<span class="n">validate_data</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="p">{</span>
+    <span class="s2">&quot;list_path&quot;</span><span class="p">:</span> <span class="s2">&quot;products&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;nested_field&quot;</span><span class="p">:</span> <span class="s2">&quot;sku&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;check_fields&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="s2">&quot;currency&quot;</span><span class="p">]</span>
+<span class="p">})</span>
+</code></pre></div>
+
+<p>传统的参数传递方式无法优雅地处理这些场景，ApiMeter 的高级参数解析功能完美解决了这些问题。</p>
+<h2 id="1">1. 基础回顾<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 简单参数传递<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>最基础的用法，传递单个参数：</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># debugtalk.py</span>
+<span class="nt">def validate_token(token)</span><span class="p">:</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">assert len(token) == 16, f&quot;Token length should be 16, got {len(token)}&quot;</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">return True</span>
+
+<span class="c1"># 测试用例</span>
+<span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${validate_token(content.token)}</span>
+</code></pre></div>
+
+<h3 id="12">1.2 多个参数传递<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p>传递多个独立参数：</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># debugtalk.py</span>
+<span class="l l-Scalar l-Scalar-Plain">def get_sign(device_sn, os_platform, app_version)</span><span class="p p-Indicator">:</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">content = f&quot;{device_sn}{os_platform}{app_version}&quot;</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">return hashlib.md5(content.encode()).hexdigest()</span>
+
+<span class="c1"># 测试用例</span>
+<span class="nt">request</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">json</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">sign</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${get_sign($device_sn, $os_platform, $app_version)}</span>
+</code></pre></div>
+
+<h2 id="2">2. 链式取值<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 全局变量链式取值<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p>直接访问响应数据的深层字段：</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># debugtalk.py</span>
+<span class="nt">def validate_user_name(name)</span><span class="p">:</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">assert len(name) &gt; 0, &quot;User name cannot be empty&quot;</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">return True</span>
+
+<span class="c1"># 测试用例 - 链式访问</span>
+<span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 访问 content.data.user.profile.name</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${validate_user_name(content.data.user.profile.name)}</span>
+</code></pre></div>
+
+<p><strong>响应数据示例：</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;profile&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="22">2.2 自定义变量链式取值<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<p>提取变量后支持链式访问：</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">extract</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">user_info</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">content.data.user</span>
+
+<span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 使用提取的变量进行链式访问</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${validate_user_name($user_info.profile.name)}</span>
+</code></pre></div>
+
+<h3 id="23">2.3 数组索引访问<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 访问数组第一个元素的字段</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${validate_price(content.products[0].price)}</span>
+
+<span class="w">  </span><span class="c1"># 访问嵌套数组</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${validate_sku_id(content.products[0].sku[0].id)}</span>
+</code></pre></div>
+
+<h2 id="3">3. 列表参数解析<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 基本语法<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>使用中括号 <code>[]</code> 传递列表参数：</p>
+<div class="codehilite"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">${function_name([$param1, $param2, $param3])}</span>
+</code></pre></div>
+
+<h3 id="32">3.2 使用场景：签名生成<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p><strong>场景描述</strong>：
+API 需要将多个参数组合后生成签名，传统方式需要逐个传递参数，使用列表参数可以更简洁。</p>
+<p><strong>debugtalk.py</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hmac</span>
+
+<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="s2">&quot;DebugTalk&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_sign_v2</span><span class="p">(</span><span class="n">args_list</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    使用列表参数生成签名</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        args_list: 参数列表，如 [&quot;device_001&quot;, &quot;ios&quot;, &quot;2.8.6&quot;]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        签名字符串</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">args_list</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
+    <span class="n">sign_key</span> <span class="o">=</span> <span class="n">SECRET_KEY</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
+    <span class="n">sign</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">sign_key</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">sign</span>
+</code></pre></div>
+
+<p><strong>测试用例</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">config</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">variables</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">device_sn</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;TEST_DEVICE_001&quot;</span>
+<span class="w">    </span><span class="nt">os_platform</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ios&quot;</span>
+<span class="w">    </span><span class="nt">app_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2.8.6&quot;</span>
+
+<span class="nt">teststeps</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">获取访问令牌</span>
+<span class="w">  </span><span class="nt">request</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/api/get-token</span>
+<span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">POST</span>
+<span class="w">    </span><span class="nt">json</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># 使用列表参数传递</span>
+<span class="w">      </span><span class="nt">sign</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${get_sign_v2([$device_sn, $os_platform, $app_version])}</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert status_code == 200</span>
+</code></pre></div>
+
+<h3 id="33">3.3 使用场景：批量校验<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<p><strong>场景描述</strong>：
+需要同时校验多个字段是否存在。</p>
+<p><strong>debugtalk.py</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">check_fields_exist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">fields_list</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    批量检查字段是否存在</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data: 数据对象</span>
+<span class="sd">        fields_list: 字段列表，如 [&quot;id&quot;, &quot;name&quot;, &quot;email&quot;]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        True if all fields exist</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields_list</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">data</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Missing required field: </span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
+
+<p><strong>测试用例</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 批量检查用户必填字段</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${check_fields_exist(content.user, [id, name, email, phone])}</span>
+
+<span class="w">  </span><span class="c1"># 批量检查产品必填字段</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${check_fields_exist(content.product, [id, title, price, stock])}</span>
+</code></pre></div>
+
+<h3 id="34">3.4 列表参数 + 变量引用<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nt">variables</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">required_user_fields</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;id&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">required_product_fields</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;id&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;title&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;price&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 引用变量列表</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${check_fields_exist(content.user, $required_user_fields)}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${check_fields_exist(content.product, $required_product_fields)}</span>
+</code></pre></div>
+
+<h2 id="4">4. 字典对象参数解析<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<h3 id="41">4.1 基本语法<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<p>使用花括号 <code>{}</code> 传递字典参数：</p>
+<div class="codehilite"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">${function_name({key1</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value1, key2</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value2})}</span>
+</code></pre></div>
+
+<p><strong>注意</strong>：字典参数通常需要用引号包裹：</p>
+<div class="codehilite"><pre><span></span><code><span class="s">&quot;${function_name({key1:</span><span class="nv"> </span><span class="s">value1,</span><span class="nv"> </span><span class="s">key2:</span><span class="nv"> </span><span class="s">value2})}&quot;</span>
+</code></pre></div>
+
+<h3 id="42">4.2 使用场景：复杂签名配置<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<p><strong>场景描述</strong>：
+签名算法需要多个参数，使用字典可以让参数更有语义。</p>
+<p><strong>debugtalk.py</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hmac</span>
+
+<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="s2">&quot;DebugTalk&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_sign_v3</span><span class="p">(</span><span class="n">args_dict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    使用字典参数生成签名</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        args_dict: 参数字典，如 {</span>
+<span class="sd">            &quot;device_sn&quot;: &quot;xxx&quot;,</span>
+<span class="sd">            &quot;os_platform&quot;: &quot;ios&quot;,</span>
+<span class="sd">            &quot;app_version&quot;: &quot;2.8.6&quot;</span>
+<span class="sd">        }</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        签名字符串</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+        <span class="n">args_dict</span><span class="p">[</span><span class="s2">&quot;device_sn&quot;</span><span class="p">],</span>
+        <span class="n">args_dict</span><span class="p">[</span><span class="s2">&quot;os_platform&quot;</span><span class="p">],</span>
+        <span class="n">args_dict</span><span class="p">[</span><span class="s2">&quot;app_version&quot;</span><span class="p">]</span>
+    <span class="p">])</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
+    <span class="n">sign_key</span> <span class="o">=</span> <span class="n">SECRET_KEY</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
+    <span class="n">sign</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">sign_key</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">sign</span>
+</code></pre></div>
+
+<p><strong>测试用例</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">request</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">json</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># 使用字典参数（注意外层引号）</span>
+<span class="w">    </span><span class="nt">sign</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${get_sign_v3({</span>
+<span class="w">      </span><span class="s">device_sn:</span><span class="nv"> </span><span class="s">$device_sn,</span>
+<span class="w">      </span><span class="s">os_platform:</span><span class="nv"> </span><span class="s">$os_platform,</span>
+<span class="w">      </span><span class="s">app_version:</span><span class="nv"> </span><span class="s">$app_version</span>
+<span class="w">    </span><span class="s">})}&quot;</span>
+</code></pre></div>
+
+<h3 id="43">4.3 使用场景：配置对象传递<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<p><strong>场景描述</strong>：
+数据校验需要复杂的配置信息。</p>
+<p><strong>debugtalk.py</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">validate_with_config</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    根据配置校验数据</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data: 待校验数据</span>
+<span class="sd">        config: 配置对象，如 {</span>
+<span class="sd">            &quot;min_length&quot;: 10,</span>
+<span class="sd">            &quot;max_length&quot;: 100,</span>
+<span class="sd">            &quot;allow_empty&quot;: false</span>
+<span class="sd">        }</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        True if validation passes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">min_len</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;min_length&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">max_len</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_length&quot;</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">))</span>
+    <span class="n">allow_empty</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;allow_empty&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">allow_empty</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Data cannot be empty&quot;</span>
+
+    <span class="k">assert</span> <span class="n">min_len</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">max_len</span><span class="p">,</span> \
+        <span class="sa">f</span><span class="s2">&quot;Data length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2"> not in range [</span><span class="si">{</span><span class="n">min_len</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">max_len</span><span class="si">}</span><span class="s2">]&quot;</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
+
+<p><strong>测试用例</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 传递配置对象</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;${validate_with_config(content.description,</span><span class="nv"> </span><span class="s">{</span>
+<span class="w">      </span><span class="s">min_length:</span><span class="nv"> </span><span class="s">10,</span>
+<span class="w">      </span><span class="s">max_length:</span><span class="nv"> </span><span class="s">500,</span>
+<span class="w">      </span><span class="s">allow_empty:</span><span class="nv"> </span><span class="s">false</span>
+<span class="w">    </span><span class="s">})}&quot;</span>
+</code></pre></div>
+
+<h2 id="5">5. 复杂嵌套对象参数<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<h3 id="51">5.1 使用场景：嵌套列表批量校验<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
+<p><strong>场景描述</strong>：
+响应数据包含多层嵌套结构，需要批量校验所有嵌套数据的特定字段。</p>
+<p><strong>响应数据结构</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;productList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Product 1&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;sku&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;USD&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;USD&quot;</span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Product 2&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;sku&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EUR&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">250</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EUR&quot;</span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>debugtalk.py</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">check_nested_list_fields</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    检查嵌套列表中的字段</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data: 响应数据</span>
+<span class="sd">        config: 配置对象 {</span>
+<span class="sd">            &quot;list_path&quot;: &quot;productList&quot;,        # 外层列表路径</span>
+<span class="sd">            &quot;nested_field&quot;: &quot;sku&quot;,             # 内层列表字段名</span>
+<span class="sd">            &quot;check_fields&quot;: [&quot;id&quot;, &quot;amount&quot;]   # 需要检查的字段</span>
+<span class="sd">        }</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        True if all validations pass</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">list_path</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;list_path&quot;</span><span class="p">]</span>
+    <span class="n">nested_field</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;nested_field&quot;</span><span class="p">]</span>
+    <span class="n">check_fields</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;check_fields&quot;</span><span class="p">]</span>
+
+    <span class="c1"># 获取外层列表</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">list_path</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;List &#39;</span><span class="si">{</span><span class="n">list_path</span><span class="si">}</span><span class="s2">&#39; is empty&quot;</span>
+
+    <span class="c1"># 遍历外层列表</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+        <span class="c1"># 获取内层列表</span>
+        <span class="n">nested_items</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">nested_field</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">nested_items</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> \
+            <span class="sa">f</span><span class="s2">&quot;Nested field &#39;</span><span class="si">{</span><span class="n">nested_field</span><span class="si">}</span><span class="s2">&#39; is empty in item </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="c1"># 遍历内层列表，检查字段</span>
+        <span class="k">for</span> <span class="n">nested_item</span> <span class="ow">in</span> <span class="n">nested_items</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">check_fields</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">nested_item</span><span class="p">,</span> \
+                    <span class="sa">f</span><span class="s2">&quot;Field &#39;</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2">&#39; not found in nested item&quot;</span>
+                <span class="k">assert</span> <span class="n">nested_item</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> \
+                    <span class="sa">f</span><span class="s2">&quot;Field &#39;</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2">&#39; is None&quot;</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
+
+<p><strong>测试用例</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 检查嵌套列表中的字段</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;${check_nested_list_fields(content,</span><span class="nv"> </span><span class="s">{</span>
+<span class="w">      </span><span class="s">list_path:</span><span class="nv"> </span><span class="s">productList,</span>
+<span class="w">      </span><span class="s">nested_field:</span><span class="nv"> </span><span class="s">sku,</span>
+<span class="w">      </span><span class="s">check_fields:</span><span class="nv"> </span><span class="s">[id,</span><span class="nv"> </span><span class="s">amount,</span><span class="nv"> </span><span class="s">currency]</span>
+<span class="w">    </span><span class="s">})}&quot;</span>
+</code></pre></div>
+
+<h3 id="52">5.2 使用场景：多级配置对象<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
+<p><strong>debugtalk.py</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">validate_complex_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">validation_rules</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    使用复杂规则验证数据</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data: 待验证数据</span>
+<span class="sd">        validation_rules: 验证规则 {</span>
+<span class="sd">            &quot;user&quot;: {</span>
+<span class="sd">                &quot;required_fields&quot;: [&quot;id&quot;, &quot;name&quot;],</span>
+<span class="sd">                &quot;name_min_length&quot;: 2</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;product&quot;: {</span>
+<span class="sd">                &quot;required_fields&quot;: [&quot;id&quot;, &quot;price&quot;],</span>
+<span class="sd">                &quot;price_min&quot;: 0</span>
+<span class="sd">            }</span>
+<span class="sd">        }</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># 验证 user 数据</span>
+    <span class="k">if</span> <span class="s2">&quot;user&quot;</span> <span class="ow">in</span> <span class="n">validation_rules</span><span class="p">:</span>
+        <span class="n">user_rules</span> <span class="o">=</span> <span class="n">validation_rules</span><span class="p">[</span><span class="s2">&quot;user&quot;</span><span class="p">]</span>
+        <span class="n">user_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="p">{})</span>
+
+        <span class="c1"># 检查必填字段</span>
+        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">user_rules</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;required_fields&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+            <span class="k">assert</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">user_data</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;User missing field: </span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="c1"># 检查名称长度</span>
+        <span class="k">if</span> <span class="s2">&quot;name_min_length&quot;</span> <span class="ow">in</span> <span class="n">user_rules</span><span class="p">:</span>
+            <span class="n">min_len</span> <span class="o">=</span> <span class="n">user_rules</span><span class="p">[</span><span class="s2">&quot;name_min_length&quot;</span><span class="p">]</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">user_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span> <span class="o">&gt;=</span> <span class="n">min_len</span>
+
+    <span class="c1"># 验证 product 数据</span>
+    <span class="k">if</span> <span class="s2">&quot;product&quot;</span> <span class="ow">in</span> <span class="n">validation_rules</span><span class="p">:</span>
+        <span class="n">product_rules</span> <span class="o">=</span> <span class="n">validation_rules</span><span class="p">[</span><span class="s2">&quot;product&quot;</span><span class="p">]</span>
+        <span class="n">product_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;product&quot;</span><span class="p">,</span> <span class="p">{})</span>
+
+        <span class="c1"># 检查必填字段</span>
+        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">product_rules</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;required_fields&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+            <span class="k">assert</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">product_data</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Product missing field: </span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="c1"># 检查价格</span>
+        <span class="k">if</span> <span class="s2">&quot;price_min&quot;</span> <span class="ow">in</span> <span class="n">product_rules</span><span class="p">:</span>
+            <span class="n">price_min</span> <span class="o">=</span> <span class="n">product_rules</span><span class="p">[</span><span class="s2">&quot;price_min&quot;</span><span class="p">]</span>
+            <span class="k">assert</span> <span class="n">product_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">price_min</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
+
+<p><strong>测试用例</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 传递多级配置对象</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;${validate_complex_data(content,</span><span class="nv"> </span><span class="s">{</span>
+<span class="w">      </span><span class="s">user:</span><span class="nv"> </span><span class="s">{</span>
+<span class="w">        </span><span class="s">required_fields:</span><span class="nv"> </span><span class="s">[id,</span><span class="nv"> </span><span class="s">name,</span><span class="nv"> </span><span class="s">email],</span>
+<span class="w">        </span><span class="s">name_min_length:</span><span class="nv"> </span><span class="s">2</span>
+<span class="w">      </span><span class="s">},</span>
+<span class="w">      </span><span class="s">product:</span><span class="nv"> </span><span class="s">{</span>
+<span class="w">        </span><span class="s">required_fields:</span><span class="nv"> </span><span class="s">[id,</span><span class="nv"> </span><span class="s">price,</span><span class="nv"> </span><span class="s">stock],</span>
+<span class="w">        </span><span class="s">price_min:</span><span class="nv"> </span><span class="s">0</span>
+<span class="w">      </span><span class="s">}</span>
+<span class="w">    </span><span class="s">})}&quot;</span>
+</code></pre></div>
+
+<h2 id="6">6. 通配符批量校验<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<h3 id="61">6.1 通配符 <code>*</code> 语法<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
+<p>使用 <code>*</code> 通配符可以匹配任意层级的数据，实现批量校验。</p>
+<p><strong>语法</strong>：</p>
+<div class="codehilite"><pre><span></span><code>path.to.*.field
+path.to.*.nested.*.field
+</code></pre></div>
+
+<h3 id="62">6.2 单层通配符<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
+<p><strong>场景</strong>：校验所有产品的 ID 和价格。</p>
+<p><strong>响应数据</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;products&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>debugtalk.py</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="n">field_paths</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    通用字段检查函数</span>
+<span class="sd">    支持通配符路径</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data: 响应数据</span>
+<span class="sd">        *field_paths: 字段路径列表，支持通配符</span>
+<span class="sd">            如: &quot;products.*.id&quot;, &quot;products.*.price&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">field_paths</span><span class="p">:</span>
+        <span class="n">_check_field_path</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_field_path</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;检查单个字段路径&quot;&quot;&quot;</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+    <span class="n">_recursive_check</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">parts</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_recursive_check</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">parts</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;递归检查字段&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">parts</span><span class="p">:</span>
+        <span class="c1"># 路径检查完毕，确保数据不为 None</span>
+        <span class="k">assert</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Field value is None&quot;</span>
+        <span class="k">return</span>
+
+    <span class="n">part</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">remaining</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+    <span class="k">if</span> <span class="n">part</span> <span class="o">==</span> <span class="s1">&#39;*&#39;</span><span class="p">:</span>
+        <span class="c1"># 通配符：遍历列表或字典</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                <span class="n">_recursive_check</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">remaining</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="n">_recursive_check</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">remaining</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># 普通字段</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">data</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Field &#39;</span><span class="si">{</span><span class="n">part</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span>
+            <span class="n">_recursive_check</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">part</span><span class="p">],</span> <span class="n">remaining</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot access field &#39;</span><span class="si">{</span><span class="n">part</span><span class="si">}</span><span class="s2">&#39; on non-dict data&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>测试用例</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 检查所有产品的 id 和 price</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${check(content, products.*.id, products.*.price)}</span>
+</code></pre></div>
+
+<h3 id="63">6.3 多层通配符<a class="headerlink" href="#63" title="Permanent link">&para;</a></h3>
+<p><strong>场景</strong>：校验所有产品的所有 SKU 的字段。</p>
+<p><strong>响应数据</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;products&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;sku&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;USD&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;USD&quot;</span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;sku&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EUR&quot;</span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>测试用例</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 检查所有产品的所有 SKU 的字段</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${check(content,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">products.*.id,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">products.*.sku.*.id,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">products.*.sku.*.amount,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">products.*.sku.*.currency</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">)}</span>
+</code></pre></div>
+
+<h3 id="64">6.4 通配符 + 链式取值<a class="headerlink" href="#64" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 检查嵌套深层数据</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${check(content,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">data.product.purchasePlan.*.sku.*.id,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">data.product.purchasePlan.*.sku.*.amount,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">data.product.purchasePlan.*.sku.*.origin_amount,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">data.product.purchasePlan.*.sku.*.currency,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">data.product.purchasePlan.*.sku.*.duration</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">)}</span>
+</code></pre></div>
+
+<h2 id="7">7. 正则表达式校验<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<h3 id="71">7.1 正则表达式语法 <code>~=</code><a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<p>使用 <code>~=</code> 操作符进行正则表达式匹配。</p>
+<p><strong>语法</strong>：</p>
+<div class="codehilite"><pre><span></span><code>&#39;field_name ~= regex_pattern&#39;
+</code></pre></div>
+
+<h3 id="72-url">7.2 使用场景：URL 格式校验<a class="headerlink" href="#72-url" title="Permanent link">&para;</a></h3>
+<p><strong>debugtalk.py</strong>（扩展 check 函数）：</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="n">rules</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    通用检查函数</span>
+<span class="sd">    支持：</span>
+<span class="sd">    - 通配符路径: &quot;products.*.id&quot;</span>
+<span class="sd">    - 正则表达式: &quot;_url ~= ^https?://.*&quot;</span>
+<span class="sd">    - 包含校验: &quot;status =* [active, pending]&quot;</span>
+<span class="sd">    - 类型校验: &quot;user @= dict&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39; ~= &#39;</span> <span class="ow">in</span> <span class="n">rule</span><span class="p">:</span>
+            <span class="c1"># 正则表达式校验</span>
+            <span class="n">field</span><span class="p">,</span> <span class="n">pattern</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; ~= &#39;</span><span class="p">)</span>
+            <span class="n">field</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">pattern</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">_check_regex</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 普通字段路径校验</span>
+            <span class="n">_check_field_path</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">rule</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_regex</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;正则表达式校验&quot;&quot;&quot;</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">_get_field_value</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)),</span> \
+        <span class="sa">f</span><span class="s2">&quot;Field &#39;</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2">&#39; value &#39;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&#39; does not match pattern &#39;</span><span class="si">{</span><span class="n">pattern</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+</code></pre></div>
+
+<p><strong>测试用例</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># URL 格式校验</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${check(content,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">&#39;_url ~= ^https?://[^\s/$.?#].[^\s]*$&#39;</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">)}</span>
+
+<span class="w">  </span><span class="c1"># 邮箱格式校验</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${check(content,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">&#39;user.email ~= ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$&#39;</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">)}</span>
+
+<span class="w">  </span><span class="c1"># 电话号码格式校验</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${check(content,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">&#39;user.phone ~= ^1[3-9]\d{9}$&#39;</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">)}</span>
+</code></pre></div>
+
+<h2 id="8">8. 类型校验<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<h3 id="81">8.1 类型校验语法 <code>@=</code><a class="headerlink" href="#81" title="Permanent link">&para;</a></h3>
+<p>使用 <code>@=</code> 操作符进行类型校验。</p>
+<p><strong>语法</strong>：</p>
+<div class="codehilite"><pre><span></span><code>&#39;field_name @= type_name&#39;
+</code></pre></div>
+
+<p><strong>支持的类型</strong>：
+- <code>dict</code> - 字典类型
+- <code>list</code> - 列表类型
+- <code>str</code> - 字符串类型
+- <code>int</code> - 整数类型
+- <code>float</code> - 浮点数类型
+- <code>bool</code> - 布尔类型</p>
+<h3 id="82">8.2 使用场景：数据结构校验<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
+<p><strong>debugtalk.py</strong>（继续扩展 check 函数）：</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="n">rules</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;通用检查函数&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s1">&#39; ~= &#39;</span> <span class="ow">in</span> <span class="n">rule</span><span class="p">:</span>
+                <span class="c1"># 正则表达式</span>
+                <span class="n">field</span><span class="p">,</span> <span class="n">pattern</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; ~= &#39;</span><span class="p">)</span>
+                <span class="n">_check_regex</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">pattern</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="s1">&#39; =* &#39;</span> <span class="ow">in</span> <span class="n">rule</span><span class="p">:</span>
+                <span class="c1"># 包含校验</span>
+                <span class="n">field</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; =* &#39;</span><span class="p">)</span>
+                <span class="n">_check_contains</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">values</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="s1">&#39; @= &#39;</span> <span class="ow">in</span> <span class="n">rule</span><span class="p">:</span>
+                <span class="c1"># 类型校验</span>
+                <span class="n">field</span><span class="p">,</span> <span class="n">type_name</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; @= &#39;</span><span class="p">)</span>
+                <span class="n">_check_type</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">type_name</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># 字段路径</span>
+                <span class="n">_check_field_path</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">rule</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_check_field_path</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">rule</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_type</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">type_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;类型校验&quot;&quot;&quot;</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">_get_field_value</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>
+
+    <span class="n">type_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;dict&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="s1">&#39;list&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+        <span class="s1">&#39;str&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;int&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="s1">&#39;float&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="s1">&#39;bool&#39;</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="p">}</span>
+
+    <span class="n">expected_type</span> <span class="o">=</span> <span class="n">type_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">type_name</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">expected_type</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Unknown type: </span><span class="si">{</span><span class="n">type_name</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">expected_type</span><span class="p">),</span> \
+        <span class="sa">f</span><span class="s2">&quot;Field &#39;</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2">&#39; type is </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">, expected </span><span class="si">{</span><span class="n">type_name</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+
+<p><strong>测试用例</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 类型校验</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${check(content,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">&#39;user @= dict&#39;,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">&#39;user.id @= int&#39;,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">&#39;user.name @= str&#39;,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">&#39;user.is_active @= bool&#39;,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">&#39;products @= list&#39;</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">)}</span>
+</code></pre></div>
+
+<h3 id="83">8.3 包含校验语法 <code>=*</code><a class="headerlink" href="#83" title="Permanent link">&para;</a></h3>
+<p>使用 <code>=*</code> 操作符检查值是否在指定范围内。</p>
+<p><strong>语法</strong>：</p>
+<div class="codehilite"><pre><span></span><code>&#39;field_name =* [value1, value2, value3]&#39;
+</code></pre></div>
+
+<p><strong>debugtalk.py</strong>（check 函数已包含）：</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_check_contains</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">values_str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;包含校验&quot;&quot;&quot;</span>
+    <span class="c1"># 解析值列表: &quot;[USD, CNY, EUR]&quot; -&gt; [&quot;USD&quot;, &quot;CNY&quot;, &quot;EUR&quot;]</span>
+    <span class="n">values_str</span> <span class="o">=</span> <span class="n">values_str</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;[]&#39;</span><span class="p">)</span>
+    <span class="n">expected_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)]</span>
+
+    <span class="n">value</span> <span class="o">=</span> <span class="n">_get_field_value</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="n">expected_values</span><span class="p">,</span> \
+        <span class="sa">f</span><span class="s2">&quot;Field &#39;</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2">&#39; value &#39;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&#39; not in </span><span class="si">{</span><span class="n">expected_values</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+
+<p><strong>测试用例</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 货币类型校验</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${check(content,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">&#39;default_currency =* [USD, CNY, EUR]&#39;</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">)}</span>
+
+<span class="w">  </span><span class="c1"># 状态校验</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${check(content,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">&#39;order.status =* [pending, processing, completed, cancelled]&#39;</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">)}</span>
+</code></pre></div>
+
+<h2 id="9">9. 综合实战案例<a class="headerlink" href="#9" title="Permanent link">&para;</a></h2>
+<h3 id="1-api">案例 1：电商 API 完整校验<a class="headerlink" href="#1-api" title="Permanent link">&para;</a></h3>
+<p><strong>响应数据</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/products&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;default_currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;USD&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;default_sku&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DEFAULT_001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.99</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;product&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Product Name&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;purchasePlan&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;plan_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PLAN_001&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;sku&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SKU_001&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;origin_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;USD&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SKU_002&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;origin_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">240</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;USD&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>测试用例</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 一次性校验所有字段</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${check(content,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">&#39;_url ~= ^https?://[^\s/$.?#].[^\s]*$&#39;,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">&#39;default_currency =* [USD, CNY, EUR]&#39;,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">&#39;default_sku @= dict&#39;,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">&#39;product @= dict&#39;,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">&#39;product.purchasePlan @= list&#39;,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">product.purchasePlan.*.sku.*.id,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">product.purchasePlan.*.sku.*.amount,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">product.purchasePlan.*.sku.*.origin_amount,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">product.purchasePlan.*.sku.*.currency,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">product.purchasePlan.*.sku.*.duration</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">)}</span>
+</code></pre></div>
+
+<h3 id="2_1">案例 2：用户信息复杂校验<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<p><strong>debugtalk.py</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">validate_user_complete</span><span class="p">(</span><span class="n">user_data</span><span class="p">,</span> <span class="n">rules</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    用户信息完整校验</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        user_data: 用户数据</span>
+<span class="sd">        rules: 校验规则 {</span>
+<span class="sd">            &quot;required_fields&quot;: [&quot;id&quot;, &quot;name&quot;, &quot;email&quot;],</span>
+<span class="sd">            &quot;email_pattern&quot;: &quot;^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$&quot;,</span>
+<span class="sd">            &quot;name_min_length&quot;: 2,</span>
+<span class="sd">            &quot;name_max_length&quot;: 50,</span>
+<span class="sd">            &quot;check_permissions&quot;: true,</span>
+<span class="sd">            &quot;required_permissions&quot;: [&quot;read&quot;, &quot;write&quot;]</span>
+<span class="sd">        }</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+    <span class="c1"># 检查必填字段</span>
+    <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">rules</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;required_fields&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+        <span class="k">assert</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">user_data</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Missing required field: </span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">assert</span> <span class="n">user_data</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Field &#39;</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2">&#39; is None&quot;</span>
+
+    <span class="c1"># 检查邮箱格式</span>
+    <span class="k">if</span> <span class="s2">&quot;email_pattern&quot;</span> <span class="ow">in</span> <span class="n">rules</span> <span class="ow">and</span> <span class="s2">&quot;email&quot;</span> <span class="ow">in</span> <span class="n">user_data</span><span class="p">:</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="n">rules</span><span class="p">[</span><span class="s2">&quot;email_pattern&quot;</span><span class="p">]</span>
+        <span class="n">email</span> <span class="o">=</span> <span class="n">user_data</span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">email</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Invalid email format: </span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="c1"># 检查名称长度</span>
+    <span class="k">if</span> <span class="s2">&quot;name&quot;</span> <span class="ow">in</span> <span class="n">user_data</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">user_data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+        <span class="n">min_len</span> <span class="o">=</span> <span class="n">rules</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name_min_length&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">max_len</span> <span class="o">=</span> <span class="n">rules</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name_max_length&quot;</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">))</span>
+        <span class="k">assert</span> <span class="n">min_len</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">max_len</span><span class="p">,</span> \
+            <span class="sa">f</span><span class="s2">&quot;Name length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2"> not in range [</span><span class="si">{</span><span class="n">min_len</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">max_len</span><span class="si">}</span><span class="s2">]&quot;</span>
+
+    <span class="c1"># 检查权限</span>
+    <span class="k">if</span> <span class="n">rules</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;check_permissions&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="n">required_perms</span> <span class="o">=</span> <span class="n">rules</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;required_permissions&quot;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="n">user_perms</span> <span class="o">=</span> <span class="n">user_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;permissions&quot;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">required_perms</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">user_perms</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Missing permission: </span><span class="si">{</span><span class="n">perm</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
+
+<p><strong>测试用例</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;${validate_user_complete(content.user,</span><span class="nv"> </span><span class="s">{</span>
+<span class="w">      </span><span class="s">required_fields:</span><span class="nv"> </span><span class="s">[id,</span><span class="nv"> </span><span class="s">name,</span><span class="nv"> </span><span class="s">email,</span><span class="nv"> </span><span class="s">phone],</span>
+<span class="w">      </span><span class="s">email_pattern:</span><span class="nv"> </span><span class="s">&#39;^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+</span><span class="err">\</span><span class="s">.[a-zA-Z]{2,}$&#39;,</span>
+<span class="w">      </span><span class="s">name_min_length:</span><span class="nv"> </span><span class="s">2,</span>
+<span class="w">      </span><span class="s">name_max_length:</span><span class="nv"> </span><span class="s">50,</span>
+<span class="w">      </span><span class="s">check_permissions:</span><span class="nv"> </span><span class="s">true,</span>
+<span class="w">      </span><span class="s">required_permissions:</span><span class="nv"> </span><span class="s">[read,</span><span class="nv"> </span><span class="s">write,</span><span class="nv"> </span><span class="s">delete]</span>
+<span class="w">    </span><span class="s">})}&quot;</span>
+</code></pre></div>
+
+<h3 id="3_1">案例 3：多环境配置签名<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<p><strong>debugtalk.py</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hmac</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_signature</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    生成请求签名</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        params: 签名参数 {</span>
+<span class="sd">            &quot;method&quot;: &quot;POST&quot;,</span>
+<span class="sd">            &quot;url&quot;: &quot;/api/users&quot;,</span>
+<span class="sd">            &quot;timestamp&quot;: 1234567890,</span>
+<span class="sd">            &quot;nonce&quot;: &quot;random_string&quot;,</span>
+<span class="sd">            &quot;body&quot;: {...},</span>
+<span class="sd">            &quot;secret_key&quot;: &quot;xxx&quot;</span>
+<span class="sd">        }</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># 按key排序</span>
+    <span class="n">sorted_params</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span>
+        <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> 
+        <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s1">&#39;secret_key&#39;</span>
+    <span class="p">])</span>
+
+    <span class="c1"># 拼接字符串</span>
+    <span class="n">sign_str</span> <span class="o">=</span> <span class="s1">&#39;&amp;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sorted_params</span><span class="p">])</span>
+
+    <span class="c1"># 生成签名</span>
+    <span class="n">secret</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;secret_key&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="n">sign</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">sign_str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">sign</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_timestamp</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;获取当前时间戳&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_nonce</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;生成随机字符串&quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">string</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">16</span><span class="p">))</span>
+</code></pre></div>
+
+<p><strong>测试用例</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">variables</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">secret_key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;MySecretKey123&quot;</span>
+<span class="w">  </span><span class="nt">request_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;POST&quot;</span>
+<span class="w">  </span><span class="nt">request_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/api/users&quot;</span>
+
+<span class="nt">teststeps</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">创建用户（带签名）</span>
+<span class="w">  </span><span class="nt">request</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$base_url$request_url</span>
+<span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">POST</span>
+<span class="w">    </span><span class="nt">headers</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">X-Timestamp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${get_timestamp()}</span>
+<span class="w">      </span><span class="nt">X-Nonce</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${get_nonce()}</span>
+<span class="w">      </span><span class="nt">X-Signature</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${generate_signature({</span>
+<span class="w">        </span><span class="s">method:</span><span class="nv"> </span><span class="s">$request_method,</span>
+<span class="w">        </span><span class="s">url:</span><span class="nv"> </span><span class="s">$request_url,</span>
+<span class="w">        </span><span class="s">timestamp:</span><span class="nv"> </span><span class="s">${get_timestamp()},</span>
+<span class="w">        </span><span class="s">nonce:</span><span class="nv"> </span><span class="s">${get_nonce()},</span>
+<span class="w">        </span><span class="s">body:</span><span class="nv"> </span><span class="s">{name:</span><span class="nv"> </span><span class="s">&#39;Alice&#39;,</span><span class="nv"> </span><span class="s">email:</span><span class="nv"> </span><span class="s">&#39;alice@example.com&#39;},</span>
+<span class="w">        </span><span class="s">secret_key:</span><span class="nv"> </span><span class="s">$secret_key</span>
+<span class="w">      </span><span class="s">})}&quot;</span>
+<span class="w">    </span><span class="nt">json</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span>
+<span class="w">      </span><span class="nt">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;alice@example.com&quot;</span>
+</code></pre></div>
+
+<h2 id="10">10. 最佳实践<a class="headerlink" href="#10" title="Permanent link">&para;</a></h2>
+<h3 id="101">10.1 参数命名规范<a class="headerlink" href="#101" title="Permanent link">&para;</a></h3>
+<p><strong>推荐</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># ✅ 清晰的参数名</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_user_data</span><span class="p">(</span><span class="n">user_data</span><span class="p">,</span> <span class="n">validation_rules</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">check_nested_fields</span><span class="p">(</span><span class="n">response_data</span><span class="p">,</span> <span class="n">field_config</span><span class="p">):</span>
+    <span class="k">pass</span>
+</code></pre></div>
+
+<p><strong>不推荐</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># ❌ 模糊的参数名</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">rules</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">pass</span>
+</code></pre></div>
+
+<h3 id="102">10.2 函数职责单一<a class="headerlink" href="#102" title="Permanent link">&para;</a></h3>
+<p><strong>推荐</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># ✅ 职责单一</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_email_format</span><span class="p">(</span><span class="n">email</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;只验证邮箱格式&quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$&#39;</span>
+    <span class="k">assert</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">email</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Invalid email: </span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_required_fields</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">fields</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;只验证必填字段&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">data</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Missing field: </span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
+
+<p><strong>不推荐</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># ❌ 职责混乱</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_everything</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;做太多事情&quot;&quot;&quot;</span>
+    <span class="c1"># 验证格式</span>
+    <span class="c1"># 验证字段</span>
+    <span class="c1"># 验证类型</span>
+    <span class="c1"># 验证业务逻辑</span>
+    <span class="c1"># ...</span>
+    <span class="k">pass</span>
+</code></pre></div>
+
+<h3 id="103">10.3 提供清晰的错误信息<a class="headerlink" href="#103" title="Permanent link">&para;</a></h3>
+<p><strong>推荐</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># ✅ 清晰的错误信息</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_price</span><span class="p">(</span><span class="n">price</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)),</span> \
+        <span class="sa">f</span><span class="s2">&quot;Price must be number, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">price</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">assert</span> <span class="n">price</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> \
+        <span class="sa">f</span><span class="s2">&quot;Price must be non-negative, got </span><span class="si">{</span><span class="n">price</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">assert</span> <span class="n">price</span> <span class="o">&lt;=</span> <span class="mi">1000000</span><span class="p">,</span> \
+        <span class="sa">f</span><span class="s2">&quot;Price must be less than 1000000, got </span><span class="si">{</span><span class="n">price</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
+
+<p><strong>不推荐</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># ❌ 模糊的错误信息</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_price</span><span class="p">(</span><span class="n">price</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)),</span> <span class="s2">&quot;Invalid type&quot;</span>
+    <span class="k">assert</span> <span class="n">price</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Invalid value&quot;</span>
+    <span class="k">assert</span> <span class="n">price</span> <span class="o">&lt;=</span> <span class="mi">1000000</span><span class="p">,</span> <span class="s2">&quot;Too large&quot;</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
+
+<h3 id="104">10.4 合理使用通配符<a class="headerlink" href="#104" title="Permanent link">&para;</a></h3>
+<p><strong>推荐</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># ✅ 通配符配合具体字段</span>
+<span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 先检查基本结构</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert isinstance(content.products, list)</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assert len(content.products) &gt; 0</span>
+
+<span class="w">  </span><span class="c1"># 再使用通配符批量检查</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${check(content,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">products.*.id,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">products.*.price</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">)}</span>
+</code></pre></div>
+
+<p><strong>不推荐</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># ❌ 过度依赖通配符</span>
+<span class="nt">script</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 直接使用通配符，错误信息不明确</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${check(content, products.*.*.*)}</span>
+</code></pre></div>
+
+<h3 id="105">10.5 文档注释<a class="headerlink" href="#105" title="Permanent link">&para;</a></h3>
+<p><strong>推荐</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">check_nested_list_fields</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    检查嵌套列表中的字段</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (dict): 响应数据</span>
+<span class="sd">        config (dict): 配置对象</span>
+<span class="sd">            - list_path (str): 外层列表路径</span>
+<span class="sd">            - nested_field (str): 内层列表字段名</span>
+<span class="sd">            - check_fields (list): 需要检查的字段列表</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: 校验是否通过</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        AssertionError: 当校验失败时</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; check_nested_list_fields(response, {</span>
+<span class="sd">        ...     &quot;list_path&quot;: &quot;products&quot;,</span>
+<span class="sd">        ...     &quot;nested_field&quot;: &quot;sku&quot;,</span>
+<span class="sd">        ...     &quot;check_fields&quot;: [&quot;id&quot;, &quot;price&quot;]</span>
+<span class="sd">        ... })</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</code></pre></div>
+
+<h3 id="106">10.6 性能考虑<a class="headerlink" href="#106" title="Permanent link">&para;</a></h3>
+<p><strong>通配符批量校验</strong>：
+- ✅ 适合：数据量 &lt; 1000 条
+- ⚠️ 注意：数据量 1000-10000 条
+- ❌ 不推荐：数据量 &gt; 10000 条（考虑抽样校验）</p>
+<p><strong>抽样校验示例</strong>：</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">check_large_list</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">field_path</span><span class="p">,</span> <span class="n">sample_size</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    大列表抽样校验</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data: 数据</span>
+<span class="sd">        field_path: 字段路径</span>
+<span class="sd">        sample_size: 抽样数量</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+
+    <span class="n">items</span> <span class="o">=</span> <span class="n">_get_field_value</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">field_path</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="nb">list</span><span class="p">),</span> <span class="s2">&quot;Field must be a list&quot;</span>
+
+    <span class="c1"># 如果数据量小，全量检查</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">sample_size</span><span class="p">:</span>
+        <span class="n">check_items</span> <span class="o">=</span> <span class="n">items</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># 大数据量，随机抽样</span>
+        <span class="n">check_items</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">)</span>
+
+    <span class="c1"># 校验抽样数据</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">check_items</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="c1"># 其他校验逻辑...</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
+
+<h2 id="_5">📝 总结<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>ApiMeter 的自定义函数高级参数支持让 API 测试变得更加灵活和强大：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>使用场景</th>
+<th>优势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>列表参数</td>
+<td>签名生成、批量校验</td>
+<td>简化参数传递</td>
+</tr>
+<tr>
+<td>字典参数</td>
+<td>复杂配置传递</td>
+<td>语义清晰</td>
+</tr>
+<tr>
+<td>嵌套对象</td>
+<td>多层数据校验</td>
+<td>功能强大</td>
+</tr>
+<tr>
+<td>通配符 <code>*</code></td>
+<td>批量字段校验</td>
+<td>高效便捷</td>
+</tr>
+<tr>
+<td>正则 <code>~=</code></td>
+<td>格式校验</td>
+<td>灵活匹配</td>
+</tr>
+<tr>
+<td>类型 <code>@=</code></td>
+<td>数据结构校验</td>
+<td>类型安全</td>
+</tr>
+<tr>
+<td>包含 <code>=*</code></td>
+<td>枚举值校验</td>
+<td>范围检查</td>
+</tr>
+</tbody>
+</table>
+<p><strong>下一步学习</strong>：
+- <a href="../global-variables/">全局变量完整指南</a>
+- <a href="../../examples/advanced-examples/">高级用法示例</a>
+- <a href="../../prepare/script/">自定义脚本校验</a></p>
+<hr />
+<p><strong>有问题？</strong> 查看 <a href="../../FAQ/">FAQ</a> 或 <a href="https://git.umlife.net/utils/apimeter/issues">提交 Issue</a></p>
+                
+                  
+                
+              
+
+<!-- AI助手浮窗脚本 -->
+<script
+async
+defer
+src="https://view.umlife.net/chat/api/embed?protocol=https&host=view.umlife.net&token=1d8f7ca0d76e223f">
+</script>
+
+
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2017 - 2025 debugtalk
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://git.umlife.net/utils/apimeter" class="md-footer-social__link fa fa-globe"></a>
+    
+      <a href="https://git.umlife.net/utils/apimeter" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.a353778b.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.6.1",url:{base:"../.."}})</script>
+      
+        <script src="../../js/slardar.js"></script>
+      
+    
+  </body>
+</html>

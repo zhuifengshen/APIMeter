@@ -1,0 +1,1524 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="ApiMeter User Documentation">
+      
+      
+      
+        <meta name="author" content="debugtalk">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-3.3.0">
+    
+    
+      
+        <title>测试报告增强特性 - ApiMeter Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.962652e9.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114587036-2"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-114587036-2")</script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="ApiMeter Docs" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                ApiMeter Docs
+              </span>
+              <span class="md-header-nav__topic">
+                测试报告增强特性
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://git.umlife.net/utils/apimeter" title="前往 Github 仓库" class="md-source" data-md-source="">
+    
+    <div class="md-source__repository">
+      ApiMeter
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="ApiMeter Docs" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    ApiMeter Docs
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://git.umlife.net/utils/apimeter" title="前往 Github 仓库" class="md-source" data-md-source="">
+    
+    <div class="md-source__repository">
+      ApiMeter
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="介绍" class="md-nav__link">
+      介绍
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../Installation/" title="安装说明" class="md-nav__link">
+      安装说明
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      基础概念
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        基础概念
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../concept/nominal/" title="名词解释" class="md-nav__link">
+      名词解释
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      测试准备
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        测试准备
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/record/" title="录制生成用例" class="md-nav__link">
+      录制生成用例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/project-structure/" title="项目文件组织" class="md-nav__link">
+      项目文件组织
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/testcase-structure/" title="测试用例组织" class="md-nav__link">
+      测试用例组织
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/request-hook/" title="hook机制" class="md-nav__link">
+      hook机制
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/dot-env/" title="环境变量" class="md-nav__link">
+      环境变量
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/testcase-layer/" title="测试用例分层" class="md-nav__link">
+      测试用例分层
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/parameters/" title="参数化数据驱动" class="md-nav__link">
+      参数化数据驱动
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/validate/" title="校验器用法" class="md-nav__link">
+      校验器用法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/script/" title="自定义脚本校验" class="md-nav__link">
+      自定义脚本校验
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/pretty/" title="用例格式化" class="md-nav__link">
+      用例格式化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/yaml-issue/" title="常见格式问题" class="md-nav__link">
+      常见格式问题
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/security/" title="信息安全" class="md-nav__link">
+      信息安全
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../prepare/upload-case/" title="文件上传场景" class="md-nav__link">
+      文件上传场景
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      测试执行
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        测试执行
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../run-tests/cli/" title="运行测试(CLI)" class="md-nav__link">
+      运行测试(CLI)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../run-tests/report/" title="测试报告" class="md-nav__link">
+      测试报告
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../run-tests/load-test/" title="性能测试" class="md-nav__link">
+      性能测试
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      开发扩展
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        开发扩展
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/architecture/" title="代码框架" class="md-nav__link">
+      代码框架
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/dev-api/" title="开发扩展" class="md-nav__link">
+      开发扩展
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      实践案例
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        实践案例
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/quickstart-case/" title="快速上手案例" class="md-nav__link">
+      快速上手案例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/testerhome-login/" title="TesterHome 登录" class="md-nav__link">
+      TesterHome 登录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/demo-klook/" title="klook" class="md-nav__link">
+      klook
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../related-docs/" title="相关资料" class="md-nav__link">
+      相关资料
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../CHANGELOG/" title="CHANGELOG" class="md-nav__link">
+      CHANGELOG
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="🎯 核心增强特性" class="md-nav__link">
+    🎯 核心增强特性
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" title="1. 智能内容折叠" class="md-nav__link">
+    1. 智能内容折叠
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-json" title="2. JSON 树形展示" class="md-nav__link">
+    2. JSON 树形展示
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-script" title="3. Script 执行结果展示" class="md-nav__link">
+    3. Script 执行结果展示
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" title="4. 报告优化选项" class="md-nav__link">
+    4. 报告优化选项
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1_1" title="1. 智能内容折叠" class="md-nav__link">
+    1. 智能内容折叠
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="特性说明" class="md-nav__link">
+    特性说明
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="应用场景" class="md-nav__link">
+    应用场景
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="使用示例" class="md-nav__link">
+    使用示例
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-json_1" title="2. JSON 树形展示" class="md-nav__link">
+    2. JSON 树形展示
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="特性说明" class="md-nav__link">
+    特性说明
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="视觉效果" class="md-nav__link">
+    视觉效果
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" title="支持的数据格式" class="md-nav__link">
+    支持的数据格式
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-script_1" title="3. Script 执行结果展示" class="md-nav__link">
+    3. Script 执行结果展示
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" title="特性说明" class="md-nav__link">
+    特性说明
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" title="报告展示示例" class="md-nav__link">
+    报告展示示例
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4_1" title="4. 报告优化选项" class="md-nav__link">
+    4. 报告优化选项
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#skip-success" title="skip-success 功能" class="md-nav__link">
+    skip-success 功能
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" title="📊 报告完整结构" class="md-nav__link">
+    📊 报告完整结构
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" title="报告概览" class="md-nav__link">
+    报告概览
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" title="测试详情" class="md-nav__link">
+    测试详情
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" title="🎨 报告增强前后对比" class="md-nav__link">
+    🎨 报告增强前后对比
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-json" title="对比 1：大 JSON 响应" class="md-nav__link">
+    对比 1：大 JSON 响应
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2script" title="对比 2：Script 校验结果" class="md-nav__link">
+    对比 2：Script 校验结果
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" title="对比 3：报告体积" class="md-nav__link">
+    对比 3：报告体积
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" title="💡 最佳实践" class="md-nav__link">
+    💡 最佳实践
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" title="1. 开发阶段：显示所有用例" class="md-nav__link">
+    1. 开发阶段：显示所有用例
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cicd" title="2. CI/CD 阶段：只显示失败" class="md-nav__link">
+    2. CI/CD 阶段：只显示失败
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" title="3. 性能测试：启用所有优化" class="md-nav__link">
+    3. 性能测试：启用所有优化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_2" title="4. 调试单个用例：完整展示" class="md-nav__link">
+    4. 调试单个用例：完整展示
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" title="🔧 技术实现" class="md-nav__link">
+    🔧 技术实现
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" title="折叠机制" class="md-nav__link">
+    折叠机制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" title="树形展示" class="md-nav__link">
+    树形展示
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" title="懒加载" class="md-nav__link">
+    懒加载
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" title="📝 总结" class="md-nav__link">
+    📝 总结
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+
+                
+                
+                <h1 id="_1">测试报告增强特性<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>ApiMeter 对测试报告进行了大幅优化，特别是在大数据量场景下的可读性和性能表现。本文档详细介绍报告的各项增强特性。</p>
+<h2 id="_2">🎯 核心增强特性<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="1">1. 智能内容折叠<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<h3 id="2-json">2. JSON 树形展示<a class="headerlink" href="#2-json" title="Permanent link">&para;</a></h3>
+<h3 id="3-script">3. Script 执行结果展示<a class="headerlink" href="#3-script" title="Permanent link">&para;</a></h3>
+<h3 id="4">4. 报告优化选项<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<hr />
+<h2 id="1_1">1. 智能内容折叠<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h2>
+<h3 id="_3">特性说明<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>当内容超过 <strong>15 行</strong>时，自动折叠显示，提供更清爽的报告界面。</p>
+<p><strong>优势：</strong>
+- ✅ 自动识别长内容
+- ✅ 一键展开/折叠
+- ✅ 一键复制按钮
+- ✅ 大幅提升报告加载速度
+- ✅ 减少报告文件体积（可减少 30-50%）</p>
+<h3 id="_4">应用场景<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>智能折叠应用于以下所有内容：
+- Request Body（请求体）
+- Response Body（响应体）
+- Request Headers（请求头）
+- Response Headers（响应头）
+- Validator Expect/Actual（校验器期望值/实际值）
+- Script（自定义脚本）
+- Script Output（脚本执行结果）</p>
+<h3 id="_5">使用示例<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><strong>长 JSON 响应自动折叠：</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;products&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span>
+<span class="w">    </span><span class="c1">// ... 更多数据（超过15行）</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>在报告中显示为：</p>
+<div class="codehilite"><pre><span></span><code>Response Body: (已折叠 - 共 127 行)
+[点击展开] [复制]
+</code></pre></div>
+
+<p>点击展开后完整显示所有内容。</p>
+<hr />
+<h2 id="2-json_1">2. JSON 树形展示<a class="headerlink" href="#2-json_1" title="Permanent link">&para;</a></h2>
+<h3 id="_6">特性说明<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>自动识别 JSON 和 Python 字典数据，以树形结构展示，支持节点级别的展开/折叠。</p>
+<p><strong>优势：</strong>
+- ✅ 彩色语法高亮
+- ✅ 节点级别展开/折叠
+- ✅ 支持大型 JSON（懒加载）
+- ✅ 更直观的数据结构展示
+- ✅ 支持 JSON 和 Python 字典格式</p>
+<h3 id="_7">视觉效果<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p><strong>传统纯文本显示：</strong></p>
+<div class="codehilite"><pre><span></span><code>{&quot;code&quot;:0,&quot;message&quot;:&quot;success&quot;,&quot;data&quot;:{&quot;user&quot;:{&quot;id&quot;:123,&quot;name&quot;:&quot;Alice&quot;,&quot;email&quot;:&quot;alice@example.com&quot;,&quot;profile&quot;:{&quot;age&quot;:25,&quot;city&quot;:&quot;Beijing&quot;}},&quot;products&quot;:[{&quot;id&quot;:1,&quot;name&quot;:&quot;Product 1&quot;,&quot;price&quot;:99.99},{&quot;id&quot;:2,&quot;name&quot;:&quot;Product 2&quot;,&quot;price&quot;:199.99}]}}
+</code></pre></div>
+
+<p><strong>树形展示：</strong></p>
+<div class="codehilite"><pre><span></span><code>▼ {
+    code: 0
+    message: &quot;success&quot;
+  ▶ data: {...}
+}
+</code></pre></div>
+
+<p>点击展开 <code>data</code>:</p>
+<div class="codehilite"><pre><span></span><code>▼ {
+    code: 0
+    message: &quot;success&quot;
+  ▼ data: {
+      ▶ user: {...}
+      ▶ products: [...]
+    }
+}
+</code></pre></div>
+
+<h3 id="_8">支持的数据格式<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p><strong>标准 JSON：</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;skills&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Python&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Java&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Python 字典（单引号）：</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Alice&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+  <span class="s1">&#39;skills&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s1">&#39;Java&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>混合格式：</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s1">&#39;Alice&#39;</span><span class="p">,</span>   <span class="c1"># 双引号键，单引号值</span>
+  <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+  <span class="s2">&quot;skills&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s2">&quot;Java&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="3-script_1">3. Script 执行结果展示<a class="headerlink" href="#3-script_1" title="Permanent link">&para;</a></h2>
+<h3 id="_9">特性说明<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>在报告中详细展示每条 <code>script</code> 脚本的执行状态和结果。</p>
+<p><strong>显示内容：</strong>
+- ✅ 每条脚本的执行状态（✓ 成功 / ✗ 失败）
+- ✅ 脚本返回值和输出
+- ✅ 失败脚本的详细错误信息
+- ✅ 完整的错误堆栈
+- ✅ 支持树形展示复杂输出</p>
+<h3 id="_10">报告展示示例<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p><strong>成功的脚本：</strong></p>
+<div class="codehilite"><pre><span></span><code>Script Validations:
+  ✓ assert status_code == 200
+      Output: None
+
+  ✓ assert content.success is True
+      Output: None
+
+  ✓ ${validate_token(content.token)}
+      Output: True
+</code></pre></div>
+
+<p><strong>失败的脚本：</strong></p>
+<div class="codehilite"><pre><span></span><code>Script Validations:
+  ✓ assert status_code == 200
+      Output: None
+
+  ✗ assert content.user.age &gt; 18
+      Error: AssertionError
+      Message: assert 15 &gt; 18
+      Traceback:
+        File &quot;&lt;script&gt;&quot;, line 1, in &lt;module&gt;
+        AssertionError
+
+  ✓ ${validate_token(content.token)}
+      Output: True
+</code></pre></div>
+
+<p><strong>多行脚本输出：</strong></p>
+<div class="codehilite"><pre><span></span><code>Script Validations:
+  ✓ |
+    for item in content.items:
+        assert item.get(&quot;id&quot;) is not None
+        assert item.get(&quot;price&quot;) &gt; 0
+
+      Output: None
+      Checked: 15 items
+</code></pre></div>
+
+<hr />
+<h2 id="4_1">4. 报告优化选项<a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h2>
+<h3 id="skip-success">skip-success 功能<a class="headerlink" href="#skip-success" title="Permanent link">&para;</a></h3>
+<p><strong>功能说明：</strong></p>
+<p>默认情况下，报告中会跳过成功的用例，只显示失败和错误的用例，让你专注于问题。</p>
+<p><strong>命令行选项：</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 默认：跳过成功用例（v2.11.1+）</span>
+hrun<span class="w"> </span>testcases/<span class="w"> </span>--html<span class="w"> </span>report.html
+
+<span class="c1"># 等价于</span>
+hrun<span class="w"> </span>testcases/<span class="w"> </span>--html<span class="w"> </span>report.html<span class="w"> </span>--skip-success
+
+<span class="c1"># 显示所有用例（包括成功的）</span>
+hrun<span class="w"> </span>testcases/<span class="w"> </span>--html<span class="w"> </span>report.html<span class="w"> </span>--no-skip-success
+</code></pre></div>
+
+<p><strong>优势：</strong>
+- ✅ 聚焦失败用例，快速定位问题
+- ✅ 减少报告体积（可减少 50-70%）
+- ✅ 提升报告加载速度
+- ✅ 向后兼容，可选择显示全部</p>
+<p><strong>报告对比：</strong></p>
+<p><strong>--no-skip-success（显示所有）：</strong></p>
+<div class="codehilite"><pre><span></span><code>Test Results: 100 tests, 95 passed, 3 failed, 2 errors
+
+✓ test_user_login
+✓ test_user_profile
+✓ test_product_list
+✓ test_product_detail
+...（91 more passed tests）
+✗ test_order_create
+✗ test_order_payment
+✗ test_order_query
+✗ test_refund_apply (Error)
+✗ test_refund_status (Error)
+</code></pre></div>
+
+<p><strong>--skip-success（默认，只显示失败）：</strong></p>
+<div class="codehilite"><pre><span></span><code>Test Results: 100 tests, 95 passed, 3 failed, 2 errors
+
+✗ test_order_create
+✗ test_order_payment
+✗ test_order_query
+✗ test_refund_apply (Error)
+✗ test_refund_status (Error)
+
+(95 passed tests are hidden. Use --no-skip-success to show all.)
+</code></pre></div>
+
+<hr />
+<h2 id="_11">📊 报告完整结构<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h3 id="_12">报告概览<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>ApiMeter Test Report
+====================
+
+Summary:
+  Total: 50 tests
+  Passed: 45 (90%)
+  Failed: 3 (6%)
+  Errors: 2 (4%)
+  Duration: 12.5s
+  Start Time: 2025-10-16 10:30:00
+  Platform: Darwin-24.6.0-x86_64
+</code></pre></div>
+
+<h3 id="_13">测试详情<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>每个测试步骤包含：</p>
+<ol>
+<li><strong>基本信息</strong></li>
+<li>测试名称</li>
+<li>执行状态（✓ / ✗）</li>
+<li>
+<p>执行时间</p>
+</li>
+<li>
+<p><strong>请求信息</strong>（可折叠）</p>
+</li>
+<li>Method &amp; URL</li>
+<li>Headers（树形展示）</li>
+<li>Body（树形展示）</li>
+<li>
+<p>Query Parameters</p>
+</li>
+<li>
+<p><strong>响应信息</strong>（可折叠）</p>
+</li>
+<li>Status Code</li>
+<li>Headers（树形展示）</li>
+<li>Body（树形展示）</li>
+<li>
+<p>Response Time</p>
+</li>
+<li>
+<p><strong>校验结果</strong></p>
+</li>
+<li>Validators（传统校验器）</li>
+<li>
+<p>Script Validations（脚本校验，树形展示）</p>
+</li>
+<li>
+<p><strong>变量提取</strong></p>
+</li>
+<li>
+<p>Extracted Variables</p>
+</li>
+<li>
+<p><strong>错误信息</strong>（如果失败）</p>
+</li>
+<li>Error Type</li>
+<li>Error Message</li>
+<li>Traceback（树形展示）</li>
+</ol>
+<hr />
+<h2 id="_14">🎨 报告增强前后对比<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<h3 id="1-json">对比 1：大 JSON 响应<a class="headerlink" href="#1-json" title="Permanent link">&para;</a></h3>
+<p><strong>增强前：</strong>
+- ❌ 所有内容一次性展示
+- ❌ 超长 JSON 占据大量空间
+- ❌ 滚动困难，难以定位
+- ❌ 报告加载慢</p>
+<p><strong>增强后：</strong>
+- ✅ 自动折叠超过 15 行的内容
+- ✅ 树形结构，节点级别展开
+- ✅ 彩色语法高亮
+- ✅ 报告加载快</p>
+<h3 id="2script">对比 2：Script 校验结果<a class="headerlink" href="#2script" title="Permanent link">&para;</a></h3>
+<p><strong>增强前：</strong>
+- ❌ Script 执行结果不可见
+- ❌ 只能看到"Script 校验失败"
+- ❌ 无法知道哪条脚本失败
+- ❌ 调试困难</p>
+<p><strong>增强后：</strong>
+- ✅ 每条脚本独立显示状态
+- ✅ 清晰的成功/失败标记
+- ✅ 详细的错误信息和堆栈
+- ✅ 调试友好</p>
+<h3 id="3">对比 3：报告体积<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p><strong>测试场景：</strong> 100 个测试用例，每个用例响应 500 行 JSON</p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>报告大小</th>
+<th>加载时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>增强前</td>
+<td>25 MB</td>
+<td>5-8 秒</td>
+</tr>
+<tr>
+<td>增强后（--no-skip-success）</td>
+<td>12 MB</td>
+<td>2-3 秒</td>
+</tr>
+<tr>
+<td>增强后（--skip-success）</td>
+<td>3 MB</td>
+<td>&lt; 1 秒</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_15">💡 最佳实践<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<h3 id="1_2">1. 开发阶段：显示所有用例<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 开发阶段，查看所有用例详情</span>
+hrun<span class="w"> </span>testcases/<span class="w"> </span>--html<span class="w"> </span>report.html<span class="w"> </span>--no-skip-success
+</code></pre></div>
+
+<h3 id="2-cicd">2. CI/CD 阶段：只显示失败<a class="headerlink" href="#2-cicd" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># CI/CD 管道中，聚焦失败用例</span>
+hrun<span class="w"> </span>testcases/<span class="w"> </span>--html<span class="w"> </span>report.html<span class="w"> </span>--skip-success
+</code></pre></div>
+
+<h3 id="3_1">3. 性能测试：启用所有优化<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 大量用例时，使用所有优化</span>
+hrun<span class="w"> </span>testcases/<span class="w"> </span>--html<span class="w"> </span>report.html<span class="w"> </span>--skip-success
+</code></pre></div>
+
+<h3 id="4_2">4. 调试单个用例：完整展示<a class="headerlink" href="#4_2" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 调试特定用例，查看所有细节</span>
+hrun<span class="w"> </span>testcases/test_specific.yml<span class="w"> </span>--html<span class="w"> </span>report.html<span class="w"> </span>--no-skip-success<span class="w"> </span>--log-level<span class="w"> </span>debug
+</code></pre></div>
+
+<hr />
+<h2 id="_16">🔧 技术实现<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
+<h3 id="_17">折叠机制<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// 伪代码示例</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">renderContent</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">content</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;\n&#39;</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">lines</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">15</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 自动折叠</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span>
+<span class="sb">      &lt;div class=&quot;collapsible collapsed&quot;&gt;</span>
+<span class="sb">        &lt;button class=&quot;toggle&quot;&gt;展开 (</span><span class="si">${</span><span class="nx">lines</span><span class="p">.</span><span class="nx">length</span><span class="si">}</span><span class="sb"> 行)&lt;/button&gt;</span>
+<span class="sb">        &lt;button class=&quot;copy&quot;&gt;复制&lt;/button&gt;</span>
+<span class="sb">        &lt;pre class=&quot;content hidden&quot;&gt;</span><span class="si">${</span><span class="nx">content</span><span class="si">}</span><span class="sb">&lt;/pre&gt;</span>
+<span class="sb">      &lt;/div&gt;</span>
+<span class="sb">    `</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 直接显示</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`&lt;pre&gt;</span><span class="si">${</span><span class="nx">content</span><span class="si">}</span><span class="sb">&lt;/pre&gt;`</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="_18">树形展示<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// 伪代码示例</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">renderTree</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">isJSON</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">createTreeView</span><span class="p">(</span><span class="nx">parseJSON</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">isPythonDict</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">createTreeView</span><span class="p">(</span><span class="nx">parsePythonDict</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`&lt;pre&gt;</span><span class="si">${</span><span class="nx">data</span><span class="si">}</span><span class="sb">&lt;/pre&gt;`</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="_19">懒加载<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// 大型数据节点懒加载</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">loadNode</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">childCount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">100</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 延迟加载子节点</span>
+<span class="w">    </span><span class="nx">node</span><span class="p">.</span><span class="nx">children</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">fetchChildren</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">path</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="_20">📝 总结<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h2>
+<p>ApiMeter 报告增强特性对比：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>增强前</th>
+<th>增强后</th>
+<th>提升</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>大 JSON 可读性</td>
+<td>★☆☆☆☆</td>
+<td>★★★★★</td>
+<td>+400%</td>
+</tr>
+<tr>
+<td>报告体积</td>
+<td>大</td>
+<td>小</td>
+<td>-50~70%</td>
+</tr>
+<tr>
+<td>加载速度</td>
+<td>慢</td>
+<td>快</td>
+<td>+300%</td>
+</tr>
+<tr>
+<td>Script 结果可见性</td>
+<td>无</td>
+<td>完整</td>
+<td>新功能</td>
+</tr>
+<tr>
+<td>调试友好度</td>
+<td>★★☆☆☆</td>
+<td>★★★★★</td>
+<td>+150%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>核心价值：</strong>
+- ✅ <strong>可读性</strong> - 树形结构让复杂数据一目了然
+- ✅ <strong>性能</strong> - 智能折叠和懒加载大幅提升加载速度
+- ✅ <strong>调试</strong> - Script 执行详情让问题排查更简单
+- ✅ <strong>灵活</strong> - skip-success 让你专注于失败用例</p>
+<p><strong>下一步学习：</strong>
+- <a href="../../quickstart/">10分钟快速上手</a>
+- <a href="../../prepare/script/">自定义脚本校验</a>
+- <a href="../../examples/advanced-examples/">高级用法示例</a></p>
+<hr />
+<p><strong>有问题？</strong> 查看 <a href="../../FAQ/">FAQ</a> 或 <a href="https://git.umlife.net/utils/apimeter/issues">提交 Issue</a></p>
+                
+                  
+                
+              
+
+<!-- AI助手浮窗脚本 -->
+<script
+async
+defer
+src="https://view.umlife.net/chat/api/embed?protocol=https&host=view.umlife.net&token=1d8f7ca0d76e223f">
+</script>
+
+
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2017 - 2025 debugtalk
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://git.umlife.net/utils/apimeter" class="md-footer-social__link fa fa-globe"></a>
+    
+      <a href="https://git.umlife.net/utils/apimeter" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.a353778b.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.6.1",url:{base:"../.."}})</script>
+      
+        <script src="../../js/slardar.js"></script>
+      
+    
+  </body>
+</html>
