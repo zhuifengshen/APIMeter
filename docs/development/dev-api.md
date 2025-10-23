@@ -79,7 +79,7 @@ runner.run("docs/data/demo-quickstart-2.yml", mapping=override_mapping)
 
 除了传入测试用例文件路径，还可以直接传入标准的测试用例结构体。
 
-以 [demo-quickstart-2.yml](/data/demo-quickstart-2.yml) 为例，对应的数据结构体如下所示：
+以 [demo-quickstart-2.yml](../data/demo-quickstart-2.yml) 为例，对应的数据结构体如下所示：
 
 ```json
 [
@@ -334,6 +334,6 @@ report_path = report.gen_html_report(
 - report_dir（可选）: 指定生成报告的文件夹路径
 - report_file（可选）: 指定生成报告的文件路径，该参数的优先级高于 report_dir
 
-关于测试报告的详细内容，请查看[测试报告](/run-tests/report/)部分。
+关于测试报告的详细内容，请查看[测试报告](../run-tests/report.md)部分。
 
 [TextTestRunner]: https://docs.python.org/3.6/library/unittest.html#unittest.TextTestRunner
