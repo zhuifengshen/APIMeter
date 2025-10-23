@@ -1,0 +1,202 @@
+/* 自定义样式 */
+
+/* 主题色增强 */
+:root {
+  --md-primary-fg-color: #3f51b5;
+  --md-accent-fg-color: #ff4081;
+}
+
+/* 代码块样式优化 */
+.highlight {
+  border-radius: 6px;
+  margin: 1em 0;
+}
+
+pre code {
+  font-family: 'Roboto Mono', 'Courier New', monospace;
+  font-size: 0.85em;
+  line-height: 1.5;
+}
+
+/* 表格样式优化 */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5em 0;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+table th {
+  background-color: var(--md-primary-fg-color);
+  color: white;
+  font-weight: 600;
+  padding: 12px;
+  text-align: left;
+}
+
+table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+table tr:hover {
+  background-color: rgba(0,0,0,0.02);
+}
+
+/* 暗黑模式下的表格 */
+[data-md-color-scheme="slate"] table td {
+  border-bottom-color: rgba(255,255,255,0.05);
+}
+
+[data-md-color-scheme="slate"] table tr:hover {
+  background-color: rgba(255,255,255,0.05);
+}
+
+/* 引用块样式 */
+blockquote {
+  border-left: 4px solid var(--md-primary-fg-color);
+  padding-left: 1em;
+  margin-left: 0;
+  font-style: italic;
+  background-color: rgba(63, 81, 181, 0.05);
+  padding: 1em;
+  border-radius: 4px;
+}
+
+/* 徽章样式 */
+.md-typeset img[alt*="shield"] {
+  display: inline-block;
+  margin: 0 4px;
+}
+
+/* 按钮样式 */
+.md-button {
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.md-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* 首页居中内容 */
+.md-typeset [align="center"] {
+  text-align: center;
+}
+
+/* 导航标签页样式 */
+.md-tabs {
+  background-color: var(--md-primary-fg-color);
+}
+
+/* 返回顶部按钮 */
+.md-top {
+  background-color: var(--md-primary-fg-color);
+}
+
+/* 代码复制按钮 */
+.md-clipboard {
+  color: var(--md-primary-fg-color);
+}
+
+/* 搜索框样式 */
+.md-search__input {
+  border-radius: 20px;
+}
+
+/* 卡片样式 */
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Emoji 样式 */
+.md-typeset .twemoji {
+  height: 1.2em;
+  vertical-align: text-bottom;
+}
+
+/* 链接样式 */
+.md-typeset a {
+  color: var(--md-primary-fg-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.md-typeset a:hover {
+  color: var(--md-accent-fg-color);
+  text-decoration: underline;
+}
+
+/* 标题锚点 */
+.md-typeset .headerlink {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.md-typeset :hover > .headerlink {
+  opacity: 1;
+}
+
+/* 响应式调整 */
+@media screen and (max-width: 76.1875em) {
+  .md-typeset table {
+    font-size: 0.8em;
+  }
+}
+
+/* 打印样式 */
+@media print {
+  .md-header,
+  .md-sidebar,
+  .md-footer {
+    display: none;
+  }
+}
+
+
+/* ===========================================
+   修复 Material for MkDocs v9.5+ 导航图标布局
+   目标：图标紧跟模块名显示在右侧，跟随主题变色
+   =========================================== */
+
+/* 让图标靠近文字，而不是贴边 */
+.md-nav__item--nested > .md-nav__link {
+  display: inline-flex;             /* 让文字和图标并排 */
+  align-items: center;
+  justify-content: flex-start;      /* 左对齐 */
+}
+
+/* 控制图标位置和间距（放在文字之后） */
+.md-nav__item--nested > .md-nav__link .md-nav__icon {
+  order: 2;                         /* 确保图标在文字之后 */
+  margin-left: 0.4em;               /* 与文字间隔 */
+  margin-right: 0;                  /* 取消默认右侧间距 */
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* hover 动效 */
+.md-nav__item--nested > .md-nav__link:hover .md-nav__icon {
+  opacity: 0.85;
+  transform: scale(1.1);
+}
+
+/* ===========================================
+   主题适配（浅色/深色自动跟随）
+   =========================================== */
+
+/* 默认浅色主题 */
+[data-md-color-scheme="default"] .md-nav__item--nested > .md-nav__link .md-nav__icon {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+/* 深色主题（官方 slate） */
+[data-md-color-scheme="slate"] .md-nav__item--nested > .md-nav__link .md-nav__icon,
+[data-md-color-scheme*="dark"] .md-nav__item--nested > .md-nav__link .md-nav__icon {
+  color: rgba(255, 255, 255, 0.7);
+}

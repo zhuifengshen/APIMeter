@@ -6,6 +6,10 @@ import traceback
 from apimeter import exceptions, logger, parser
 
 
+# Modified by Devin Zhang, 2025-10-17
+# This file is part of a project based on httprunner/httprunner.py,
+# licensed under the Apache License 2.0.
+
 class ResponseFieldProxy(object):
     """响应字段代理，支持点号访问语法，复用现有的extract_field逻辑"""
     

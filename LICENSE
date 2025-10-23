@@ -1,3 +1,12 @@
+This project is licensed under the Apache License, Version 2.0.
+
+Portions of this software are derived from httprunner/httprunner.py
+(https://github.com/httprunner/httprunner.py), which is also licensed under
+the Apache License, Version 2.0.
+
+See the full license text below.
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/

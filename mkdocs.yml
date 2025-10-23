@@ -1,5 +1,4 @@
-# require mkdocs-material 3.3.0
-# pip install mkdocs-material==3.3.0
+# pip install mkdocs-material
 # mkdocs build
 # mkdocs serve
 
@@ -9,12 +8,12 @@ site_description: ApiMeter User Documentation
 site_author: 'debugtalk'
 
 # Repository
-repo_name: ApiMeter
+repo_name: ✨ Star ApiMeter
 repo_url: https://git.umlife.net/utils/apimeter
 edit_uri: ""
 
 # Copyright
-copyright: 'Copyright &copy; 2017 - 2025 debugtalk'
+copyright: '© 2017 – 2019 debugtalk · © 2020 – 2025 devin · Licensed under Apache 2.0'
 
 # Configuration
 theme:
@@ -22,42 +21,113 @@ theme:
     language: 'zh'
     custom_dir: docs/overrides
     palette:
-        primary: 'indigo'
-        accent: 'indigo'
+        - media: "(prefers-color-scheme: light)"
+          scheme: default
+          primary: indigo
+          accent: indigo
+          toggle:
+            icon: material/brightness-7
+            name: 切换至暗黑模式
+        - media: "(prefers-color-scheme: dark)"
+          scheme: slate
+          primary: indigo
+          accent: indigo
+          toggle:
+            icon: material/brightness-4
+            name: 切换至亮色模式
+    icon:
+        repo: fontawesome/brands/git-alt        
     font:
         text: 'Roboto'
         code: 'Roboto Mono'
+    features:
+        - navigation.instant           # 即时加载
+        - navigation.tracking          # 锚点跟踪
+        # - navigation.tabs            # 顶部标签页，注释后侧边栏展示全部章节
+        # - navigation.tabs.sticky     # 顶部标签页固定
+        # - navigation.sections        # 注释后折叠章节模块
+        # - navigation.expand            # 展开导航
+        - navigation.indexes           # 分组导航索引
+        - navigation.top               # 返回顶部
+        - search.suggest               # 搜索建议
+        - search.highlight             # 搜索高亮
+        - search.share                 # 搜索分享
+        - toc.follow                   # 目录跟随
+        - content.code.copy            # 代码复制
+        - content.code.annotate        # 代码注释
+        - content.tabs.link            # 标签页链接
 
-# Google Analytics
-google_analytics:
-    - 'UA-114587036-2'
-    - 'auto'
 
-# Extensions
+
+plugins:
+  - search:
+      lang:
+        - zh
+        - en
+      separator: '[\s\-\.]+'
+
 markdown_extensions:
+  - abbr
   - admonition
-  - codehilite:
-      guess_lang: false
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
   - toc:
       permalink: true
+      toc_depth: 4
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
 
-# extra
 extra:
-    search:
-        language: 'jp'
-    social:
-        - type: globe
-          link: https://git.umlife.net/utils/apimeter
-        - type: 'github'
-          link: 'https://git.umlife.net/utils/apimeter'
+  social:
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/apimeter
+      name: PyPI
+    - icon: fontawesome/brands/git-alt
+      link: https://git.umlife.net/zhangchuzhao/apimeter
+      name: Git Repository
 
-# index pages
+extra_css:
+  - stylesheets/extra.css
+
 nav:
-    - 介绍: index.md
-    - 安装说明: Installation.md
-    - 基础概念:
-        - 名词解释: concept/nominal.md
+    - 首页: index.md
+    - 🚀 快速上手: quickstart.md
+    - 🆕 新特性:
+        - 新特性概览: features/overview.md
+        - 自定义函数高级用法: features/advanced-functions.md
+        - 全局变量完整指南: features/global-variables.md
+        - 测试报告增强特性: features/report-enhancements.md
     - 测试准备:
+        - 安装说明: Installation.md
+        - 名词解释: concept/nominal.md
         - 录制生成用例: prepare/record.md
         - 项目文件组织: prepare/project-structure.md
         - 测试用例组织: prepare/testcase-structure.md
@@ -78,13 +148,11 @@ nav:
     - 开发扩展:
         - 代码框架: development/architecture.md
         - 开发扩展: development/dev-api.md
-    - FAQ: FAQ.md
     - 实践案例:
-        - 快速上手案例: examples/quickstart-case.md
+        - 快速上手示例: examples/quickstart-case.md
+        - 高级用法示例: examples/advanced-examples.md
         - TesterHome 登录: examples/testerhome-login.md
         - klook: examples/demo-klook/README.md
     - 相关资料: related-docs.md
     - CHANGELOG: CHANGELOG.md
-
-extra_javascript:
-  - 'js/slardar.js'
+    - FAQ: FAQ.md

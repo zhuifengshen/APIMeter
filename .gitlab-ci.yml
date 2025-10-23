@@ -2,7 +2,7 @@ pages: # 必须定义一个名为 pages 的 job
   image: python:3.9
   stage: deploy
   script:
-    - pip install mkdocs-material==3.3.0
+    - pip install mkdocs-material
     - mkdocs build
     - mv site public # 重命名 dist 文件夹 (npm run build 之后的输出位置)
   artifacts:
