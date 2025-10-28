@@ -1,5 +1,9 @@
 # encoding: utf-8
 
+# Modified by Devin Zhang, 2025-10-27
+# This file is part of a project based on httprunner/httprunner.py,
+# licensed under the Apache License 2.0.
+
 import collections
 try:
     # Python 3.10+ 中一些collections类型被移动到 collections.abc
@@ -30,8 +34,8 @@ absolute_http_url_regexp = re.compile(r"^https?://", re.I)
 
 def init_sentry_sdk():
     sentry_sdk.init(
-        dsn="https://cc6dd86fbe9f4e7fbd95248cfcff114d@sentry.io/1862849",
-        release="httprunner@{}".format(__version__),
+        dsn="https://aa296f8dafe9c785593e318d44cc0ca9@o4510260785053696.ingest.us.sentry.io/4510260797177856",
+        release="apimeter@{}".format(__version__),
     )
 
     with sentry_sdk.configure_scope() as scope:
