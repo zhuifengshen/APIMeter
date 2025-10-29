@@ -13,10 +13,10 @@
         url: /api/get-token
         method: POST
         headers:
-            user_agent: $user_agent
-            device_sn: $device_sn
-            os_platform: $os_platform
-            app_version: $app_version
+            user-agent: $user_agent
+            device-sn: $device_sn
+            os-platform: $os_platform
+            app-version: $app_version
         json:
             sign: ${get_sign($device_sn, $os_platform, $app_version)}
     extract:
@@ -35,7 +35,7 @@
         method: POST
         headers:
             Content-Type: application/json
-            device_sn: $device_sn
+            device-sn: $device_sn
             token: $token
         json:
             name: $user_name
@@ -51,7 +51,7 @@
         method: POST
         headers:
             Content-Type: application/json
-            device_sn: $device_sn
+            device-sn: $device_sn
             token: $token
         json:
             name: "user1"

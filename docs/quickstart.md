@@ -130,10 +130,10 @@ teststeps:
     method: POST
     headers:
       Content-Type: "application/json"
-      user_agent: $user_agent
-      device_sn: $device_sn
-      os_platform: $os_platform
-      app_version: $app_version
+      user-agent: $user_agent
+      device-sn: $device_sn
+      os-platform: $os_platform
+      app-version: $app_version
     json:
       sign: ${get_sign($device_sn, $os_platform, $app_version)}
   
@@ -180,7 +180,7 @@ teststeps:
     method: POST
     headers:
       Content-Type: "application/json"
-      device_sn: $device_sn
+      device-sn: $device_sn
       token: $token  # 使用上一步提取的 token
     json:
       name: "测试用户"
@@ -202,7 +202,7 @@ teststeps:
     method: GET
     headers:
       Content-Type: "application/json"
-      device_sn: $device_sn
+      device-sn: $device_sn
       token: $token
   
   extract:
@@ -232,7 +232,7 @@ teststeps:
     method: PUT
     headers:
       Content-Type: "application/json"
-      device_sn: $device_sn
+      device-sn: $device_sn
       token: $token
     json:
       name: "更新后的用户名"
@@ -251,7 +251,7 @@ teststeps:
     method: DELETE
     headers:
       Content-Type: "application/json"
-      device_sn: $device_sn
+      device-sn: $device_sn
       token: $token
   
   script:
@@ -520,7 +520,7 @@ request:
   method: POST
   headers:
     Content-Type: "application/json"
-    device_sn: $device_sn
+    device-sn: $device_sn
     token: $token
   json:
     name: $user_name

@@ -70,9 +70,9 @@ INFO:root:Generate YAML testcase successfully: docs/data/demo-quickstart.yml
         headers:
             Content-Type: application/json
             User-Agent: python-requests/2.18.4
-            app_version: 2.8.6
-            device_sn: FwgRiO7CNA50DSU
-            os_platform: ios
+            app-version: 2.8.6
+            device-sn: FwgRiO7CNA50DSU
+            os-platform: ios
         json:
             sign: 9c0c7e51c91ae963c833a4ccbab8d683c4a90c98
         method: POST
@@ -89,7 +89,7 @@ INFO:root:Generate YAML testcase successfully: docs/data/demo-quickstart.yml
         headers:
             Content-Type: application/json
             User-Agent: python-requests/2.18.4
-            device_sn: FwgRiO7CNA50DSU
+            device-sn: FwgRiO7CNA50DSU
             token: baNLX1zhFYP11Seb
         json:
             name: user1
@@ -135,7 +135,7 @@ ERROR    ******************************** DETAILED REQUEST & RESPONSE **********
 ====== request details ======
 url: http://127.0.0.1:5000/api/get-token
 method: POST
-headers: {'Content-Type': 'application/json', 'User-Agent': 'python-requests/2.18.4', 'app_version': '2.8.6', 'device_sn': 'FwgRiO7CNA50DSU', 'os_platform': 'ios'}
+headers: {'Content-Type': 'application/json', 'User-Agent': 'python-requests/2.18.4', 'app-version': '2.8.6', 'device-sn': 'FwgRiO7CNA50DSU', 'os-platform': 'ios'}
 json: {'sign': '9c0c7e51c91ae963c833a4ccbab8d683c4a90c98'}
 verify: True
 
@@ -158,7 +158,7 @@ ERROR    ******************************** DETAILED REQUEST & RESPONSE **********
 ====== request details ======
 url: http://127.0.0.1:5000/api/users/1000
 method: POST
-headers: {'Content-Type': 'application/json', 'User-Agent': 'python-requests/2.18.4', 'device_sn': 'FwgRiO7CNA50DSU', 'token': 'baNLX1zhFYP11Seb'}
+headers: {'Content-Type': 'application/json', 'User-Agent': 'python-requests/2.18.4', 'device-sn': 'FwgRiO7CNA50DSU', 'token': 'baNLX1zhFYP11Seb'}
 json: {'name': 'user1', 'password': '123456'}
 verify: True
 
@@ -275,7 +275,7 @@ ERROR    ******************************** DETAILED REQUEST & RESPONSE **********
 ====== request details ======
 url: http://127.0.0.1:5000/api/users/1000
 method: POST
-headers: {'Content-Type': 'application/json', 'User-Agent': 'python-requests/2.18.4', 'device_sn': 'FwgRiO7CNA50DSU', 'token': 'baNLX1zhFYP11Seb'}
+headers: {'Content-Type': 'application/json', 'User-Agent': 'python-requests/2.18.4', 'device-sn': 'FwgRiO7CNA50DSU', 'token': 'baNLX1zhFYP11Seb'}
 json: {'name': 'user1', 'password': '123456'}
 verify: True
 
@@ -352,7 +352,7 @@ INFO     Generated Html report: /Users/debugtalk/MyProjects/HttpRunner-dev/httpr
 
 ```json
 "headers": {
-  "device_sn": "FwgRiO7CNA50DSU",
+  "device-sn": "FwgRiO7CNA50DSU",
   "token": "$token",
   "Content-Type": "application/json"
 }

@@ -6,7 +6,7 @@ request:
     url: /headers
     headers:
         Content-Type: "application/json"
-        device_sn: $device_sn
+        device-sn: $device_sn
     method: GET
 setup_hooks:
     - ${setup_hook_add_kwargs($request)}

@@ -6,7 +6,7 @@ request:
     method: GET
     headers:
         Content-Type: "application/json"
-        device_sn: $device_sn
+        device-sn: $device_sn
         token: $token
 validate:
     - eq: ["status_code", 200]

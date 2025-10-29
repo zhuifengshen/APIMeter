@@ -72,11 +72,11 @@ def gen_md5(*args):
 def validate_request(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        device_sn = request.headers.get("device_sn", "")
+        device_sn = request.headers.get("device-sn", "")
         token = request.headers.get("token", "")
 
         if not device_sn or not token:
-            result = {"success": False, "msg": "device_sn or token is null."}
+            result = {"success": False, "msg": "device-sn or token is null."}
             response = make_response(json.dumps(result), 401)
             response.headers["Content-Type"] = "application/json"
             return response
@@ -99,9 +99,9 @@ def index():
 
 @app.route("/api/get-token", methods=["POST"])
 def get_token():
-    device_sn = request.headers.get("device_sn", "")
-    os_platform = request.headers.get("os_platform", "")
-    app_version = request.headers.get("app_version", "")
+    device_sn = request.headers.get("device-sn", "")
+    os_platform = request.headers.get("os-platform", "")
+    app_version = request.headers.get("app-version", "")
     data = request.get_json()
     sign = data.get("sign", "")
 

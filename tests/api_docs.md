@@ -20,13 +20,13 @@ python api_server.py
 - 使用 HTTP Status Code 标识状态
 - 数据返回格式统一使用 JSON
 - API V1 认证统一使用 Token 认证
-- 需要授权的 API ，必须在请求头中使用`device_sn`字段提供设备序列号和 `token` 字段提供访问令牌
+- 需要授权的 API ，必须在请求头中使用`device-sn`字段提供设备序列号和 `token` 字段提供访问令牌
 - 全局请求头
 
 | 参数名       | 参数类型 | 参数说明   | 备注                        |
 | ------------ | -------- | ---------- | --------------------------- |
 | Content-Type | String   | 内容类型   | application/json            |
-| device_sn    | String   | 设备序列号 | 唯一设备标识符              |
+| device-sn    | String   | 设备序列号 | 唯一设备标识符              |
 | token        | String   | 访问令牌   | 拥有 token 的设备才有访问权 |
 
 #### 1.1. 支持的请求方法
@@ -66,7 +66,7 @@ python api_server.py
 | 参数名      | 参数类型 | 参数说明   | 备注 |
 | ----------- | -------- | ---------- | ---- |
 | User-Agent  | String   | 用户代理   |      |
-| device_sn   | String   | 设备序列号 |      |
+| device-sn   | String   | 设备序列号 |      |
 | os_platform | String   | 系统平台   |      |
 | app_version | String   | 应用版本   |      |
 

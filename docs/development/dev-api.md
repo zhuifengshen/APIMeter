@@ -119,7 +119,7 @@ runner.run("docs/data/demo-quickstart-2.yml", mapping=override_mapping)
         "request": {
           "url": "http://127.0.0.1:5000/api/get-token",
           "method": "POST",
-          "headers": {"Content-Type": "application/json", "app_version": "2.8.6", "device_sn": "FwgRiO7CNA50DSU", "os_platform": "ios", "user_agent": "iOS/10.3"},
+          "headers": {"Content-Type": "application/json", "app-version": "2.8.6", "device-sn": "FwgRiO7CNA50DSU", "os-platform": "ios", "user-agent": "iOS/10.3"},
           "json": {"sign": "9c0c7e51c91ae963c833a4ccbab8d683c4a90c98"}
         },
         "extract": [
@@ -133,7 +133,7 @@ runner.run("docs/data/demo-quickstart-2.yml", mapping=override_mapping)
       },
       {
         "name": "/api/users/1000",
-        "request": {"url": "http://127.0.0.1:5000/api/users/1000", "method": "POST", "headers": {"Content-Type": "application/json", "device_sn": "FwgRiO7CNA50DSU", "token": "$token"},
+        "request": {"url": "http://127.0.0.1:5000/api/users/1000", "method": "POST", "headers": {"Content-Type": "application/json", "device-sn": "FwgRiO7CNA50DSU", "token": "$token"},
         "json": {"name": "user1", "password": "123456"}},
         "validate": [
           {"eq": ["status_code", 201]},
@@ -237,7 +237,7 @@ summary = runner.run(path_or_tests)
             "request": {
               "url": "http://127.0.0.1:5000/api/get-token",
               "method": "POST",
-              "headers": {"User-Agent": "python-requests/2.18.4", "Accept-Encoding": "gzip, deflate", "Accept": "*/*", "Connection": "keep-alive", "Content-Type": "application/json", "app_version": "2.8.6", "device_sn": "FwgRiO7CNA50DSU", "os_platform": "ios", "user_agent": "iOS/10.3", "Content-Length": "52"},
+              "headers": {"User-Agent": "python-requests/2.18.4", "Accept-Encoding": "gzip, deflate", "Accept": "*/*", "Connection": "keep-alive", "Content-Type": "application/json", "app-version": "2.8.6", "device-sn": "FwgRiO7CNA50DSU", "os-platform": "ios", "user-agent": "iOS/10.3", "Content-Length": "52"},
               "start_timestamp": 1538449655.944801,
               "json": {"sign": "9c0c7e51c91ae963c833a4ccbab8d683c4a90c98"},
               "body": b'{"sign": "9c0c7e51c91ae963c833a4ccbab8d683c4a90c98"}'

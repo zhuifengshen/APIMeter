@@ -13,7 +13,7 @@
         base_url: http://127.0.0.1:5000
         headers:
             Content-Type: application/json
-            device_sn: $device_sn
+            device-sn: $device_sn
 
 - test:
     name: get token with $user_agent, $os_platform, $app_version
@@ -21,9 +21,9 @@
         url: /api/get-token
         method: POST
         headers:
-            app_version: $app_version
-            os_platform: $os_platform
-            user_agent: $user_agent
+            app-version: $app_version
+            os-platform: $os_platform
+            user-agent: $user_agent
         json:
             sign: ${get_sign($user_agent, $device_sn, $os_platform, $app_version)}
     extract:

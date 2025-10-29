@@ -13,9 +13,9 @@
         headers:
             Content-Type: application/json
             User-Agent: python-requests/2.18.4
-            app_version: $app_version
-            device_sn: $device_sn
-            os_platform: $os_platform
+            app-version: $app_version
+            device-sn: $device_sn
+            os-platform: $os_platform
         json:
             sign: 9c0c7e51c91ae963c833a4ccbab8d683c4a90c98
         method: POST
@@ -36,7 +36,7 @@
         headers:
             Content-Type: application/json
             User-Agent: python-requests/2.18.4
-            device_sn: $device_sn
+            device-sn: $device_sn
             token: $token
         json:
             name: user1
