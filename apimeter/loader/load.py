@@ -10,19 +10,15 @@ from apimeter import builtin
 from apimeter import exceptions, logger, utils
 from apimeter.loader.locate import get_project_working_directory
 
-try:
-    # PyYAML version >= 5.1
-    # ref: https://github.com/yaml/pyyaml/wiki/PyYAML-yaml.load(input)-Deprecation
-    yaml.warnings({"YAMLLoadWarning": False})
-except AttributeError:
-    pass
-
+# Modified by Devin Zhang, 2025-10-28
+# This file is part of a project based on httprunner/httprunner.py,
+# licensed under the Apache License 2.0.
 
 def _load_yaml_file(yaml_file):
     """load yaml file and check file content format"""
     with io.open(yaml_file, "r", encoding="utf-8") as stream:
         try:
-            yaml_content = yaml.load(stream)
+            yaml_content = yaml.safe_load(stream)
         except yaml.YAMLError as ex:
             logger.log_error(str(ex))
             raise exceptions.FileFormatError
