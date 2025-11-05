@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 import time
-
+import os
 import requests
 import urllib3
 from requests import Request, Response
@@ -17,6 +17,10 @@ from apimeter.utils import lower_dict_keys, omit_long_data
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+
+# Modified by Devin Zhang, 2025-11-05
+# This file is part of a project based on httprunner/httprunner.py,
+# licensed under the Apache License 2.0.
 
 def get_req_resp_record(resp_obj):
     """get request and response info from Response() object."""
@@ -180,7 +184,21 @@ class HttpSession(requests.Session):
         # record original request info
         self.meta_data["data"][0]["request"]["method"] = method
         self.meta_data["data"][0]["request"]["url"] = url
-        kwargs.setdefault("timeout", 120)
+        # 设置默认超时时间
+        default_timeout = int(os.getenv("APIMETER_DEFAULT_TIMEOUT", "120"))
+        kwargs.setdefault("timeout", default_timeout)
+        # 设置默认Connection: close
+        close_connection = os.getenv("APIMETER_CLOSE_CONNECTION", "false").lower() in ("true", "on", "yes")
+        if close_connection:
+            headers = kwargs.get("headers", {})
+            if headers is None:
+                headers = {}
+            # 使用不区分大小写的检查，避免重复设置
+            headers_lower = {k.lower(): k for k in headers.keys()}
+            if "connection" not in headers_lower:
+                headers["Connection"] = "close"
+            kwargs["headers"] = headers
+
         self.meta_data["data"][0]["request"].update(kwargs)
 
         start_timestamp = time.time()
