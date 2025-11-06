@@ -5,12 +5,14 @@ import os
 import requests
 import urllib3
 from requests import Request, Response
+from requests.adapters import HTTPAdapter
 from requests.exceptions import (
     InvalidSchema,
     InvalidURL,
     MissingSchema,
     RequestException,
 )
+from urllib3.util.retry import Retry
 
 from apimeter import logger, response
 from apimeter.utils import lower_dict_keys, omit_long_data
@@ -108,6 +110,35 @@ class HttpSession(requests.Session):
         super(HttpSession, self).__init__()
         self.init_meta_data()
 
+        # 配置重试策略，解决连接池中僵尸连接导致的 Connection reset 问题
+        # 当 SSL 握手失败或连接被重置时，自动重试而不是直接失败
+        retry_strategy = Retry(
+            total=3,              # 总共重试3次
+            connect=3,            # 连接失败（包括SSL握手失败）重试3次
+            read=2,               # 读取超时重试2次
+            status_forcelist=[500, 502, 503, 504],  # 这些HTTP状态码也重试
+            allowed_methods=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE", "POST"],
+            backoff_factor=0.5,   # 重试延迟：0.5s, 1s, 2s
+            raise_on_status=False,
+        )
+
+        # 是否禁用连接池（通过环境变量控制）
+        # 禁用连接池可以避免复用僵尸连接，但会略微降低性能
+        disable_pool = os.getenv("APIMETER_DISABLE_POOL", "false").lower() in ("true", "on", "yes", "1")
+        pool_size = 1 if disable_pool else 20
+
+        # 配置 HTTP 适配器，保留连接池以提升性能，但配置重试机制以提升稳定性
+        adapter = HTTPAdapter(
+            max_retries=retry_strategy,
+            pool_connections=pool_size,   # 连接池大小
+            pool_maxsize=pool_size,       # 最大连接数
+            pool_block=False,             # 连接池满时不阻塞
+        )
+
+        # 为 http 和 https 协议挂载适配器
+        self.mount('http://', adapter)
+        self.mount('https://', adapter)
+
     def init_meta_data(self):
         """initialize meta_data, it will store detail data of request and response"""
         self.meta_data = {
@@ -184,11 +215,11 @@ class HttpSession(requests.Session):
         # record original request info
         self.meta_data["data"][0]["request"]["method"] = method
         self.meta_data["data"][0]["request"]["url"] = url
-        # 设置默认超时时间
+        # 设置超时时间
         default_timeout = int(os.getenv("APIMETER_DEFAULT_TIMEOUT", "120"))
         kwargs.setdefault("timeout", default_timeout)
-        # 设置默认Connection: close
-        close_connection = os.getenv("APIMETER_CLOSE_CONNECTION", "false").lower() in ("true", "on", "yes")
+        # 设置 Connection 方式
+        close_connection = os.getenv("APIMETER_CLOSE_CONNECTION", "false").lower() in ("true", "on", "yes", "1")
         if close_connection:
             headers = kwargs.get("headers", {})
             if headers is None:
